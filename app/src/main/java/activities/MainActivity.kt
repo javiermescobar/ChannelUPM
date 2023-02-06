@@ -1,0 +1,15 @@
+package activities
+
+import android.os.Bundle
+import android.widget.TextView
+import com.javier.channelupm.R
+
+class MainActivity: BaseActivity(){
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        findViewById<TextView>(R.id.base_text).text = "This is the main activity"
+    }
+
+    override fun setResourceLayout(): Int = R.layout.activity_base
+}
