@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/button_rounded.xml" value="0.2985" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/rounded_style.xml" value="0.191" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/text_box_rounded.xml" value="0.2985" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_base.xml" value="0.1" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_login.xml" value="0.33" />
       </map>
     </option>

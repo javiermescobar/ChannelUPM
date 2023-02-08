@@ -1,19 +1,19 @@
 package activities
 
 import android.os.Bundle
-import android.widget.EditText
-import com.javier.channelupm.R
+import com.javier.channelupm.databinding.ActivityLoginBinding
 
 class LoginActivity: BaseActivity() {
 
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         configureUI()
     }
 
-    override fun setResourceLayout(): Int = R.layout.activity_login
-
     private fun configureUI() {
-
     }
 }
