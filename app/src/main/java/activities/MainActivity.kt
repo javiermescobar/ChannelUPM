@@ -10,6 +10,4 @@ class MainActivity: BaseActivity(){
         super.onCreate(savedInstanceState)
         findViewById<TextView>(R.id.base_text).text = "This is the main activity"
     }
-
-    override fun setResourceLayout(): Int = R.layout.activity_base
 }
