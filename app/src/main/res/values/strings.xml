@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">ChannelUPM</string>
 
+    <string name="confirm">Confirmar</string>
+
+    <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
+    <string name="input_name">Introduce tu nombre</string>
     <string name="input_mail">Introduce tu correo</string>
     <string name="input_password">Introduce tu contraseña</string>
+    <string name="confirm_password">Confirma tu contraseña</string>
     <string name="confirm_login">Iniciar sesión</string>
     <string name="firstTime">¿Primera vez?</string>
     <string name="register">Regístrate!</string>
@@ -11,5 +16,5 @@
     <string name="login_error_no_mail">No es un correo o no pertenece a la UPM</string>
     <string name="login_error_password_weak">Debe tener minúscula, mayúscula y un símbolo</string>
     <string name="login_error_password_short">La contraseña debe ser de al menos 8 caracteres</string>
-
+    <string name="register_section">Registro de usuario</string>
 </resources>
