@@ -9,9 +9,14 @@ abstract class BaseActivity: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         configureToolbar()
+        initializeView()
     }
 
     open fun configureToolbar() {
         this.supportActionBar?.hide()
     }
+
+    open fun initializeView() {}
+
+    open fun subscribe() {}
 }
