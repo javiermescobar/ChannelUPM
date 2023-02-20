@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.234" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable-v24/rounded_text_box_red.xml" value="0.234" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/button_rounded.xml" value="0.2985" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/ic_back_button.xml" value="0.157" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/rounded_style.xml" value="0.191" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/rounded_text_box_purple.xml" value="0.234" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/text_box_rounded.xml" value="0.2985" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_base.xml" value="0.1" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_login.xml" value="0.33" />
-        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_register.xml" value="0.33" />
       </map>
     </option>
   </component>

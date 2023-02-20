@@ -13,8 +13,11 @@
     <string name="firstTime">¿Primera vez?</string>
     <string name="register">Regístrate!</string>
     <string name="login_error_mail_found">Correo ya registrado</string>
-    <string name="login_error_no_mail">No es un correo o no pertenece a la UPM</string>
-    <string name="login_error_password_weak">Debe tener minúscula, mayúscula y un símbolo</string>
-    <string name="login_error_password_short">La contraseña debe ser de al menos 8 caracteres</string>
+    <string name="login_error_no_upm_mail">No es un correo o no pertenece a la UPM</string>
+    <string name="login_error_password_mail_dont_match">La contraseña o el correo son incorrectos</string>
     <string name="register_section">Registro de usuario</string>
+    <string name="register_error_mail_registered">Este correo ya está registrado</string>
+    <string name="register_error_password_weak">Debe tener minúscula, mayúscula y un número</string>
+    <string name="register_error_password_short">La contraseña debe ser tener entre 8 y 20 caractéres</string>
+    <string name="register_error_passwords_dont_match">Las contraseñas deben ser iguales</string>
 </resources>

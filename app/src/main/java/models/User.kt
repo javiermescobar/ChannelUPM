@@ -1,6 +1,11 @@
 package models
 
 data class User(
-    val id: Int,
-    val name: String
+    val UserId: Int,
+    val Name: String,
+    val Mail: String,
+    val UserPassword: String,
+    val Description: String,
+    val AvatarImage: String,
+    val Administrator: Int
 )

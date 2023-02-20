@@ -7,9 +7,10 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseActivity: AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initializeView()
         super.onCreate(savedInstanceState)
         configureToolbar()
-        initializeView()
+        subscribe()
     }
 
     open fun configureToolbar() {
