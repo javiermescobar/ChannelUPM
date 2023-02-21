@@ -8,4 +8,18 @@ data class User(
     val Description: String,
     val AvatarImage: String,
     val Administrator: Int
-)
+) {
+    companion object {
+        fun emptyUser(): User {
+            return User(
+                -1,
+                "",
+                "",
+                "",
+                "",
+                "",
+                0
+            )
+        }
+    }
+}

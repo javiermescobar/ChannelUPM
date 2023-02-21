@@ -10,6 +10,7 @@ abstract class BaseActivity: AppCompatActivity(){
         initializeView()
         super.onCreate(savedInstanceState)
         configureToolbar()
+        configureUI()
         subscribe()
     }
 
@@ -18,6 +19,8 @@ abstract class BaseActivity: AppCompatActivity(){
     }
 
     open fun initializeView() {}
+
+    open fun configureUI() {}
 
     open fun subscribe() {}
 }

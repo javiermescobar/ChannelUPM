@@ -1,15 +1,11 @@
 package activities
 
 import android.content.Intent
-import android.opengl.Visibility
-import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityRegisterBinding
-import okhttp3.internal.wait
 import repositories.RegisterRepository
 import utils.Constants
 import viewModels.RegisterViewModel
@@ -17,33 +13,17 @@ import viewModels.RegisterViewModel
 class RegisterActivity: BaseActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var registerRepository: RegisterRepository
     private lateinit var registerViewModel: RegisterViewModel
-
-    private var userRegistered = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        configureUI()
-    }
 
     override fun initializeView() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        registerRepository = RegisterRepository()
+        val registerRepository = RegisterRepository()
         registerViewModel = RegisterViewModel(registerRepository)
     }
 
-    override fun subscribe() {
-        registerViewModel.mutableUserRegistered.observe(this, Observer {
-            if(it.isSuccessful) {
-                userRegistered = it.body() == 0
-            }
-        })
-    }
-
-    private fun configureUI() {
+    override fun configureUI() {
         binding.backButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -66,15 +46,12 @@ class RegisterActivity: BaseActivity() {
         }
     }
 
-    private fun performRegister() {
-        val mail = binding.mailTextBox.text.toString()
-
-        if(mail.contains('@') && Constants.isAcceptedDomain(mail.split('@')[1])) {
-            registerViewModel.getMailRegistered(binding.mailTextBox.text.toString())
-            if(!userRegistered) {
+    override fun subscribe() {
+        registerViewModel.mutableUserRegistered.observe(this, Observer {
+            if(it == 0) {
                 val password = binding.passwordTextBox.text.toString()
                 if(password.length < Constants.MIN_PASSWORD_LENGHT ||
-                        password.length > Constants.MAX_PASSWORD_LENGHT) {
+                    password.length > Constants.MAX_PASSWORD_LENGHT) {
                     binding.errorPassword.text = binding.root.resources.getText(R.string.register_error_password_short)
                     binding.errorPassword.visibility = View.VISIBLE
                 } else {
@@ -82,7 +59,7 @@ class RegisterActivity: BaseActivity() {
                         if(password == binding.confirmPasswordTextBox.text.toString()) {
                             registerViewModel.registerUser(
                                 name = binding.nameTextBox.text.toString(),
-                                mail = mail,
+                                mail = binding.mailTextBox.text.toString(),
                                 password = password
                             )
                         } else {
@@ -97,6 +74,14 @@ class RegisterActivity: BaseActivity() {
                 binding.errorTextMail.text = binding.root.resources.getText(R.string.register_error_mail_registered)
                 binding.errorTextMail.visibility = View.VISIBLE
             }
+        })
+    }
+
+    private fun performRegister() {
+        val mail = binding.mailTextBox.text.toString()
+
+        if(mail.contains('@') && Constants.isAcceptedDomain(mail.split('@')[1])) {
+            registerViewModel.getMailRegistered(mail)
         } else {
             binding.errorTextMail.text = binding.root.resources.getText(R.string.login_error_no_upm_mail)
             binding.errorTextMail.visibility = View.VISIBLE
@@ -117,7 +102,6 @@ class RegisterActivity: BaseActivity() {
                 hasNum = true
             }
         }
-
         return hasLow && hasUpp && hasNum
     }
 }
