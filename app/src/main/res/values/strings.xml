@@ -18,6 +18,6 @@
     <string name="register_section">Registro de usuario</string>
     <string name="register_error_mail_registered">Este correo ya está registrado</string>
     <string name="register_error_password_weak">Debe tener minúscula, mayúscula y un número</string>
-    <string name="register_error_password_short">La contraseña debe ser tener entre 8 y 20 caractéres</string>
+    <string name="register_error_password_short">La contraseña debe tener entre 8 y 20 caractéres</string>
     <string name="register_error_passwords_dont_match">Las contraseñas deben ser iguales</string>
 </resources>
