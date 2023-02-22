@@ -1,47 +1,55 @@
 package activities
 
 import android.content.Intent
-import android.os.Bundle
+import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.javier.channelupm.databinding.ActivityLoginBinding
-import repositories.UserRepository
-import viewModels.UserViewModel
+import repositories.LoginRepository
+import viewModels.LoginViewModel
 
 class LoginActivity: BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
-    private val userRepository = UserRepository()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun initializeView() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        super.onCreate(savedInstanceState)
+        val loginRepository = LoginRepository()
+        loginViewModel = LoginViewModel(loginRepository)
     }
 
-    override fun initializeView() {
-        subscribe()
-        configureUI()
-    }
+    override fun configureUI() {
+        binding.LoginButton.setOnClickListener {
+            loginViewModel.loginUser(
+                binding.mailTextBox.text.toString(),
+                binding.passwordTextBox.text.toString()
+            )
+        }
 
-    override fun subscribe() {
-        userViewModel = UserViewModel(userRepository)
+        binding.mailTextBox.addTextChangedListener {
+            binding.errorTextPassword.visibility = View.GONE
+        }
 
-        userViewModel.user.observe(this, Observer {
-            binding.mailTextBox.setText(it.name)
-        })
-    }
+        binding.passwordTextBox.addTextChangedListener {
+            binding.errorTextPassword.visibility = View.GONE
+        }
 
-    private fun configureUI() {
         binding.registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        binding.LoginButton.setOnClickListener {
-            userViewModel.getUser()
-        }
+    override fun subscribe() {
+        loginViewModel.currentUser.observe(this, Observer {
+            if(it.UserId != -1) {
+                //Go to new activity
+            } else {
+                binding.errorTextPassword.visibility = View.VISIBLE
+            }
+        })
     }
 }
