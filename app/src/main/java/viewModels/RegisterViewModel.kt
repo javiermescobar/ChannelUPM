@@ -22,7 +22,7 @@ class RegisterViewModel(
                     mutableUserRegistered.postValue(it)
                 }
             } else {
-                //Show error dialog
+                mutableUserRegistered.postValue(1)
             }
         }
     }
