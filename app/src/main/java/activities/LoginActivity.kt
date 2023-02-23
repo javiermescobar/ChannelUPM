@@ -1,9 +1,13 @@
 package activities
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import repositories.LoginRepository
 import viewModels.LoginViewModel

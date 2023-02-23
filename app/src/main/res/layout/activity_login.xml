@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_grey">
+        style="@style/Theme.ChannelUPM">
 
         <ImageView
             android:id="@+id/logo_image"
@@ -26,8 +26,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/confirm_login"
-            android:textColor="@color/white"
             android:textSize="@dimen/huge_text"
+            style="@style/default_text"
             android:layout_marginTop="@dimen/default_margin"/>
 
 
@@ -91,32 +91,34 @@
             android:maxLines="1"
             android:background="@drawable/rounded_button"
             android:text="@string/confirm_login"
+            style="@style/default_text"
             android:layout_marginTop="@dimen/default_margin"/>
 
         <TextView
             android:id="@+id/first_time_text"
+            style="@style/default_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/login_text_top_margin"
+            android:layout_marginBottom="@dimen/default_margin"
             android:maxLines="1"
             android:text="@string/firstTime"
             android:textSize="14pt"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Login_button"
-            android:layout_marginTop="@dimen/big_margin"
-            android:layout_marginLeft="@dimen/login_text_top_margin"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/register_button"
+            style="@style/default_text"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Login_button"
-            android:text="@string/register"
-            android:maxLines="1"
-            android:background="@drawable/rounded_button"
             android:layout_marginRight="@dimen/login_text_top_margin"
-            android:layout_marginTop="@dimen/login_register_button_top_margin"/>
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@drawable/rounded_button"
+            android:maxLines="1"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
