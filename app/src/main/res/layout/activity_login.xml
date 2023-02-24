@@ -16,7 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/mail_textBox"
             android:src="@drawable/logo"
-            android:layout_marginTop="@dimen/big_margin"/>
+            android:layout_marginTop="@dimen/default_margin"/>
 
         <TextView
             android:id="@+id/register_title"
@@ -26,7 +26,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/confirm_login"
-            android:textSize="@dimen/huge_text"
+            android:textSize="@dimen/big_text"
+            android:gravity="center"
             style="@style/default_text"
             android:layout_marginTop="@dimen/default_margin"/>
 
@@ -96,7 +97,6 @@
 
         <TextView
             android:id="@+id/first_time_text"
-            style="@style/default_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/login_text_top_margin"
@@ -104,12 +104,12 @@
             android:maxLines="1"
             android:text="@string/firstTime"
             android:textSize="14pt"
+            style="@style/default_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/register_button"
-            style="@style/default_text"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
             android:layout_marginRight="@dimen/login_text_top_margin"
@@ -117,6 +117,7 @@
             android:background="@drawable/rounded_button"
             android:maxLines="1"
             android:text="@string/register"
+            style="@style/default_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

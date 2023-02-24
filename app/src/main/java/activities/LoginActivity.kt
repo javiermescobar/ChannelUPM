@@ -27,6 +27,7 @@ class LoginActivity: BaseActivity() {
 
     override fun configureUI() {
         binding.LoginButton.setOnClickListener {
+            super.hideKeyboard()
             loginViewModel.loginUser(
                 binding.mailTextBox.text.toString(),
                 binding.passwordTextBox.text.toString()
@@ -42,6 +43,7 @@ class LoginActivity: BaseActivity() {
         }
 
         binding.registerButton.setOnClickListener {
+            super.hideKeyboard()
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
