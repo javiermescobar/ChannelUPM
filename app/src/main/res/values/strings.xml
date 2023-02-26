@@ -26,4 +26,6 @@
     <string name="groups_section">Grupos</string>
     <string name="messages_section">Mensajes</string>
     <string name="settings_section">Ajustes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

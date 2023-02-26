@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import repositories.LoginRepository
+import utils.Constants
 import viewModels.LoginViewModel
 
 class LoginActivity: BaseActivity() {
@@ -51,10 +52,11 @@ class LoginActivity: BaseActivity() {
 
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
-            if(it.UserId == -1) {
+            if(it.UserId != -1) {
+                Constants.currentUserId = it.UserId
+            } else {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-            } else {
                 binding.errorTextPassword.visibility = View.VISIBLE
             }
         })
