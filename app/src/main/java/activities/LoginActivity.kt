@@ -51,8 +51,9 @@ class LoginActivity: BaseActivity() {
 
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
-            if(it.UserId != -1) {
-                //Go to new activity
+            if(it.UserId == -1) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             } else {
                 binding.errorTextPassword.visibility = View.VISIBLE
             }

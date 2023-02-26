@@ -21,4 +21,6 @@
     <dimen name="login_register_button_top_margin">50dp</dimen>
     <dimen name="login_error_text_height">30dp</dimen>
 
+    <dimen name="bottom_bar_height">60dp</dimen>
+
 </resources>
