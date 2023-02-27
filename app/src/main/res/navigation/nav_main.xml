@@ -2,10 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_main"
-    app:startDestination="@id/newsFragment">
+    app:startDestination="@id/news_fragment">
 
     <fragment
-        android:id="@+id/newsFragment"
+        android:id="@+id/news_fragment"
         android:name="fragments.NewsFragment"
         android:label="NewsFragment" />
+
+    <fragment
+        android:id="@+id/contacts_fragment"
+        android:name="fragments.ContactsFragment"
+        android:label="ContactsFragment"/>
+
+    <fragment
+        android:id="@+id/messages_fragment"
+        android:name="fragments.MessagesFragment"
+        android:label="MessagesFragment"/>
+
+    <fragment
+        android:id="@+id/groups_fragment"
+        android:name="fragments.GroupsFragment"
+        android:label="GroupsFragment"/>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="fragments.SettingsFragment"
+        android:label="SettingsFragment"/>
 </navigation>
