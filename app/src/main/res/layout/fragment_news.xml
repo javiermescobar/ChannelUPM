@@ -1,14 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="fragments.NewsFragment">
-
-    <TextView
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="@dimen/big_text"
-        style="@style/default_text"/>
+        tools:context="fragments.NewsFragment">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Esta es la sección de noticias"
+            android:gravity="center"
+            android:textSize="@dimen/big_text"
+            style="@style/default_text"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
