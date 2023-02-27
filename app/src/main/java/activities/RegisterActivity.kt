@@ -25,6 +25,7 @@ class RegisterActivity: BaseActivity() {
 
     override fun configureUI() {
         binding.backButton.setOnClickListener {
+            super.hideKeyboard()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
@@ -42,6 +43,7 @@ class RegisterActivity: BaseActivity() {
         }
 
         binding.confirmRegistrationButton.setOnClickListener {
+            super.hideKeyboard()
             performRegister()
         }
     }

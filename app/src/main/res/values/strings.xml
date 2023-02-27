@@ -1,17 +1,16 @@
 <resources>
     <string name="app_name">ChannelUPM</string>
 
-    <string name="confirm">Confirmar</string>
-
     <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
     <string name="input_name">Introduce tu nombre</string>
     <string name="input_mail">Introduce tu correo</string>
     <string name="input_password">Introduce tu contraseña</string>
     <string name="confirm_password">Confirma tu contraseña</string>
-    <string name="confirm_login">Iniciar sesión</string>
+    <string name="confirm_login">INICIAR SESIÓN</string>
+    <string name="confirm">CONFIRMAR</string>
     <string name="firstTime">¿Primera vez?</string>
-    <string name="register">Regístrate!</string>
+    <string name="register">¡REGÍSTRATE!</string>
     <string name="login_error_mail_found">Correo ya registrado</string>
     <string name="login_error_no_upm_mail">No es un correo o no pertenece a la UPM</string>
     <string name="login_error_password_mail_dont_match">La contraseña o el correo son incorrectos</string>
@@ -20,4 +19,13 @@
     <string name="register_error_password_weak">Debe tener minúscula, mayúscula y un número</string>
     <string name="register_error_password_short">La contraseña debe tener entre 8 y 20 caractéres</string>
     <string name="register_error_passwords_dont_match">Las contraseñas deben ser iguales</string>
+
+    <!-- menus -->
+    <string name="news_section">Noticias</string>
+    <string name="contacts_section">Contactos</string>
+    <string name="groups_section">Grupos</string>
+    <string name="messages_section">Mensajes</string>
+    <string name="settings_section">Ajustes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

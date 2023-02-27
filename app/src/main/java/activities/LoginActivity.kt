@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import repositories.LoginRepository
+import utils.Constants
 import viewModels.LoginViewModel
 
 class LoginActivity: BaseActivity() {
@@ -27,6 +28,7 @@ class LoginActivity: BaseActivity() {
 
     override fun configureUI() {
         binding.LoginButton.setOnClickListener {
+            super.hideKeyboard()
             loginViewModel.loginUser(
                 binding.mailTextBox.text.toString(),
                 binding.passwordTextBox.text.toString()
@@ -42,6 +44,7 @@ class LoginActivity: BaseActivity() {
         }
 
         binding.registerButton.setOnClickListener {
+            super.hideKeyboard()
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
@@ -50,8 +53,10 @@ class LoginActivity: BaseActivity() {
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
             if(it.UserId != -1) {
-                //Go to new activity
+                Constants.currentUserId = it.UserId
             } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 binding.errorTextPassword.visibility = View.VISIBLE
             }
         })

@@ -4,7 +4,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_grey">
+        android:background="?attr/colorPrimary">
 
         <ImageButton
             android:id="@+id/back_button"
@@ -13,8 +13,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/ic_back_button"
-            android:layout_marginLeft="@dimen/login_text_top_margin"
-            android:layout_marginTop="@dimen/login_text_side_margin"/>
+            android:layout_marginTop="@dimen/login_text_side_margin"
+            android:layout_marginLeft="@dimen/login_text_top_margin"/>
 
         <ImageView
             android:id="@+id/logo_image"
@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/logo"
-            android:layout_marginTop="@dimen/big_margin"/>
+            android:layout_marginTop="@dimen/login_register_button_top_margin"/>
 
         <TextView
             android:id="@+id/register_title"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/register_section"
-            android:textColor="@color/white"
+            style="@style/default_text"
             android:textSize="18pt"
             android:maxLines="1"
             android:layout_marginTop="@dimen/default_margin"/>
@@ -171,6 +171,8 @@
             android:maxLines="1"
             android:background="@drawable/rounded_button"
             android:text="@string/confirm"
+            android:textSize="@dimen/smallest_text"
+            style="@style/default_text"
             android:layout_marginTop="@dimen/default_margin"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,5 +18,7 @@ class Constants {
             }
             return accepted
         }
+
+        var currentUserId: Int = 0
     }
 }

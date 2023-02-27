@@ -16,7 +16,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="light_mode_text" parent="Theme.ChannelUPM">
+    <style name="default_text" parent="Theme.ChannelUPM">
         <item name="android:textColor">@color/dark_grey</item>
     </style>
 </resources>
