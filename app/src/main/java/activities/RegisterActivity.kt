@@ -20,7 +20,7 @@ class RegisterActivity: BaseActivity() {
         setContentView(binding.root)
 
         val registerRepository = RegisterRepository()
-        registerViewModel = RegisterViewModel(registerRepository)
+        registerViewModel = RegisterViewModel(registerRepository, super.baseViewModel)
     }
 
     override fun configureUI() {

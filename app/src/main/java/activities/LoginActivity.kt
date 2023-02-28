@@ -23,7 +23,7 @@ class LoginActivity: BaseActivity() {
         setContentView(binding.root)
 
         val loginRepository = LoginRepository()
-        loginViewModel = LoginViewModel(loginRepository)
+        loginViewModel = LoginViewModel(loginRepository, super.baseViewModel)
     }
 
     override fun configureUI() {
