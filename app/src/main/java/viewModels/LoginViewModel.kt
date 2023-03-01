@@ -1,16 +1,14 @@
 package viewModels
 
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import models.User
 import repositories.LoginRepository
-import retrofit2.Response
-import timber.log.Timber
 import utils.AppState
 import utils.Constants
-import java.lang.Exception
 
 class LoginViewModel(
     private val loginRepository: LoginRepository,

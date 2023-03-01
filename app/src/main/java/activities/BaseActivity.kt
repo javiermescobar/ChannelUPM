@@ -2,11 +2,14 @@ package activities
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
+import com.airbnb.lottie.LottieAnimationView
+import com.javier.channelupm.R
 import utils.AppState
 import viewModels.BaseViewModel
 
@@ -46,11 +49,17 @@ abstract class BaseActivity: AppCompatActivity(){
     }
 
     private fun appStateSubscribe() {
+        val loading = findViewById<LottieAnimationView>(R.id.loading)
+
         baseViewModel.appState.observe(this, Observer {
             if(it == AppState.LOADING) {
-                //Show loading animation
+                loading?.let {
+                    it.visibility = View.VISIBLE
+                }
             } else {
-                //Hide loading animation
+                loading?.let {
+                    it.visibility = View.GONE
+                }
                 if(it == AppState.ERROR) {
                   //Show error dialog
                 }
