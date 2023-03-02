@@ -10,15 +10,18 @@ import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.airbnb.lottie.LottieAnimationView
 import com.javier.channelupm.R
+import dialogs.ErrorDialogFragment
 import utils.AppState
 import viewModels.BaseViewModel
 
 abstract class BaseActivity: AppCompatActivity(){
 
     protected lateinit var baseViewModel: BaseViewModel
+    private lateinit var errorDialog: ErrorDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         baseViewModel = BaseViewModel()
+        errorDialog = ErrorDialogFragment(this)
 
         initializeView()
         super.onCreate(savedInstanceState)
@@ -53,15 +56,15 @@ abstract class BaseActivity: AppCompatActivity(){
 
         baseViewModel.appState.observe(this, Observer {
             if(it == AppState.LOADING) {
-                loading?.let {
-                    it.visibility = View.VISIBLE
+                loading?.let { anim ->
+                    anim.visibility = View.VISIBLE
                 }
             } else {
-                loading?.let {
-                    it.visibility = View.GONE
+                loading?.let { anim ->
+                    anim.visibility = View.GONE
                 }
                 if(it == AppState.ERROR) {
-                  //Show error dialog
+                    errorDialog.show(supportFragmentManager, resources.getString(R.string.error_dialog_tag))
                 }
             }
         })

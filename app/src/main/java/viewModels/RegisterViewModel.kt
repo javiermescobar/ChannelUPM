@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import repositories.RegisterRepository
-import retrofit2.Response
 import utils.AppState
 import utils.Constants
 

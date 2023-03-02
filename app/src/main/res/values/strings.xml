@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ChannelUPM</string>
 
+    <string name="error_message">Algo ha ido mal...</string>
+    <string name="error_confirm">OK</string>
+    <string name="error_dialog_tag">Error dialog</string>
+
     <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
     <string name="input_name">Introduce tu nombre</string>
@@ -26,6 +30,4 @@
     <string name="groups_section">Grupos</string>
     <string name="messages_section">Mensajes</string>
     <string name="settings_section">Ajustes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

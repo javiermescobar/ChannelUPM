@@ -16,7 +16,11 @@
         <item name="android:textColor">@color/light_grey</item>
     </style>
 
-    <style name="default_text" parent="Theme.ChannelUPM">
+    <style name="default_text">
         <item name="android:textColor">@color/lighter_grey</item>
+    </style>
+
+    <style name="error_dialog">
+        <item name="android:background">?attr/colorOnPrimary</item>
     </style>
 </resources>

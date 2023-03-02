@@ -4,10 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.airbnb.lottie.LottieAnimationView
-import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
-import okhttp3.internal.wait
 import repositories.LoginRepository
 import utils.Constants
 import viewModels.LoginViewModel
