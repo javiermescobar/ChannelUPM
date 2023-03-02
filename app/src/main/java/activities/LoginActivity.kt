@@ -1,13 +1,9 @@
 package activities
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.util.TypedValue
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import repositories.LoginRepository
 import utils.Constants
@@ -23,7 +19,7 @@ class LoginActivity: BaseActivity() {
         setContentView(binding.root)
 
         val loginRepository = LoginRepository()
-        loginViewModel = LoginViewModel(loginRepository)
+        loginViewModel = LoginViewModel(loginRepository, super.baseViewModel)
     }
 
     override fun configureUI() {
@@ -55,9 +51,13 @@ class LoginActivity: BaseActivity() {
             if(it.UserId != -1) {
                 Constants.currentUserId = it.UserId
             } else {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
                 binding.errorTextPassword.visibility = View.VISIBLE
+
+                Thread{
+                    Thread.sleep(100)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }.start()
             }
         })
     }

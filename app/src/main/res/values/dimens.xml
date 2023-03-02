@@ -22,5 +22,7 @@
     <dimen name="login_error_text_height">30dp</dimen>
 
     <dimen name="bottom_bar_height">60dp</dimen>
+    <dimen name="error_dialog_button_width">100dp</dimen>
+    <dimen name="error_dialog_button_height">70dp</dimen>
 
 </resources>

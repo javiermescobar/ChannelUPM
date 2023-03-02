@@ -6,25 +6,27 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import models.User
 import repositories.LoginRepository
-import retrofit2.Response
-import timber.log.Timber
+import utils.AppState
 import utils.Constants
-import java.lang.Exception
 
 class LoginViewModel(
-    val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val baseViewModel: BaseViewModel
 ): ViewModel() {
 
     val currentUser: MutableLiveData<User> = MutableLiveData()
 
     fun loginUser(mail: String, password: String) {
+        baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = loginRepository.LoginUser(mail, password)
             if(response.code() == Constants.ACCEPTED_CODE)  {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
                 response.body()?.let {
                     currentUser.postValue(it)
                 }
             } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
                 currentUser.postValue(User.emptyUser())
             }
         }
