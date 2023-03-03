@@ -7,24 +7,24 @@
         android:orientation="vertical"
         android:background="@drawable/dialog_background">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/huge_text"
-            style="@style/default_text"
-            android:text=":/"
-            android:gravity="center"/>
+        <ImageView
+            android:layout_width="@dimen/big_margin"
+            android:layout_height="@dimen/big_margin"
+            android:src="@drawable/ic_warning"
+            android:layout_gravity="center"/>
 
         <TextView
+            android:id="@+id/information_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/normal_text"
             style="@style/default_text"
-            android:text="@string/error_message"
+            android:text="Mensaje de información"
+            android:layout_margin="@dimen/small_margin"
             android:gravity="center"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/error_confirmation_button"
+            android:id="@+id/information_confirmation_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"

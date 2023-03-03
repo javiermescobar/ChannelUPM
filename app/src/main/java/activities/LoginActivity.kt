@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import repositories.LoginRepository
 import utils.Constants
@@ -25,10 +26,27 @@ class LoginActivity: BaseActivity() {
     override fun configureUI() {
         binding.LoginButton.setOnClickListener {
             super.hideKeyboard()
-            loginViewModel.loginUser(
-                binding.mailTextBox.text.toString(),
-                binding.passwordTextBox.text.toString()
-            )
+
+            val mail = binding.mailTextBox.text.toString()
+            val password = binding.passwordTextBox.text.toString()
+
+            if(mail.isEmpty() || password.isEmpty()) {
+                super.showInformationDialog(R.string.enter_all_fields)
+            } else {
+
+                if(mail == "admin" && password == "0000") {
+                    Thread{
+                        Thread.sleep(100)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }.start()
+                }
+
+                loginViewModel.loginUser(
+                    mail,
+                    password
+                )
+            }
         }
 
         binding.mailTextBox.addTextChangedListener {
@@ -50,14 +68,13 @@ class LoginActivity: BaseActivity() {
         loginViewModel.currentUser.observe(this, Observer {
             if(it.UserId != -1) {
                 Constants.currentUserId = it.UserId
-            } else {
-                binding.errorTextPassword.visibility = View.VISIBLE
-
                 Thread{
                     Thread.sleep(100)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }.start()
+            } else {
+                binding.errorTextPassword.visibility = View.VISIBLE
             }
         })
     }

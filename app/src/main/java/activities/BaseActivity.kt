@@ -11,6 +11,7 @@ import androidx.viewbinding.ViewBinding
 import com.airbnb.lottie.LottieAnimationView
 import com.javier.channelupm.R
 import dialogs.ErrorDialogFragment
+import dialogs.InformationDialogFragment
 import utils.AppState
 import viewModels.BaseViewModel
 
@@ -18,6 +19,7 @@ abstract class BaseActivity: AppCompatActivity(){
 
     protected lateinit var baseViewModel: BaseViewModel
     private lateinit var errorDialog: ErrorDialogFragment
+    private lateinit var informationDialog: InformationDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         baseViewModel = BaseViewModel()
@@ -68,5 +70,10 @@ abstract class BaseActivity: AppCompatActivity(){
                 }
             }
         })
+    }
+
+    protected fun showInformationDialog(informationMessage: Int) {
+        informationDialog = InformationDialogFragment(this, informationMessage)
+        informationDialog.show(supportFragmentManager, resources.getString(R.string.information_dialog_tag))
     }
 }
