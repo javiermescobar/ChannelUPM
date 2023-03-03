@@ -80,14 +80,25 @@ class RegisterActivity: BaseActivity() {
     }
 
     private fun performRegister() {
-        val mail = binding.mailTextBox.text.toString()
 
-        if(mail.contains('@') && Constants.isAcceptedDomain(mail.split('@')[1])) {
-            registerViewModel.getMailRegistered(mail)
+        if(anyBlankField()) {
+            super.showInformationDialog(R.string.enter_all_fields)
         } else {
-            binding.errorTextMail.text = binding.root.resources.getText(R.string.login_error_no_upm_mail)
-            binding.errorTextMail.visibility = View.VISIBLE
+            val mail = binding.mailTextBox.text.toString()
+            if(mail.contains('@') && Constants.isAcceptedDomain(mail.split('@')[1])) {
+                registerViewModel.getMailRegistered(mail)
+            } else {
+                binding.errorTextMail.text = binding.root.resources.getText(R.string.login_error_no_upm_mail)
+                binding.errorTextMail.visibility = View.VISIBLE
+            }
         }
+    }
+
+    private fun anyBlankField(): Boolean {
+        return (binding.nameTextBox.text.isEmpty() ||
+                    binding.mailTextBox.text.isEmpty() ||
+                    binding.passwordTextBox.text.isEmpty() ||
+                    binding.confirmPasswordTextBox.text.isEmpty())
     }
 
     private fun passwordGoodEnough(password: String): Boolean {
