@@ -1,16 +1,24 @@
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/title_text"
+            style="@style/default_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Esta es la sección de noticias"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="Esta es la sección de noticias"
             android:textSize="@dimen/big_text"
-            style="@style/default_text"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title_text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
