@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.javier.channelupm.databinding.FragmentSettingsBinding
 
-class SettingsFragment: Fragment() {
+class SettingsFragment: BaseFragment() {
 
     private lateinit var binding: FragmentSettingsBinding
 
