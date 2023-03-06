@@ -4,21 +4,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="@dimen/news_fragment_logo_width"
+            android:layout_height="@dimen/news_fragment_logo_height"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/logo"
+            android:layout_margin="@dimen/smallest_margin"/>
+
+        <ImageButton
+            android:id="@+id/edit_new_button"
+            android:layout_width="@dimen/news_fragment_add_image_side"
+            android:layout_height="@dimen/news_fragment_add_image_side"
+            android:src="@drawable/ic_plus"
+            android:background="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/smallest_margin"/>
+
+
         <TextView
             android:id="@+id/title_text"
             style="@style/default_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Esta es la sección de noticias"
+            android:text="@string/news_fragment_title"
             android:textSize="@dimen/big_text"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/logo_image"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title_text"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/top_navigation_height"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

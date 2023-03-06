@@ -35,6 +35,7 @@ class LoginActivity: BaseActivity() {
             } else {
 
                 if(mail == "admin" && password == "0000") {
+                    Constants.currentUserId = -1
                     Thread{
                         Thread.sleep(100)
                         val intent = Intent(this, MainActivity::class.java)

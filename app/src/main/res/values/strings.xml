@@ -33,4 +33,7 @@
     <string name="groups_section">Grupos</string>
     <string name="messages_section">Mensajes</string>
     <string name="settings_section">Ajustes</string>
+
+    <!-- fragments -->
+    <string name="news_fragment_title">Noticias UPM</string>
 </resources>

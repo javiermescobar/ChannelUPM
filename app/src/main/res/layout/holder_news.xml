@@ -27,7 +27,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/smallest_margin"
-            android:layout_marginEnd="@dimen/smallest_margin"/>
+            android:layout_marginEnd="@dimen/smallest_margin"
+            android:visibility="gone"/>
 
 
         <TextView
@@ -38,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="Ejemplo de texto largo que describe una noticia"
-            android:textSize="@dimen/small_text"
+            android:textSize="@dimen/smallest_text"
             style="@style/default_text"
             android:layout_marginStart="@dimen/smallest_margin"
             android:layout_marginEnd="@dimen/smallest_margin"/>
