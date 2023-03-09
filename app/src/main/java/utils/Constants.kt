@@ -1,5 +1,7 @@
 package utils
 
+import models.User
+
 class Constants {
     companion object {
         const val BASE_URL = "https://localhost:8080/"
@@ -19,6 +21,6 @@ class Constants {
             return accepted
         }
 
-        var currentUserId: Int = 0
+        lateinit var currentUser: User
     }
 }

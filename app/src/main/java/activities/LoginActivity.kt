@@ -6,6 +6,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
+import models.User
 import repositories.LoginRepository
 import utils.Constants
 import viewModels.LoginViewModel
@@ -35,7 +36,7 @@ class LoginActivity: BaseActivity() {
             } else {
 
                 if(mail == "admin" && password == "0000") {
-                    Constants.currentUserId = -1
+                    Constants.currentUser = User.emptyAdminUser()
                     Thread{
                         Thread.sleep(100)
                         val intent = Intent(this, MainActivity::class.java)
@@ -68,7 +69,7 @@ class LoginActivity: BaseActivity() {
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
             if(it.UserId != -1) {
-                Constants.currentUserId = it.UserId
+                Constants.currentUser = it
                 Thread{
                     Thread.sleep(100)
                     val intent = Intent(this, MainActivity::class.java)

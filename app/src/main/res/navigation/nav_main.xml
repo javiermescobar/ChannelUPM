@@ -7,7 +7,16 @@
     <fragment
         android:id="@+id/news_fragment"
         android:name="fragments.NewsFragment"
-        android:label="NewsFragment" />
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/action_news_fragment_to_add_news_fragment"
+            app:destination="@id/add_news_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_news_fragment"
+        android:name="fragments.AddNewsFragment"
+        android:label="AddNewsFragment"/>
 
     <fragment
         android:id="@+id/contacts_fragment"

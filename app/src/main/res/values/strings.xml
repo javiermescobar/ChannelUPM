@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ChannelUPM</string>
 
+    <string name="confirm">CONFIRMAR</string>
+    <string name="menu_continue">CONTINUAR</string>
+
     <string name="error_message">Algo ha ido mal...</string>
     <string name="error_confirm">OK</string>
 
@@ -14,7 +17,6 @@
     <string name="input_password">Introduce tu contraseña</string>
     <string name="confirm_password">Confirma tu contraseña</string>
     <string name="confirm_login">INICIAR SESIÓN</string>
-    <string name="confirm">CONFIRMAR</string>
     <string name="firstTime">¿Primera vez?</string>
     <string name="register">¡REGÍSTRATE!</string>
     <string name="login_error_mail_found">Correo ya registrado</string>
@@ -36,4 +38,7 @@
 
     <!-- fragments -->
     <string name="news_fragment_title">Noticias UPM</string>
+    <string name="add_news_fragment_title">Añadir noticia</string>
+    <string name="add_news_title">Título de la noticia</string>
+    <string name="add_news_description">Descripción de la noticia</string>
 </resources>

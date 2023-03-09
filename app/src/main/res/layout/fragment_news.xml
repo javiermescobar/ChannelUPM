@@ -14,7 +14,7 @@
             android:layout_margin="@dimen/smallest_margin"/>
 
         <ImageButton
-            android:id="@+id/edit_new_button"
+            android:id="@+id/add_news_button"
             android:layout_width="@dimen/news_fragment_add_image_side"
             android:layout_height="@dimen/news_fragment_add_image_side"
             android:src="@drawable/ic_plus"
