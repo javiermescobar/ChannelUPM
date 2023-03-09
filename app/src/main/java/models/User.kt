@@ -21,5 +21,17 @@ data class User(
                 0
             )
         }
+
+        fun emptyAdminUser(): User {
+            return User(
+                -1,
+                "",
+                "",
+                "",
+                "",
+                "",
+                1
+            )
+        }
     }
 }

@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import utils.Constants.Companion.BASE_URL
 
 object RetrofitInstance {
@@ -25,5 +26,9 @@ object RetrofitInstance {
 
     val loginApi: LoginApi by lazy {
         retrofit.create(LoginApi::class.java)
+    }
+
+    val newsApi: NewsApi by lazy {
+        retrofit.create(NewsApi::class.java)
     }
 }

@@ -82,7 +82,7 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:visibility="gone"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Login_button"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
@@ -108,7 +108,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register_button"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
