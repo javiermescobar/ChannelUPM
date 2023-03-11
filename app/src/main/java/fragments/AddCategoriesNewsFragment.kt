@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.databinding.FragmentAddCategoriesNewsBinding
 import models.Category
@@ -57,6 +58,10 @@ class AddCategoriesNewsFragment: BaseFragment(){
         binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         binding.categoriesRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
         binding.categoriesRecyclerView.adapter = categoriesAdapter
+
+        binding.backButton.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
     private fun updateAdapter() {
