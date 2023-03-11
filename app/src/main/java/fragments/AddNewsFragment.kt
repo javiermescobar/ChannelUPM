@@ -33,5 +33,9 @@ class AddNewsFragment: BaseFragment() {
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.addNewButton.setOnClickListener {
+            findNavController().navigate(R.id.action_add_news_fragment_to_add_categories_news_fragment)
+        }
     }
 }

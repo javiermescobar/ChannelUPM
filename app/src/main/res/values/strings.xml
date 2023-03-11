@@ -41,4 +41,5 @@
     <string name="add_news_fragment_title">Añadir noticia</string>
     <string name="add_news_title">Título de la noticia</string>
     <string name="add_news_description">Descripción de la noticia</string>
+    <string name="add_categories_news">Seleccionar categoría</string>
 </resources>
