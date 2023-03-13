@@ -66,6 +66,7 @@
             android:padding="@dimen/smallest_margin"
             android:maxLength="1000"
             android:minLines="16"
+            android:maxLines="16"
             android:gravity="top|start"
             style="@style/default_text"
             android:layout_marginStart="@dimen/small_margin"

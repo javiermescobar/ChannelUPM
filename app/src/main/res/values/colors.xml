@@ -10,5 +10,6 @@
     <color name="red">#c80000</color>
     <color name="purple">#541f7a</color>
     <color name="blue">#558ed5</color>
+    <color name="dark_blue">#1f344f</color>
     <color name="orange">#F68426</color>
 </resources>

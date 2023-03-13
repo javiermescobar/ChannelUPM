@@ -16,7 +16,23 @@
     <fragment
         android:id="@+id/add_news_fragment"
         android:name="fragments.AddNewsFragment"
-        android:label="AddNewsFragment"/>
+        android:label="AddNewsFragment">
+        <action
+            android:id="@+id/action_add_news_fragment_to_add_categories_news_fragment"
+            app:destination="@id/add_categories_news_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_categories_news_fragment"
+        android:name="fragments.AddCategoriesNewsFragment"
+        android:label="AddCategoriesNewsFragment">
+        <argument
+            android:name="news_title"
+            app:argType="string" />
+        <argument
+            android:name="news_description"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/contacts_fragment"
