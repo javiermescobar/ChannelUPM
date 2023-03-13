@@ -41,7 +41,21 @@
         android:id="@+id/categories_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/top_navigation_height"/>
+        android:layout_marginTop="@dimen/top_navigation_height"
+        android:layout_marginBottom="@dimen/error_dialog_button_width"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_confirm"
+        android:layout_width="@dimen/login_register_button_width"
+        android:layout_height="@dimen/login_register_button_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/rounded_button"
+        android:text="@string/confirm"
+        style="@style/default_text"
+        android:layout_marginBottom="@dimen/small_margin"/>
+
 
 
 
