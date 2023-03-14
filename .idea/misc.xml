@@ -8,6 +8,7 @@
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/background_rectangle.xml" value="0.29" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/button_rounded.xml" value="0.2985" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/dialog_background.xml" value="0.198" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/gradient_background.xml" value="0.173" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/ic_back_button.xml" value="0.157" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.1775" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.29" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/activity_splash.xml" value="0.14910025706940874" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/bottom_bar_menu.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/bottom_navigation_bar.xml" value="0.3043859649122807" />
         <entry key="..\:/Users/javie/Desktop/Universidad/PFG/ChannelUPM/app/src/main/res/layout/dialog_error.xml" value="0.33" />
