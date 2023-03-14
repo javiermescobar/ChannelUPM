@@ -32,6 +32,9 @@
         <argument
             android:name="news_description"
             app:argType="string" />
+        <action
+            android:id="@+id/action_add_categories_news_fragment_to_news_fragment"
+            app:destination="@id/news_fragment" />
     </fragment>
 
     <fragment
