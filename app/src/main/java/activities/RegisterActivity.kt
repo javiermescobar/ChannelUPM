@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityRegisterBinding
 import repositories.RegisterRepository
+import utils.AppState
 import utils.Constants
 import viewModels.RegisterViewModel
 
@@ -15,19 +16,19 @@ class RegisterActivity: BaseActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
 
+    private var creatingUser = false
+
     override fun initializeView() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val registerRepository = RegisterRepository()
-        registerViewModel = RegisterViewModel(registerRepository, super.baseViewModel)
+        registerViewModel = RegisterViewModel(RegisterRepository(), super.baseViewModel)
     }
 
     override fun configureUI() {
         binding.backButton.setOnClickListener {
             super.hideKeyboard()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         binding.mailTextBox.addTextChangedListener {
@@ -59,6 +60,7 @@ class RegisterActivity: BaseActivity() {
                 } else {
                     if(passwordGoodEnough(password)) {
                         if(password == binding.confirmPasswordTextBox.text.toString()) {
+                            creatingUser = true
                             registerViewModel.registerUser(
                                 name = binding.nameTextBox.text.toString(),
                                 mail = binding.mailTextBox.text.toString(),
@@ -75,6 +77,20 @@ class RegisterActivity: BaseActivity() {
             } else {
                 binding.errorTextMail.text = binding.root.resources.getText(R.string.register_error_mail_registered)
                 binding.errorTextMail.visibility = View.VISIBLE
+            }
+        })
+
+        baseViewModel.appState.observe(this, Observer {
+            when (it) {
+                AppState.ERROR -> {
+                    creatingUser = false
+                }
+                AppState.SUCCESS -> {
+                    if(creatingUser) {
+                        startActivity(Intent(this, LoginActivity::class.java))
+                    }
+                }
+                else -> {}
             }
         })
     }

@@ -36,9 +36,8 @@ class NewsFragment : BaseFragment() {
     }
 
     override fun initializeView() {
-        val newsRepository = NewsRepository()
-        newsViewModel = NewsViewModel(newsRepository, baseViewModel)
-        //newsViewModel.getNews(Constants.currentUser.UserId)
+        newsViewModel = NewsViewModel(NewsRepository(), baseViewModel)
+        newsViewModel.getNews(Constants.currentUser.UserId)
 
         news = mutableListOf()
         news.add(New.getNew("Prueba1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))

@@ -10,8 +10,8 @@ import utils.AppState
 import utils.Constants
 
 class CategoriesViewModel(
-    private val baseViewModel: BaseViewModel,
-    private val categoriesRepository: CategoriesRepository
+    private val categoriesRepository: CategoriesRepository,
+    private val baseViewModel: BaseViewModel
 ): ViewModel() {
 
     val categories: MutableLiveData<List<Category>> = MutableLiveData()
