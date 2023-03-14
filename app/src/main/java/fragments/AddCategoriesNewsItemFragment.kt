@@ -12,23 +12,21 @@ import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentAddCategoriesNewsBinding
 import models.Category
 import models.InteractableCategory
-import repositories.CategoriesRepository
 import repositories.NewsRepository
 import utils.AppState
 import utils.Constants
 import utils.ItemDecorator
-import viewModels.CategoriesViewModel
 import viewModels.NewsViewModel
 
-class AddCategoriesNewsFragment: BaseFragment(){
+class AddCategoriesNewsItemFragment: BaseFragment(){
 
     private lateinit var binding: FragmentAddCategoriesNewsBinding
     private lateinit var categoriesAdapter: CategoryAdapter
     private lateinit var newsViewModel: NewsViewModel
 
     private var selectedCategory: InteractableCategory? = null
-    private var newTitle = ""
-    private var newDescription = ""
+    private var newsItemTitle = ""
+    private var newsItemDescription = ""
     private var creatingNew = false
 
     companion object {
@@ -42,8 +40,8 @@ class AddCategoriesNewsFragment: BaseFragment(){
     ): View {
 
         arguments?.let {
-            newTitle = it.getString(Constants.TITLE_NAV_ARG)!!
-            newDescription = it.getString(Constants.DESCRIPTION_NAV_ARG)!!
+            newsItemTitle = it.getString(Constants.TITLE_NAV_ARG)!!
+            newsItemDescription = it.getString(Constants.DESCRIPTION_NAV_ARG)!!
         }
 
         binding = FragmentAddCategoriesNewsBinding.inflate(layoutInflater)
@@ -92,7 +90,7 @@ class AddCategoriesNewsFragment: BaseFragment(){
                 showInformationDialog(R.string.need_select_category)
             } else {
                 creatingNew = true
-                newsViewModel.addNew(Constants.currentUser.UserId, newTitle, newDescription, selectedCategory!!.categoryId)
+                newsViewModel.addNew(Constants.currentUser.UserId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
             }
         }
     }
