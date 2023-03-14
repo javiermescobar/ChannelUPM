@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import models.New
+import models.NewsItem
 import repositories.NewsRepository
 import utils.AppState
 import utils.Constants
@@ -14,7 +14,7 @@ class NewsViewModel(
     private val baseViewModel: BaseViewModel
 ): ViewModel() {
 
-    var mutableNews: MutableLiveData<List<New>> = MutableLiveData()
+    var mutableNews: MutableLiveData<List<NewsItem>> = MutableLiveData()
 
     fun getNews(userId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)

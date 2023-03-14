@@ -8,8 +8,8 @@ class Constants {
         const val ACCEPTED_CODE = 200
         const val MIN_PASSWORD_LENGHT = 8
         const val MAX_PASSWORD_LENGHT = 20
-        const val TITLE_NAV_ARG = "news_title"
-        const val DESCRIPTION_NAV_ARG = "description_title"
+        const val TITLE_NAV_ARG = "newsItem_title"
+        const val DESCRIPTION_NAV_ARG = "newsItem_description"
 
         val ACCEPTED_DOMAINS = arrayListOf("upm.es","alumnos.upm.es")
 

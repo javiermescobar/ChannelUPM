@@ -3,14 +3,14 @@ package holders
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.channelupm.databinding.HolderNewsBinding
-import models.New
+import models.NewsItem
 import utils.Constants
 
-class NewsViewHolder(
+class NewsItemViewHolder(
     private val binding: HolderNewsBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: New) {
+    fun bind(item: NewsItem) {
         binding.titleText.text = item.Title
         binding.descriptionText.text = item.Description
         binding.dateText.text = item.SendDate.toString()

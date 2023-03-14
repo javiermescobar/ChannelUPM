@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/add_news_fragment"
-        android:name="fragments.AddNewsFragment"
+        android:name="fragments.AddNewsItemFragment"
         android:label="AddNewsFragment">
         <action
             android:id="@+id/action_add_news_fragment_to_add_categories_news_fragment"
@@ -24,13 +24,13 @@
 
     <fragment
         android:id="@+id/add_categories_news_fragment"
-        android:name="fragments.AddCategoriesNewsFragment"
+        android:name="fragments.AddCategoriesNewsItemFragment"
         android:label="AddCategoriesNewsFragment">
         <argument
-            android:name="news_title"
+            android:name="newsItem_title"
             app:argType="string" />
         <argument
-            android:name="news_description"
+            android:name="newsItem_description"
             app:argType="string" />
         <action
             android:id="@+id/action_add_categories_news_fragment_to_news_fragment"

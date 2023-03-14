@@ -1,6 +1,6 @@
 package apis
 
-import models.New
+import models.NewsItem
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -10,10 +10,10 @@ interface NewsApi {
     suspend fun getNews(
         @Url url: String,
         @Query("userId") userId: Int
-    ): Response<List<New>>
+    ): Response<List<NewsItem>>
 
     @POST
-    suspend fun addNew(
+    suspend fun addNewsItem(
         @Url url: String,
         @Query("userId") userId: Int,
         @Query("title") title: String,
@@ -22,9 +22,9 @@ interface NewsApi {
     ): Response<Int>
 
     @PUT
-    suspend fun editNew(
+    suspend fun editNewsItem(
         @Url url: String,
-        @Query("newId") newId: Int,
+        @Query("newsItemId") newId: Int,
         @Query("title") title: String,
         @Query("description") description: String,
         @Query("categoryId") categoryId: Int

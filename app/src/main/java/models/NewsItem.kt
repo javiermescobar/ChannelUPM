@@ -4,8 +4,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 
-data class New(
-    val NewId: Int,
+data class NewsItem(
+    val NewsItemId: Int,
     val Title: String,
     val Description: String,
     val SendDate: LocalDate,
@@ -14,9 +14,9 @@ data class New(
 ) {
     companion object {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun getNew(title: String, description: String): New{
-            return New(
-                NewId = -1,
+        fun getNewsItem(title: String, description: String): NewsItem{
+            return NewsItem(
+                NewsItemId = -1,
                 Title = title,
                 Description = description,
                 SendDate = LocalDate.of(2023,3,6),

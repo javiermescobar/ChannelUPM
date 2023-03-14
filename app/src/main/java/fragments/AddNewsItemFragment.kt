@@ -11,7 +11,7 @@ import repositories.NewsRepository
 import utils.Constants
 import viewModels.NewsViewModel
 
-class AddNewsFragment: BaseFragment() {
+class AddNewsItemFragment: BaseFragment() {
 
     private lateinit var binding: FragmentAddNewsBinding
     private lateinit var newsViewModel: NewsViewModel
