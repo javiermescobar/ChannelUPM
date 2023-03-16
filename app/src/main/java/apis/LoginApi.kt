@@ -9,8 +9,13 @@ import retrofit2.http.Url
 interface LoginApi {
 
     @GET
-    suspend fun LoginUser(
+    suspend fun loginUser(
         @Url url: String,
         @Query("mail") mail: String,
-        @Query("password") password: String): Response<User>
+        @Query("password") password: String): Response<Int>
+
+    @GET
+    suspend fun getUserById(
+        @Url url: String,
+        @Query("userId") userId: Int): Response<User>
 }
