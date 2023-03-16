@@ -13,6 +13,8 @@ class RegisterRepository {
     }
 
     suspend fun registerUser(name: String, mail: String, password: String): Response<User> {
-        return RetrofitInstance.registerApi.registerUser("", name = name, mail = mail, password = password)
+        return RetrofitInstance.registerApi.registerUser(
+            "https://vrhsffvcmua6xbiimvpw6jjure0mzxxo.lambda-url.eu-west-2.on.aws/",
+            name = name, mail = mail, password = password)
     }
 }
