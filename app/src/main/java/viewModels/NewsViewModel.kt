@@ -32,7 +32,7 @@ class NewsViewModel(
     fun addNew(userId: Int, title: String, description: String, categoryId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = newsRepository.addNew(userId, title, description, categoryId)
+            val response = newsRepository.addNewsItem(userId, title, description, categoryId)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
@@ -44,7 +44,7 @@ class NewsViewModel(
     fun editNew(newId: Int, title: String, description: String, categoryId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = newsRepository.editNew(newId, title, description, categoryId)
+            val response = newsRepository.editNewsItem(newId, title, description, categoryId)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {

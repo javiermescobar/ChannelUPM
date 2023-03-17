@@ -30,7 +30,7 @@ class NewsFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNewsBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -38,19 +38,6 @@ class NewsFragment : BaseFragment() {
     override fun initializeView() {
         newsViewModel = NewsViewModel(NewsRepository(), baseViewModel)
         newsViewModel.getNews(Constants.currentUser.UserId)
-
-        news = mutableListOf()
-        news.add(NewsItem.getNewsItem("Prueba1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
-        news.add(NewsItem.getNewsItem("Prueba2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
-        news.add(NewsItem.getNewsItem("Prueba3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
-        news.add(NewsItem.getNewsItem("Prueba4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
-        news.add(NewsItem.getNewsItem("Prueba5", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))
-
-        newsItemAdapter = NewsItemAdapter(news.toList())
-
-        binding.newsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL,false)
-        binding.newsRecyclerView.adapter = newsItemAdapter
-        binding.newsRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
 
         binding.addNewsButton.apply {
             visibility = if(Constants.currentUser.Administrator == 1) {
@@ -70,8 +57,8 @@ class NewsFragment : BaseFragment() {
             newsItemAdapter = NewsItemAdapter(it)
 
             binding.newsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL,false)
-            binding.newsRecyclerView.adapter = newsItemAdapter
             binding.newsRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
+            binding.newsRecyclerView.adapter = newsItemAdapter
         })
     }
 }
