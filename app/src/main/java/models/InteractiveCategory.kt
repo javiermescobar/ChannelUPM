@@ -1,15 +1,15 @@
 package models
 
-class InteractableCategory(
+class InteractiveCategory(
     val categoryId: Int,
     val categoryTitle: String,
     var selected: Boolean
 ) {
     companion object {
-        fun mapCategoryToInteractableCategory(category: Category): InteractableCategory {
-            return InteractableCategory(
+        fun mapCategoryToInteractiveCategory(category: Category): InteractiveCategory {
+            return InteractiveCategory(
                 category.CategoryId,
-                category.Title,
+                category.CategoryName,
                 false
             )
         }

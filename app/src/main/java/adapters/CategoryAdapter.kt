@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.channelupm.databinding.HolderCategoryBinding
 import holders.CategoryViewHolder
-import models.Category
-import models.InteractableCategory
+import models.InteractiveCategory
 
 class CategoryAdapter(
-    private val items: List<InteractableCategory>,
-    private val onClick: (item: InteractableCategory) -> Unit
+    private val items: List<InteractiveCategory>,
+    private val onClick: (item: InteractiveCategory) -> Unit
 ): RecyclerView.Adapter<CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
