@@ -3,15 +3,14 @@ package holders
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.HolderCategoryBinding
-import models.Category
-import models.InteractableCategory
+import models.InteractiveCategory
 
 class CategoryViewHolder(
     private val binding: HolderCategoryBinding,
-    private val onClick: (item: InteractableCategory) -> Unit
+    private val onClick: (item: InteractiveCategory) -> Unit
 ): RecyclerView.ViewHolder(binding.root){
 
-    fun bind(item: InteractableCategory) {
+    fun bind(item: InteractiveCategory) {
         binding.titleText.text = item.categoryTitle
         binding.categoryButton.setOnClickListener {
             onClick.invoke(item)

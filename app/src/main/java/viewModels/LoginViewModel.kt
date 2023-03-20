@@ -19,15 +19,30 @@ class LoginViewModel(
     fun loginUser(mail: String, password: String) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = loginRepository.LoginUser(mail, password)
+            val response = loginRepository.loginUser(mail, password)
             if(response.code() == Constants.ACCEPTED_CODE)  {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
-                response.body()?.let {
-                    currentUser.postValue(it)
+                if(response.body() != 0) {
+                    response.body()?.let {
+                        getUserById(it)
+                    }
                 }
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
                 currentUser.postValue(User.emptyUser())
+            }
+        }
+    }
+
+    private fun getUserById(userId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = loginRepository.getUserById(userId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                currentUser.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
             }
         }
     }

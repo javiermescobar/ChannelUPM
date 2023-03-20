@@ -11,16 +11,16 @@ class NewsRepository {
         userId = userId)
     }
 
-    suspend fun addNew(userId: Int, title: String, description: String, categoryId: Int): Response<Int> {
-        return RetrofitInstance.newsApi.addNewsItem("https://zndva5soirzksyn3hs62ls4s5y0vqpvx.lambda-url.eu-west-2.on.aws/",
+    suspend fun addNewsItem(userId: Int, title: String, description: String, categoryId: Int): Response<Int> {
+        return RetrofitInstance.newsApi.addNewsItem("https://vrkjzox5krfbqas46wwxqnzbvu0gvfbh.lambda-url.eu-west-2.on.aws/",
         userId = userId,
         title = title,
         description = description,
         categoryId = categoryId)
     }
 
-    suspend fun editNew(newId: Int, title: String, description: String, categoryId: Int): Response<Int> {
-        return RetrofitInstance.newsApi.editNewsItem("https://gkmkxysvl4idar6n57qgs7xkse0bokvs.lambda-url.eu-west-2.on.aws/",
+    suspend fun editNewsItem(newId: Int, title: String, description: String, categoryId: Int): Response<Int> {
+        return RetrofitInstance.newsApi.editNewsItem("https://gtxo356dspiz3xy2gl4fpdyyte0yjrlp.lambda-url.eu-west-2.on.aws/",
         newId = newId,
         title = title,
         description = description,

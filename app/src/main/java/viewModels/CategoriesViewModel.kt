@@ -16,7 +16,7 @@ class CategoriesViewModel(
 
     val categories: MutableLiveData<List<Category>> = MutableLiveData()
 
-    suspend fun getCategories() {
+    fun getCategories() {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = categoriesRepository.getCategories()

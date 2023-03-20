@@ -41,12 +41,12 @@ class LoginActivity: BaseActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     }.start()
+                } else {
+                    loginViewModel.loginUser(
+                        mail,
+                        password
+                    )
                 }
-
-                loginViewModel.loginUser(
-                    mail,
-                    password
-                )
             }
         }
 

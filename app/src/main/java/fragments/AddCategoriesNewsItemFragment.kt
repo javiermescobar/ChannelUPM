@@ -10,12 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentAddCategoriesNewsBinding
-import models.Category
-import models.InteractableCategory
+import models.InteractiveCategory
+import repositories.CategoriesRepository
 import repositories.NewsRepository
 import utils.AppState
 import utils.Constants
 import utils.ItemDecorator
+import viewModels.CategoriesViewModel
 import viewModels.NewsViewModel
 
 class AddCategoriesNewsItemFragment: BaseFragment(){
@@ -23,8 +24,9 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
     private lateinit var binding: FragmentAddCategoriesNewsBinding
     private lateinit var categoriesAdapter: CategoryAdapter
     private lateinit var newsViewModel: NewsViewModel
+    private lateinit var categoriesViewModel: CategoriesViewModel
 
-    private var selectedCategory: InteractableCategory? = null
+    private var selectedCategory: InteractiveCategory? = null
     private var newsItemTitle = ""
     private var newsItemDescription = ""
     private var creatingNew = false
@@ -52,34 +54,8 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
 
         newsViewModel = NewsViewModel(NewsRepository(), baseViewModel)
 
-        var mutableCategories = mutableListOf<InteractableCategory>()
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 1")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 2")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 3")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 4")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 5")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 6")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 7")))
-        mutableCategories.add(InteractableCategory.mapCategoryToInteractableCategory(Category.newCategory("Categoría 8")))
-
-        categoriesAdapter = CategoryAdapter(mutableCategories.toList()) {
-            if(it.selected) {
-                selectedCategory = null
-                mutableCategories.forEach { it.selected = false }
-            } else {
-                mutableCategories.filter { category -> category.selected }
-                    .forEach { filteredCategory ->
-                        filteredCategory.selected = false
-                    }
-                selectedCategory = it
-                it.selected = true
-            }
-            updateAdapter()
-        }
-
-        binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
-        binding.categoriesRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
-        binding.categoriesRecyclerView.adapter = categoriesAdapter
+        categoriesViewModel = CategoriesViewModel(CategoriesRepository(), baseViewModel)
+        categoriesViewModel.getCategories()
 
         binding.backButton.setOnClickListener{
             findNavController().popBackStack()
@@ -109,6 +85,34 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
                 }
                 else -> {}
             }
+        })
+
+        categoriesViewModel.categories.observe(this, Observer {
+
+            val mutableCategories = mutableListOf<InteractiveCategory>()
+
+            it.forEach { category ->
+                mutableCategories.add(InteractiveCategory.mapCategoryToInteractiveCategory(category))
+            }
+
+            categoriesAdapter = CategoryAdapter(mutableCategories) { interactiveCategory ->
+                if(interactiveCategory.selected) {
+                    selectedCategory = null
+                    mutableCategories.forEach { it.selected = false }
+                } else {
+                    mutableCategories.filter { category -> category.selected }
+                        .forEach { filteredCategory ->
+                            filteredCategory.selected = false
+                        }
+                    selectedCategory = interactiveCategory
+                    interactiveCategory.selected = true
+                }
+                updateAdapter()
+            }
+
+            binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
+            binding.categoriesRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
+            binding.categoriesRecyclerView.adapter = categoriesAdapter
         })
     }
 
