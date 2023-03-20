@@ -1,5 +1,6 @@
 package utils
 
+import models.NewsItem
 import models.User
 
 class Constants {
@@ -10,6 +11,8 @@ class Constants {
         const val MAX_PASSWORD_LENGHT = 20
         const val TITLE_NAV_ARG = "newsItem_title"
         const val DESCRIPTION_NAV_ARG = "newsItem_description"
+        const val EDITING_NAV_ARG = "is_editing"
+
 
         val ACCEPTED_DOMAINS = arrayListOf("upm.es","alumnos.upm.es")
 
@@ -24,5 +27,6 @@ class Constants {
         }
 
         lateinit var currentUser: User
+        lateinit var currentNewsItem: NewsItem
     }
 }

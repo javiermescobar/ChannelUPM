@@ -48,8 +48,8 @@ abstract class BaseFragment: Fragment() {
         })
     }
 
-    protected fun showInformationDialog(informationMessage: Int) {
-        informationDialog = InformationDialogFragment(this.requireActivity(), informationMessage)
+    protected fun showInformationDialog(informationMessage: Int, isWarning: Boolean) {
+        informationDialog = InformationDialogFragment(this.requireActivity(), informationMessage, isWarning)
         informationDialog.show(parentFragmentManager, resources.getString(R.string.information_dialog_tag))
     }
 }

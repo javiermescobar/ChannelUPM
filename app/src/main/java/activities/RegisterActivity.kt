@@ -98,7 +98,7 @@ class RegisterActivity: BaseActivity() {
     private fun performRegister() {
 
         if(anyBlankField()) {
-            super.showInformationDialog(R.string.enter_all_fields)
+            super.showInformationDialog(R.string.enter_all_fields, true)
         } else {
             val mail = binding.mailTextBox.text.toString()
             if(mail.contains('@') && Constants.isAcceptedDomain(mail.split('@')[1])) {

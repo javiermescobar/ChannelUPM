@@ -72,8 +72,8 @@ abstract class BaseActivity: AppCompatActivity(){
         })
     }
 
-    protected fun showInformationDialog(informationMessage: Int) {
-        informationDialog = InformationDialogFragment(this, informationMessage)
+    protected fun showInformationDialog(informationMessage: Int, isWarning: Boolean) {
+        informationDialog = InformationDialogFragment(this, informationMessage, isWarning)
         informationDialog.show(supportFragmentManager, resources.getString(R.string.information_dialog_tag))
     }
 }

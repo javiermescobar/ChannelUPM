@@ -29,6 +29,7 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
     private var selectedCategory: InteractiveCategory? = null
     private var newsItemTitle = ""
     private var newsItemDescription = ""
+    private var isEditing = false
     private var creatingNew = false
 
     companion object {
@@ -44,6 +45,7 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
         arguments?.let {
             newsItemTitle = it.getString(Constants.TITLE_NAV_ARG)!!
             newsItemDescription = it.getString(Constants.DESCRIPTION_NAV_ARG)!!
+            isEditing = it.getBoolean(Constants.EDITING_NAV_ARG)
         }
 
         binding = FragmentAddCategoriesNewsBinding.inflate(layoutInflater)
@@ -63,10 +65,14 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
 
         binding.buttonConfirm.setOnClickListener {
             if(selectedCategory == null) {
-                showInformationDialog(R.string.need_select_category)
+                showInformationDialog(R.string.need_select_category, true)
             } else {
                 creatingNew = true
-                newsViewModel.addNew(Constants.currentUser.UserId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
+                if(isEditing) {
+                    newsViewModel.editNew(Constants.currentNewsItem.NewsItemId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
+                } else {
+                    newsViewModel.addNew(Constants.currentUser.UserId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
+                }
             }
         }
     }
@@ -79,7 +85,11 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
                 }
                 AppState.SUCCESS -> {
                     if(creatingNew) {
-                        showInformationDialog(R.string.new_created)
+                        if(isEditing) {
+                            showInformationDialog(R.string.newsItem_edited, false)
+                        } else {
+                            showInformationDialog(R.string.newsItem_created, false)
+                        }
                         findNavController().navigate(R.id.action_add_categories_news_fragment_to_news_fragment)
                     }
                 }
