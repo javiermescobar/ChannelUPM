@@ -38,10 +38,12 @@
 
     <!-- fragments -->
     <string name="news_fragment_title">Noticias UPM</string>
-    <string name="add_news_fragment_title">Añadir noticia</string>
-    <string name="add_news_title">Título de la noticia</string>
-    <string name="add_news_description">Descripción de la noticia</string>
+    <string name="add_newsItem_fragment_title">Añadir noticia</string>
+    <string name="edit_newsItem_fragment_title">Editar noticia</string>
+    <string name="add_newsItem_title">Título de la noticia</string>
+    <string name="add_newsItem_description">Descripción de la noticia</string>
     <string name="add_categories_news">Seleccionar categoría</string>
     <string name="need_select_category">Debes seleccionar una categoría</string>
-    <string name="new_created">Noticia creada!</string>
+    <string name="newsItem_created">Noticia creada!</string>
+    <string name="newsItem_edited">Noticia editada!</string>
 </resources>

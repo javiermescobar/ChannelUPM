@@ -19,7 +19,6 @@ import viewModels.NewsViewModel
 class NewsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewsBinding
-    private lateinit var news: MutableList<NewsItem>
     private lateinit var newsItemAdapter: NewsItemAdapter
     private lateinit var newsViewModel: NewsViewModel
 
@@ -47,14 +46,23 @@ class NewsFragment : BaseFragment() {
             }
 
             setOnClickListener {
-                findNavController().navigate(R.id.action_news_fragment_to_add_news_fragment)
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.EDITING_NAV_ARG, false)
+                findNavController().navigate(R.id.action_news_fragment_to_add_news_fragment, navBundle)
             }
         }
     }
 
     override fun subscribe() {
         newsViewModel.mutableNews.observe(this, Observer {
-            newsItemAdapter = NewsItemAdapter(it)
+            newsItemAdapter = NewsItemAdapter(it) { newsItem ->
+                Constants.currentNewsItem = newsItem
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.EDITING_NAV_ARG, true)
+                navBundle.putSerializable(Constants.TITLE_NAV_ARG, newsItem.Title)
+                navBundle.putSerializable(Constants.DESCRIPTION_NAV_ARG, newsItem.Description)
+                findNavController().navigate(R.id.action_news_fragment_to_add_news_fragment, navBundle)
+            }
 
             binding.newsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL,false)
             binding.newsRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))

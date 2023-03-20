@@ -17,9 +17,18 @@
         android:id="@+id/add_news_fragment"
         android:name="fragments.AddNewsItemFragment"
         android:label="AddNewsFragment">
+        <argument
+            android:name="is_editing"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_add_news_fragment_to_add_categories_news_fragment"
             app:destination="@id/add_categories_news_fragment" />
+        <argument
+            android:name="newsItem_title"
+            app:argType="string" />
+        <argument
+            android:name="newsItem_description"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -32,6 +41,9 @@
         <argument
             android:name="newsItem_description"
             app:argType="string" />
+        <argument
+            android:name="is_editing"
+            app:argType="boolean"/>
         <action
             android:id="@+id/action_add_categories_news_fragment_to_news_fragment"
             app:destination="@id/news_fragment" />

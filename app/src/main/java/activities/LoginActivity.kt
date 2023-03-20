@@ -31,7 +31,7 @@ class LoginActivity: BaseActivity() {
             val password = binding.passwordTextBox.text.toString()
 
             if(mail.isEmpty() || password.isEmpty()) {
-                super.showInformationDialog(R.string.enter_all_fields)
+                super.showInformationDialog(R.string.enter_all_fields, true)
             } else {
 
                 if(mail == "admin" && password == "0000") {
