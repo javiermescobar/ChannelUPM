@@ -39,4 +39,8 @@ object RetrofitInstance {
     val categoriesApi: CategoriesApi by lazy {
         retrofit.create(CategoriesApi::class.java)
     }
+
+    val contactsApi: ContactsApi by lazy {
+        retrofit.create(ContactsApi::class.java)
+    }
 }
