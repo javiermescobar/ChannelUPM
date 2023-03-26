@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/contact_holder_height">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/orange"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/contact_image"
         android:layout_width="@dimen/contact_image_size"
@@ -26,6 +32,12 @@
         style="@style/default_text"
         android:text="Nombre de usuario"
         android:textSize="@dimen/small_text"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
