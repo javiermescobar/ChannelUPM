@@ -13,4 +13,10 @@ interface ContactsApi {
         @Url url: String,
         @Query("userId") userId: Int
         ): Response<List<User>>
+
+    @GET
+    suspend fun searchContacts(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("searchString") searchString: String): Response<List<User>>
 }

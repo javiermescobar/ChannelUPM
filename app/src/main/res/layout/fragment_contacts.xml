@@ -30,7 +30,7 @@
             android:layout_below="@id/title_text"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_input_box"
-            android:text="@string/search_contact"
+            android:hint="@string/search_contact"
             style="@style/default_text"
             android:padding="@dimen/smallest_margin"
             android:drawableEnd="@drawable/ic_search"/>
