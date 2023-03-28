@@ -18,15 +18,9 @@ import viewModels.ContactsViewModel
 
 class ContactsFragment: BaseFragment() {
 
-    private var searching = false
-
     private lateinit var binding: FragmentContactsBinding
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var contactsAdapter: ContactsAdapter
-
-    companion object {
-        private const val MIN_SEARCH_LENGHT = 3
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,14 +40,10 @@ class ContactsFragment: BaseFragment() {
 
         binding.searchInput.addTextChangedListener {
             it?.let {
-                if(it.length >= MIN_SEARCH_LENGHT) {
+                if(it.isNotEmpty()) {
                     contactsViewModel.searchContacts(Constants.currentUser.UserId, it.toString())
-                    searching = true
                 } else {
-                    if(searching) {
-                        searching = false
-                        contactsViewModel.getContacts(Constants.currentUser.UserId)
-                    }
+                    contactsViewModel.getContacts(Constants.currentUser.UserId)
                 }
             }
         }
