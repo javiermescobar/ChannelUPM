@@ -69,10 +69,18 @@ class AddContactFragment: BaseFragment() {
             contactsAdapter = ContactsAdapter(avilableContacts.toList()) {
 
             }
+            binding.contactsRecyclerView.adapter = contactsAdapter
         })
 
         contactsViewModel.mutableContacts.observe(this, Observer {
             currentContacts = it
+            if(this::avilableContacts.isInitialized && avilableContacts.isNotEmpty()) {
+                currentContacts.forEach { contact ->
+                    if(avilableContacts.contains(contact)) {
+                        avilableContacts.remove(contact)
+                    }
+                }
+            }
         })
     }
 }
