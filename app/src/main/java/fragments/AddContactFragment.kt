@@ -21,7 +21,7 @@ class AddContactFragment: BaseFragment() {
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var contactsAdapter: ContactsAdapter
 
-    private lateinit var avilableContacts: MutableList<User>
+    private lateinit var availableContacts: MutableList<User>
     private lateinit var currentContacts: List<User>
 
     override fun onCreateView(
@@ -58,15 +58,15 @@ class AddContactFragment: BaseFragment() {
 
     override fun subscribe() {
         contactsViewModel.mutableUsers.observe(this, Observer {
-            avilableContacts = it as MutableList<User>
+            availableContacts = it as MutableList<User>
             if(this::currentContacts.isInitialized && currentContacts.isNotEmpty()) {
                 currentContacts.forEach { contact ->
-                    if(avilableContacts.contains(contact)) {
-                        avilableContacts.remove(contact)
+                    if(availableContacts.contains(contact)) {
+                        availableContacts.remove(contact)
                     }
                 }
             }
-            contactsAdapter = ContactsAdapter(avilableContacts.toList()) {
+            contactsAdapter = ContactsAdapter(availableContacts.toList()) {
 
             }
             binding.contactsRecyclerView.adapter = contactsAdapter
@@ -74,10 +74,10 @@ class AddContactFragment: BaseFragment() {
 
         contactsViewModel.mutableContacts.observe(this, Observer {
             currentContacts = it
-            if(this::avilableContacts.isInitialized && avilableContacts.isNotEmpty()) {
+            if(this::availableContacts.isInitialized && availableContacts.isNotEmpty()) {
                 currentContacts.forEach { contact ->
-                    if(avilableContacts.contains(contact)) {
-                        avilableContacts.remove(contact)
+                    if(availableContacts.contains(contact)) {
+                        availableContacts.remove(contact)
                     }
                 }
             }
