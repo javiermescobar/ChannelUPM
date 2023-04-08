@@ -40,4 +40,5 @@
     <!-- Contacts fragment-->
     <dimen name="contact_holder_height">100dp</dimen>
     <dimen name="contact_image_size">75dp</dimen>
+    <dimen name="contact_info_image_size">150dp</dimen>
 </resources>

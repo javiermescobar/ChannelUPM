@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentContactsBinding
 import repositories.ContactsRepository
 import utils.Constants
@@ -51,7 +53,14 @@ class ContactsFragment: BaseFragment() {
 
     override fun subscribe() {
         contactsViewModel.mutableContacts.observe(this, Observer {
-            contactsAdapter = ContactsAdapter(it){}
+            contactsAdapter = ContactsAdapter(it){ user ->
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.CONTACT_INFO_NAME, user.Name)
+                navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, user.Mail)
+                navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, user.Description)
+                navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, user.AvatarImage)
+                findNavController().navigate(R.id.action_contacts_fragment_to_contact_info_fragment, navBundle)
+            }
             binding.contactsRecyclerView.adapter = contactsAdapter
         })
     }

@@ -29,8 +29,8 @@ class AddNewsItemFragment: BaseFragment() {
         arguments?.let {
             isEditing = it.getBoolean(Constants.EDITING_NAV_ARG)
             if(isEditing) {
-                placeHolderTitle = it.getString(Constants.TITLE_NAV_ARG)!!
-                placeHolderDescription = it.getString(Constants.DESCRIPTION_NAV_ARG)!!
+                placeHolderTitle = it.getString(Constants.TITLE_NAV_ARG, "")
+                placeHolderDescription = it.getString(Constants.DESCRIPTION_NAV_ARG, "")
             }
         }
 

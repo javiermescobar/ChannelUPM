@@ -50,4 +50,7 @@
     <!-- Contacts fragment-->
     <string name="contacts_fragment_title">Conctactos</string>
     <string name="search_contact">Buscar contacto</string>
+    <string name="contact_info_title">Información de contacto</string>
+    <string name="contact_info_to_chat">Conversación</string>
+    <string name="contact_info_no_description">Sin descripción</string>
 </resources>
