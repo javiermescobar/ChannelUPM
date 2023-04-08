@@ -6,8 +6,8 @@
 
         <ImageView
             android:id="@+id/logo_image"
-            android:layout_width="@dimen/news_fragment_logo_width"
-            android:layout_height="@dimen/news_fragment_logo_height"
+            android:layout_width="@dimen/fragment_logo_width"
+            android:layout_height="@dimen/fragment_logo_height"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/logo"

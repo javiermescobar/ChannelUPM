@@ -36,7 +36,7 @@
     <string name="messages_section">Mensajes</string>
     <string name="settings_section">Ajustes</string>
 
-    <!-- fragments -->
+    <!--  News fragment -->
     <string name="news_fragment_title">Noticias UPM</string>
     <string name="add_newsItem_fragment_title">Añadir noticia</string>
     <string name="edit_newsItem_fragment_title">Editar noticia</string>
@@ -46,4 +46,11 @@
     <string name="need_select_category">Debes seleccionar una categoría</string>
     <string name="newsItem_created">Noticia creada!</string>
     <string name="newsItem_edited">Noticia editada!</string>
+
+    <!-- Contacts fragment-->
+    <string name="contacts_fragment_title">Conctactos</string>
+    <string name="search_contact">Buscar contacto</string>
+    <string name="contact_info_title">Información de contacto</string>
+    <string name="contact_info_to_chat">Conversación</string>
+    <string name="contact_info_no_description">Sin descripción</string>
 </resources>

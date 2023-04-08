@@ -52,7 +52,29 @@
     <fragment
         android:id="@+id/contacts_fragment"
         android:name="fragments.ContactsFragment"
-        android:label="ContactsFragment"/>
+        android:label="ContactsFragment">
+        <action
+            android:id="@+id/action_contacts_fragment_to_contact_info_fragment"
+            app:destination="@id/contact_info_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contact_info_fragment"
+        android:name="fragments.ContactInfoFragment"
+        android:label="ContactInfoFragment">
+        <argument
+            android:name="contact_name"
+            app:argType="string"/>
+        <argument
+            android:name="contact_mail"
+            app:argType="string"/>
+        <argument
+            android:name="contact_description"
+            app:argType="string"/>
+        <argument
+            android:name="contact_avatar"
+            app:argType="string"/>
+    </fragment>
 
     <fragment
         android:id="@+id/messages_fragment"
