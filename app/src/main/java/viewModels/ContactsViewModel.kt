@@ -15,6 +15,33 @@ class ContactsViewModel(
 ): ViewModel() {
 
     val mutableContacts: MutableLiveData<List<User>> = MutableLiveData()
+    val mutableUsers: MutableLiveData<List<User>> = MutableLiveData()
+
+    fun getUsers() {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = contactsRepository.getAllUsers()
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableUsers.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun searchUser(searchString: String) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = contactsRepository.searchUser(searchString)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableUsers.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
 
     fun getContacts(userId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
@@ -36,6 +63,18 @@ class ContactsViewModel(
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableContacts.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun saveUser(userId: Int, contactId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = contactsRepository.saveUser(userId, contactId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

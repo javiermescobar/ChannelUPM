@@ -1,120 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/transparent"
-        android:src="@drawable/ic_back_button"
-        android:layout_marginStart="@dimen/smallest_margin"
-        android:layout_marginTop="@dimen/smallest_margin"/>
-
-    <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="@dimen/fragment_logo_width"
-        android:layout_height="@dimen/fragment_logo_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/logo"
-        android:layout_marginEnd="@dimen/smallest_margin"
-        android:layout_marginTop="@dimen/smallest_margin"/>
-
-    <TextView
-        android:id="@+id/title_text"
-        style="@style/default_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/contact_info_title"
-        android:textSize="@dimen/normal_text"
-        app:layout_constraintTop_toBottomOf="@+id/back_button"
-        android:layout_marginTop="@dimen/small_margin"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/contact_image"
-        android:layout_width="@dimen/contact_info_image_size"
-        android:layout_height="@dimen/contact_info_image_size"
-        android:src="@drawable/user_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_text"
-        android:layout_marginTop="@dimen/default_margin"/>
-
-    <TextView
-        android:id="@+id/contact_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_image"
-        android:background="@drawable/rounded_input_box"
-        style="@style/default_text"
-        android:padding="@dimen/smallest_margin"
-        android:textSize="@dimen/small_text"
-        android:maxLines="1"
-        android:text="Nombre de contacto"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/small_margin"/>
-
-    <TextView
-        android:id="@+id/contact_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contact_name"
-        android:background="@drawable/rounded_input_box"
-        style="@style/default_text"
-        android:padding="@dimen/smallest_margin"
-        android:textSize="@dimen/small_text"
-        android:text="Mail de contacto"
-        android:gravity="center"
-        android:maxLines="1"
-        android:layout_marginTop="@dimen/smallest_margin"/>
-
-    <TextView
-        android:id="@+id/contact_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/contact_mail"
-        android:background="@drawable/rounded_input_box"
-        style="@style/default_text"
-        android:padding="@dimen/smallest_margin"
-        android:textSize="@dimen/small_text"
-        android:text="Descripcion de contacto"
-        android:gravity="center"
-        android:layout_marginStart="@dimen/smallest_margin"
-        android:layout_marginEnd="@dimen/smallest_margin"
-        android:layout_marginTop="@dimen/smallest_margin" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/to_chat_button"
-        android:layout_width="@dimen/login_register_button_width"
-        android:layout_height="@dimen/login_register_button_height"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/rounded_button"
-        android:textSize="@dimen/smallest_text"
-        style="@style/default_text"
-        android:text="@string/contact_info_to_chat"
-        android:layout_marginBottom="@dimen/default_margin"/>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loading"
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:lottie_rawRes="@raw/loading"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        android:visibility="gone"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_back_button"
+            android:layout_marginStart="@dimen/smallest_margin"
+            android:layout_marginTop="@dimen/smallest_margin"/>
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="@dimen/fragment_logo_width"
+            android:layout_height="@dimen/fragment_logo_height"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/logo"
+            android:layout_marginEnd="@dimen/smallest_margin"
+            android:layout_marginTop="@dimen/smallest_margin"/>
+
+        <TextView
+            android:id="@+id/title_text"
+            style="@style/default_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/contact_info_title"
+            android:textSize="@dimen/normal_text"
+            app:layout_constraintTop_toBottomOf="@+id/back_button"
+            android:layout_marginTop="@dimen/small_margin"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contact_image"
+            android:layout_width="@dimen/contact_info_image_size"
+            android:layout_height="@dimen/contact_info_image_size"
+            android:src="@drawable/user_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            android:layout_marginTop="@dimen/default_margin"/>
+
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contact_image"
+            android:background="@drawable/rounded_input_box"
+            style="@style/default_text"
+            android:padding="@dimen/smallest_margin"
+            android:textSize="@dimen/small_text"
+            android:maxLines="1"
+            android:text="Nombre de contacto"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/small_margin"/>
+
+        <TextView
+            android:id="@+id/contact_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contact_name"
+            android:background="@drawable/rounded_input_box"
+            style="@style/default_text"
+            android:padding="@dimen/smallest_margin"
+            android:textSize="@dimen/small_text"
+            android:text="Mail de contacto"
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/smallest_margin"/>
+
+        <TextView
+            android:id="@+id/contact_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/contact_mail"
+            android:background="@drawable/rounded_input_box"
+            style="@style/default_text"
+            android:padding="@dimen/smallest_margin"
+            android:textSize="@dimen/small_text"
+            android:text="Descripcion de contacto"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/smallest_margin"
+            android:layout_marginEnd="@dimen/smallest_margin"
+            android:layout_marginTop="@dimen/smallest_margin" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/to_chat_button"
+            android:layout_width="@dimen/login_register_button_width"
+            android:layout_height="@dimen/login_register_button_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/rounded_button"
+            android:textSize="@dimen/smallest_text"
+            style="@style/default_text"
+            android:text="@string/contact_info_to_chat"
+            android:layout_marginBottom="@dimen/default_margin"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:lottie_rawRes="@raw/loading"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

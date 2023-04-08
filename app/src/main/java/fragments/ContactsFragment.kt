@@ -49,6 +49,10 @@ class ContactsFragment: BaseFragment() {
                 }
             }
         }
+
+        binding.addContactButton.setOnClickListener {
+            findNavController().navigate(R.id.action_contacts_fragment_to_add_contact_fragment)
+        }
     }
 
     override fun subscribe() {
