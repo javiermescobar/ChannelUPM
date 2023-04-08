@@ -2,40 +2,45 @@ package fragments
 
 import adapters.ContactsAdapter
 import android.os.Bundle
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.javier.channelupm.R
-import com.javier.channelupm.databinding.FragmentContactsBinding
+import com.javier.channelupm.databinding.FragmentAddContactBinding
+import models.User
 import repositories.ContactsRepository
 import utils.Constants
 import utils.ItemDecorator
 import viewModels.ContactsViewModel
 
-class ContactsFragment: BaseFragment() {
-
-    private lateinit var binding: FragmentContactsBinding
+class AddContactFragment: BaseFragment() {
+    private lateinit var binding: FragmentAddContactBinding
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var contactsAdapter: ContactsAdapter
+
+    private lateinit var avilableContacts: MutableList<User>
+    private lateinit var currentContacts: List<User>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentContactsBinding.inflate(layoutInflater)
+        binding = FragmentAddContactBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun initializeView() {
         contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)
         contactsViewModel.getContacts(Constants.currentUser.UserId)
+        contactsViewModel.getUsers()
+
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.contactsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         binding.contactsRecyclerView.addItemDecoration(ItemDecorator(0))
@@ -43,29 +48,31 @@ class ContactsFragment: BaseFragment() {
         binding.searchInput.addTextChangedListener {
             it?.let {
                 if(it.isNotEmpty()) {
-                    contactsViewModel.searchContacts(Constants.currentUser.UserId, it.toString())
+                    contactsViewModel.searchUser(it.toString())
                 } else {
                     contactsViewModel.getContacts(Constants.currentUser.UserId)
                 }
             }
         }
-
-        binding.addContactButton.setOnClickListener {
-            findNavController().navigate(R.id.action_contacts_fragment_to_add_contact_fragment)
-        }
     }
 
     override fun subscribe() {
-        contactsViewModel.mutableContacts.observe(this, Observer {
-            contactsAdapter = ContactsAdapter(it){ user ->
-                val navBundle = Bundle()
-                navBundle.putSerializable(Constants.CONTACT_INFO_NAME, user.Name)
-                navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, user.Mail)
-                navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, user.Description)
-                navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, user.AvatarImage)
-                findNavController().navigate(R.id.action_contacts_fragment_to_contact_info_fragment, navBundle)
+        contactsViewModel.mutableUsers.observe(this, Observer {
+            avilableContacts = it as MutableList<User>
+            if(this::currentContacts.isInitialized && currentContacts.isNotEmpty()) {
+                currentContacts.forEach { contact ->
+                    if(avilableContacts.contains(contact)) {
+                        avilableContacts.remove(contact)
+                    }
+                }
             }
-            binding.contactsRecyclerView.adapter = contactsAdapter
+            contactsAdapter = ContactsAdapter(avilableContacts.toList()) {
+
+            }
+        })
+
+        contactsViewModel.mutableContacts.observe(this, Observer {
+            currentContacts = it
         })
     }
 }

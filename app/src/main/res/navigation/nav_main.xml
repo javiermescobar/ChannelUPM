@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_contacts_fragment_to_contact_info_fragment"
             app:destination="@id/contact_info_fragment" />
+        <action
+            android:id="@+id/action_contacts_fragment_to_add_contact_fragment"
+            app:destination="@id/add_contact_fragment" />
     </fragment>
 
     <fragment
@@ -74,6 +77,12 @@
         <argument
             android:name="contact_avatar"
             app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_contact_fragment"
+        android:name="fragments.AddContactFragment"
+        android:label="AddContactFragment">
     </fragment>
 
     <fragment
