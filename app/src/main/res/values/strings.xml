@@ -54,4 +54,5 @@
     <string name="contact_info_to_chat">Conversación</string>
     <string name="contact_info_no_description">Sin descripción</string>
     <string name="add_contact_title">Añadir contacto</string>
+    <string name="contact_added">Contacto añadido</string>
 </resources>

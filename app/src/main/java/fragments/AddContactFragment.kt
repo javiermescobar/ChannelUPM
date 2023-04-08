@@ -9,9 +9,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentAddContactBinding
 import models.User
 import repositories.ContactsRepository
+import utils.AppState
 import utils.Constants
 import utils.ItemDecorator
 import viewModels.ContactsViewModel
@@ -20,9 +22,10 @@ class AddContactFragment: BaseFragment() {
     private lateinit var binding: FragmentAddContactBinding
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var contactsAdapter: ContactsAdapter
-
     private lateinit var availableContacts: MutableList<User>
     private lateinit var currentContacts: List<User>
+
+    private var addingUser = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,27 +62,46 @@ class AddContactFragment: BaseFragment() {
     override fun subscribe() {
         contactsViewModel.mutableUsers.observe(this, Observer {
             availableContacts = it as MutableList<User>
-            if(this::currentContacts.isInitialized && currentContacts.isNotEmpty()) {
+            if(this::currentContacts.isInitialized) {
                 currentContacts.forEach { contact ->
                     if(availableContacts.contains(contact)) {
                         availableContacts.remove(contact)
                     }
                 }
-            }
-            contactsAdapter = ContactsAdapter(availableContacts.toList()) {
 
+                contactsAdapter = ContactsAdapter(availableContacts.toList().filter {
+                    contact -> contact.UserId != Constants.currentUser.UserId
+                }) { contact ->
+                    addingUser = true
+                    contactsViewModel.saveUser(Constants.currentUser.UserId, contact.UserId)
+                }
+                binding.contactsRecyclerView.adapter = contactsAdapter
             }
-            binding.contactsRecyclerView.adapter = contactsAdapter
         })
 
         contactsViewModel.mutableContacts.observe(this, Observer {
             currentContacts = it
-            if(this::availableContacts.isInitialized && availableContacts.isNotEmpty()) {
+            if(this::availableContacts.isInitialized) {
                 currentContacts.forEach { contact ->
                     if(availableContacts.contains(contact)) {
                         availableContacts.remove(contact)
                     }
                 }
+
+                contactsAdapter = ContactsAdapter(availableContacts.toList().filter {
+                        contact -> contact.UserId != Constants.currentUser.UserId
+                }) { contact ->
+                    addingUser = true
+                    contactsViewModel.saveUser(Constants.currentUser.UserId, contact.UserId)
+                }
+                binding.contactsRecyclerView.adapter = contactsAdapter
+            }
+        })
+
+        baseViewModel.appState.observe(this, Observer {
+            if(it == AppState.SUCCESS && addingUser) {
+                showInformationDialog(R.string.contact_added,false)
+                findNavController().popBackStack()
             }
         })
     }

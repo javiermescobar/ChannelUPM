@@ -28,4 +28,11 @@ class ContactsRepository {
             "https://fj3dpd3erczdhvflp4gu7piaeu0sewgt.lambda-url.eu-west-2.on.aws/",
             userId, searchString)
     }
+
+    suspend fun saveUser(userId: Int, contactId: Int): Response<Int> {
+        return RetrofitInstance.contactsApi.saveUser(
+            "https://cb7dzw7icj2c2a4di2i4qculii0dzxpi.lambda-url.eu-west-2.on.aws/",
+            userId,
+            contactId)
+    }
 }
