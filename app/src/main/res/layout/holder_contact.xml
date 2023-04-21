@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/contact_holder_height"
-    android:background="?attr/colorOnPrimary">
+    android:background="?attr/colorPrimaryVariant">
 
     <View
         android:layout_width="match_parent"

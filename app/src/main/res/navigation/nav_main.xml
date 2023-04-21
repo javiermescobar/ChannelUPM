@@ -82,13 +82,21 @@
     <fragment
         android:id="@+id/add_contact_fragment"
         android:name="fragments.AddContactFragment"
-        android:label="AddContactFragment">
-    </fragment>
+        android:label="AddContactFragment"/>
 
     <fragment
         android:id="@+id/messages_fragment"
         android:name="fragments.MessagesFragment"
-        android:label="MessagesFragment"/>
+        android:label="MessagesFragment">
+        <action
+            android:id="@+id/action_messages_fragment_to_private_chat_fragment"
+            app:destination="@id/private_chat_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/private_chat_fragment"
+        android:name="fragments.PrivateChatFragment"
+        android:label="PrivateChatFragment"/>
 
     <fragment
         android:id="@+id/groups_fragment"
