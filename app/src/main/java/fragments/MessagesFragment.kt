@@ -51,8 +51,12 @@ class MessagesFragment: BaseFragment() {
 
     override fun subscribe() {
         contactsViewModel.mutableContacts.observe(this, Observer {
-            binding.contactsRecyclerView.adapter = ContactsAdapter(it){
-                findNavController().navigate(R.id.action_messages_fragment_to_private_chat_fragment)
+            binding.contactsRecyclerView.adapter = ContactsAdapter(it){ user ->
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.CONTACT_ID, user.UserId)
+                navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, user.AvatarImage)
+                navBundle.putSerializable(Constants.CONTACT_INFO_NAME, user.Name)
+                findNavController().navigate(R.id.action_messages_fragment_to_private_chat_fragment, navBundle)
             }
         })
     }

@@ -58,4 +58,5 @@
 
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
+    <string name="text_required">No se pueden enviar mensjaes vacíos</string>
 </resources>

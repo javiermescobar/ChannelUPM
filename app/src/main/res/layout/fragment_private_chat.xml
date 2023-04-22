@@ -9,7 +9,23 @@
             android:id="@+id/user_banner_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/message_user_banner_height"
-            android:background="?attr/colorPrimaryVariant">
+            android:background="?attr/colorPrimary">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimaryVariant"
+                android:layout_marginTop="@dimen/smallest_margin"
+                android:layout_marginBottom="@dimen/smallest_margin"/>
+
+            <View
+                android:id="@+id/view_top"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/smallest_margin"/>
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back_button"
                 android:layout_width="@dimen/back_button_width"
@@ -43,6 +59,14 @@
                 android:maxLines="1"
                 style="@style/default_text"
                 android:text="Nombre prueba"/>
+
+            <View
+                android:id="@+id/view_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/smallest_margin"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,6 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/message_input"
                 android:src="@drawable/logo"
+                android:alpha="0.6"
                 android:background="@color/transparent"/>
 
             <androidx.recyclerview.widget.RecyclerView

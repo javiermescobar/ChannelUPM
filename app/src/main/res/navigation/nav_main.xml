@@ -96,7 +96,11 @@
     <fragment
         android:id="@+id/private_chat_fragment"
         android:name="fragments.PrivateChatFragment"
-        android:label="PrivateChatFragment"/>
+        android:label="PrivateChatFragment">
+        <argument
+            android:name="contact_id"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/groups_fragment"
