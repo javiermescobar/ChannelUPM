@@ -23,6 +23,8 @@
     <dimen name="login_error_text_height">30dp</dimen>
 
     <!--Navigation-->
+    <dimen name="back_button_width">30dp</dimen>
+    <dimen name="back_button_height">50dp</dimen>
     <dimen name="bottom_bar_height">60dp</dimen>
     <dimen name="top_navigation_height">120dp</dimen>
     <dimen name="error_dialog_button_width">100dp</dimen>
@@ -41,4 +43,12 @@
     <dimen name="contact_holder_height">100dp</dimen>
     <dimen name="contact_image_size">75dp</dimen>
     <dimen name="contact_info_image_size">150dp</dimen>
+
+    <!-- messages -->
+    <dimen name="message_max_width">200dp</dimen>
+    <dimen name="message_user_banner_height">100dp</dimen>
+    <dimen name="message_input_height">50dp</dimen>
+    <dimen name="background_image_width">250dp</dimen>
+    <dimen name="background_image_height">200dp</dimen>
+    <dimen name="message_padding">5dp</dimen>
 </resources>

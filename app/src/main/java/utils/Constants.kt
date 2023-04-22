@@ -18,6 +18,7 @@ class Constants {
         const val CONTACT_INFO_MAIL = "contact_mail"
         const val CONTACT_INFO_DESCRIPTION = "contact_description"
         const val CONTACT_INFO_AVATAR = "contact_avatar"
+        const val CONTACT_ID = "contact_id"
 
 
         val ACCEPTED_DOMAINS = arrayListOf("upm.es","alumnos.upm.es")

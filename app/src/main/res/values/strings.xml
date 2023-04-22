@@ -55,4 +55,8 @@
     <string name="contact_info_no_description">Sin descripción</string>
     <string name="add_contact_title">Añadir contacto</string>
     <string name="contact_added">Contacto añadido</string>
+
+    <!-- Messages -->
+    <string name="write_here_text">Escriba aqui</string>
+    <string name="text_required">No se pueden enviar mensjaes vacíos</string>
 </resources>
