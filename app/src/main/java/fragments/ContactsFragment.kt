@@ -63,6 +63,7 @@ class ContactsFragment: BaseFragment() {
                 navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, user.Mail)
                 navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, user.Description)
                 navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, user.AvatarImage)
+                navBundle.putSerializable(Constants.CONTACT_ID, user.UserId)
                 findNavController().navigate(R.id.action_contacts_fragment_to_contact_info_fragment, navBundle)
             }
             binding.contactsRecyclerView.adapter = contactsAdapter

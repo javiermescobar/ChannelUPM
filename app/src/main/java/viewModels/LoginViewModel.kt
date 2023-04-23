@@ -26,6 +26,8 @@ class LoginViewModel(
                     response.body()?.let {
                         getUserById(it)
                     }
+                } else {
+                    currentUser.postValue(User.emptyUser())
                 }
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
@@ -34,7 +36,7 @@ class LoginViewModel(
         }
     }
 
-    private fun getUserById(userId: Int) {
+    fun getUserById(userId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = loginRepository.getUserById(userId)
