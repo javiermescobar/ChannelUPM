@@ -77,6 +77,12 @@
         <argument
             android:name="contact_avatar"
             app:argType="string"/>
+        <argument
+            android:name="contact_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_contact_info_fragment_to_private_chat_fragment"
+            app:destination="@id/private_chat_fragment" />
     </fragment>
 
     <fragment
@@ -100,6 +106,9 @@
         <argument
             android:name="contact_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_private_chat_fragment_to_contact_info_fragment"
+            app:destination="@id/contact_info_fragment" />
     </fragment>
 
     <fragment

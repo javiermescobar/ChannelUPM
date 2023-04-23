@@ -51,6 +51,19 @@ class ContactInfoFragment: BaseFragment() {
             if(placeholderAvatar.isNotEmpty()) {
                 contactImage.setImageURI(Uri.parse(placeholderAvatar))
             }
+            toChatButton.setOnClickListener {
+                goToPrivateChat()
+            }
+        }
+    }
+
+    private fun goToPrivateChat() {
+        arguments?.let {
+            val navBundle = Bundle()
+            navBundle.putSerializable(Constants.CONTACT_ID, it.getSerializable(Constants.CONTACT_ID))
+            navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, placeholderAvatar)
+            navBundle.putSerializable(Constants.CONTACT_INFO_NAME, placeholderName)
+            findNavController().navigate(R.id.action_contact_info_fragment_to_private_chat_fragment, navBundle)
         }
     }
 }

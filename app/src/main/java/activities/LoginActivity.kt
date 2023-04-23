@@ -33,20 +33,7 @@ class LoginActivity: BaseActivity() {
             if(mail.isEmpty() || password.isEmpty()) {
                 super.showInformationDialog(R.string.enter_all_fields, true)
             } else {
-
-                if(mail == "admin" && password == "0000") {
-                    Constants.currentUser = User.emptyAdminUser()
-                    Thread{
-                        Thread.sleep(100)
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    }.start()
-                } else {
-                    loginViewModel.loginUser(
-                        mail,
-                        password
-                    )
-                }
+                loginViewModel.loginUser(mail, password)
             }
         }
 

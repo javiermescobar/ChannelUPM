@@ -8,23 +8,26 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentPrivateChatBinding
-import dialogs.InformationDialogFragment
+import models.User
+import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
 import utils.ItemDecorator
+import viewModels.LoginViewModel
 import viewModels.MessagesViewModel
 
 class PrivateChatFragment: BaseFragment() {
 
     private lateinit var binding: FragmentPrivateChatBinding
     private lateinit var messagesViewModel: MessagesViewModel
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var adapter: PrivateMessageAdapter
+    private lateinit var contact: User
 
     private var contactId = -1
 
@@ -47,9 +50,9 @@ class PrivateChatFragment: BaseFragment() {
     }
 
     override fun initializeView() {
+        loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
+        loginViewModel.getUserById(contactId)
         messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
-        messagesViewModel.getPrivateMessages(contactId)
-
         val mainHandler = Handler(Looper.getMainLooper())
 
         mainHandler.post(object : Runnable {
@@ -77,6 +80,13 @@ class PrivateChatFragment: BaseFragment() {
                     showInformationDialog(R.string.text_required, true)
                 }
             }
+
+            userNameText.setOnClickListener {
+                goToInfo()
+            }
+            contactImage.setOnClickListener {
+                goToInfo()
+            }
         }
     }
 
@@ -91,5 +101,21 @@ class PrivateChatFragment: BaseFragment() {
                 messagesViewModel.getPrivateMessages(contactId)
             }
         })
+
+        loginViewModel.currentUser.observe(this, Observer {
+            contact = it
+        })
+    }
+
+    private fun goToInfo() {
+        if(this::contact.isInitialized) {
+            val navBundle = Bundle()
+            navBundle.putSerializable(Constants.CONTACT_INFO_NAME, contact.Name)
+            navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, contact.AvatarImage)
+            navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, contact.Mail)
+            navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, contact.Description)
+            navBundle.putSerializable(Constants.CONTACT_ID, contactId)
+            findNavController().navigate(R.id.action_private_chat_fragment_to_contact_info_fragment, navBundle)
+        }
     }
 }
