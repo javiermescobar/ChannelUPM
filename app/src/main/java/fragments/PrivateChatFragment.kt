@@ -52,7 +52,7 @@ class PrivateChatFragment: BaseFragment() {
     override fun initializeView() {
         loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
         loginViewModel.getUserById(contactId)
-        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(),LoginRepository(), baseViewModel)
         val mainHandler = Handler(Looper.getMainLooper())
 
         mainHandler.post(object : Runnable {

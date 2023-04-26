@@ -2,11 +2,11 @@ package holders
 
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
-import com.javier.channelupm.databinding.HolderContactBinding
+import com.javier.channelupm.databinding.HolderContactGroupBinding
 import models.User
 
 class ContactsViewHolder(
-    val binding: HolderContactBinding,
+    val binding: HolderContactGroupBinding,
     val onClick: (item: User) -> Unit
 ): RecyclerView.ViewHolder(binding.root) {
     fun bind(item: User) {
