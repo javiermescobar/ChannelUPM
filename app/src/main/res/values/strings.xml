@@ -65,4 +65,7 @@
     <string name="add_group_group_title">Título del grupo</string>
     <string name="add_group_group_description">Descripción del grupo</string>
     <string name="group_added">Grupo creado!</string>
+    <string name="group_info">Información de grupo</string>
+    <string name="participants">Participantes</string>
+    <string name="edit_participants">Editar participantes</string>
 </resources>

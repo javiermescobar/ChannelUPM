@@ -23,6 +23,7 @@ class MessagesViewModel(
     val mutableGroupParticipants: MutableLiveData<List<User>> = MutableLiveData()
     val mutableGroupParticipantsId: MutableLiveData<List<UserInGroup>> = MutableLiveData()
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableCurrentGroup: MutableLiveData<GroupChat> = MutableLiveData()
 
     fun getPrivateMessages(contactId: Int) {
         viewModelScope.launch {
@@ -75,6 +76,19 @@ class MessagesViewModel(
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableGroups.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun getGroupById(groupChatId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.getGroupById(groupChatId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableCurrentGroup.postValue(response.body())
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

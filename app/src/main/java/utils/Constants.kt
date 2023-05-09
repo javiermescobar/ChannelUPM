@@ -21,6 +21,10 @@ class Constants {
         const val CONTACT_INFO_AVATAR = "contact_avatar"
         const val CONTACT_ID = "contact_id"
 
+        const val GROUP_ID = "group_id"
+        const val GROUP_NAME = "group_name"
+        const val GROUP_AVATAR = "group_avatar"
+
 
         val ACCEPTED_DOMAINS = arrayListOf("upm.es","alumnos.upm.es")
 

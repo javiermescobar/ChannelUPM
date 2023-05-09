@@ -6,6 +6,8 @@
     <dimen name="big_text">20pt</dimen>
     <dimen name="huge_text">25pt</dimen>
 
+    <dimen name="max_info_height">200dp</dimen>
+
     <!--Login & register-->
     <dimen name="logo_login_height">170dp</dimen>
     <dimen name="smallest_margin">10dp</dimen>

@@ -18,7 +18,7 @@ class GroupsViewHolder(
             }
             if(item.AvatarImage.isNotEmpty()) {
                 Picasso.with(root.context).load(item.AvatarImage)
-                    .resize(200,200)
+                    .resize(contactImage.layoutParams.width,contactImage.layoutParams.height)
                     .centerCrop().into(contactImage)
             }
             usernameText.text = item.GroupName
