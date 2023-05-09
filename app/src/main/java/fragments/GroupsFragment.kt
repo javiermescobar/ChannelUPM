@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentsGroupsBinding
 import repositories.LoginRepository
 import repositories.MessagesRepository
@@ -34,7 +36,7 @@ class GroupsFragment: BaseFragment() {
 
         binding.apply {
             addGroupButton.setOnClickListener {
-                //go to create group fragment
+                findNavController().navigate(R.id.action_groups_fragment_to_add_group_fragment)
             }
 
             groupsRecyclerView.apply {
@@ -44,11 +46,14 @@ class GroupsFragment: BaseFragment() {
         }
     }
 
+    private fun openImage(path: String) {
+
+    }
+
+
     override fun subscribe() {
-        messagesViewModel.mutableGroups.observe(this, Observer {
-            adapter = GroupsAdapter(it){
-                //go to group
-            }
+        messagesViewModel.mutableGroups.observe(this, Observer { groups ->
+            adapter = GroupsAdapter(groups){}
             binding.groupsRecyclerView.adapter = adapter
         })
     }

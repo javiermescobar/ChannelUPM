@@ -25,13 +25,13 @@ class MessagesRepository {
     suspend fun createGroupChat(groupName: String, description: String, avatar: String): Response<Int> {
         return RetrofitInstance.messagesApi.createGroupChat(
             "https://uaknky72ykynnjwsdexjftgj7i0rlqax.lambda-url.eu-west-2.on.aws/",
-            Constants.currentUser.UserId, groupName, description, avatar)
+            groupName, avatar, description)
     }
 
-    suspend fun addUserGroup(groupChatId: Int, contactId: Int): Response<Int> {
+    suspend fun addUserGroup(groupChatId: Int, contactId: Int, admin: Int): Response<Int> {
         return RetrofitInstance.messagesApi.addUserGroup(
             "https://4do6hqk44by2enkkanmipa4fpy0ahtgt.lambda-url.eu-west-2.on.aws/",
-            groupChatId, contactId
+            admin, groupChatId, contactId
         )
     }
 

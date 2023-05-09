@@ -1,9 +1,10 @@
 package holders
 
-import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.channelupm.databinding.HolderContactGroupBinding
+import com.squareup.picasso.Picasso
 import models.GroupChat
+
 
 class GroupsViewHolder(
     val binding: HolderContactGroupBinding,
@@ -16,7 +17,9 @@ class GroupsViewHolder(
                 onClick.invoke(item)
             }
             if(item.AvatarImage.isNotEmpty()) {
-                contactImage.setImageURI(Uri.parse(item.AvatarImage))
+                Picasso.with(root.context).load(item.AvatarImage)
+                    .resize(200,200)
+                    .centerCrop().into(contactImage)
             }
             usernameText.text = item.GroupName
         }

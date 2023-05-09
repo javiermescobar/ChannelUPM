@@ -114,7 +114,20 @@
     <fragment
         android:id="@+id/groups_fragment"
         android:name="fragments.GroupsFragment"
-        android:label="GroupsFragment"/>
+        android:label="GroupsFragment">
+        <action
+            android:id="@+id/action_groups_fragment_to_add_group_fragment"
+            app:destination="@id/add_group_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_group_fragment"
+        android:name="fragments.AddGroupFragment"
+        android:label="AddGroupFragment">
+        <action
+            android:id="@+id/action_add_group_fragment_to_groups_fragment"
+            app:destination="@id/groups_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/settings_fragment"

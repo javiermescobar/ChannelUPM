@@ -4,6 +4,8 @@
     <string name="confirm">CONFIRMAR</string>
     <string name="menu_continue">CONTINUAR</string>
 
+    <string name="enter_url">URL de imagen</string>
+
     <string name="error_message">Algo ha ido mal...</string>
     <string name="error_confirm">OK</string>
 
@@ -59,4 +61,8 @@
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
     <string name="text_required">No se pueden enviar mensjaes vacíos</string>
+    <string name="add_group_title">Añadir grupo</string>
+    <string name="add_group_group_title">Título del grupo</string>
+    <string name="add_group_group_description">Descripción del grupo</string>
+    <string name="group_added">Grupo creado!</string>
 </resources>

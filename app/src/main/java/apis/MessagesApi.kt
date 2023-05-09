@@ -30,7 +30,6 @@ interface MessagesApi {
     @POST
     suspend fun createGroupChat(
         @Url url: String,
-        @Query("userId") userId: Int,
         @Query("groupName") groupName: String,
         @Query("avatar") avatar: String,
         @Query("description") description: String
@@ -39,6 +38,7 @@ interface MessagesApi {
     @POST
     suspend fun addUserGroup(
         @Url url: String,
+        @Query("admin") admin: Int,
         @Query("groupChatId") groupChatId: Int,
         @Query("contactId") contactId: Int
     ): Response<Int>

@@ -7,6 +7,7 @@ class Constants {
     companion object {
         const val BASE_URL = "https://localhost:8080/"
         const val ACCEPTED_CODE = 200
+        const val IMAGE_REQUEST_CODE = 100
         const val MIN_PASSWORD_LENGHT = 8
         const val MAX_PASSWORD_LENGHT = 20
 

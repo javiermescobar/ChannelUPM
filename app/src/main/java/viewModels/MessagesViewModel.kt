@@ -54,7 +54,14 @@ class MessagesViewModel(
         viewModelScope.launch {
             val response = messagesRepository.createGroupChat(groupName, description, avatar)
             if(response.code() == Constants.ACCEPTED_CODE) {
-                baseViewModel.appState.postValue(AppState.SUCCESS)
+                response.body()?.let {
+                    val userAdded = messagesRepository.addUserGroup(it, Constants.currentUser.UserId, 1)
+                    if(userAdded.code() == Constants.ACCEPTED_CODE) {
+                        baseViewModel.appState.postValue(AppState.SUCCESS)
+                    } else {
+                        baseViewModel.appState.postValue(AppState.ERROR)
+                    }
+                }
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }
@@ -74,10 +81,10 @@ class MessagesViewModel(
         }
     }
 
-    fun addUserGroup(groupChatId: Int, contactId: Int) {
+    fun addUserGroup(groupChatId: Int, contactId: Int, admin: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = messagesRepository.addUserGroup(groupChatId, contactId)
+            val response = messagesRepository.addUserGroup(groupChatId, contactId, admin)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
