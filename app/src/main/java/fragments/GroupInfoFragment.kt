@@ -39,8 +39,15 @@ class GroupInfoFragment: BaseFragment() {
         messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
         messagesViewModel.getGroupById(groupId)
 
-        binding.backButton.setOnClickListener {
-            findNavController().popBackStack()
+        binding.apply {
+            backButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            groupParticipantsButton.setOnClickListener {
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.GROUP_ID, groupId)
+                findNavController().navigate(R.id.action_group_info_fragment_to_group_participants_fragment, navBundle)
+            }
         }
     }
 

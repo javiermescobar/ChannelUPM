@@ -159,6 +159,21 @@
         <argument
             android:name="group_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_group_info_fragment_to_group_participants_fragment"
+            app:destination="@id/group_participants_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/group_participants_fragment"
+        android:name="fragments.GroupParticipantsFragment"
+        android:label="GroupParticipantsFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_contact_info_fragment"
+            app:destination="@id/contact_info_fragment" />
     </fragment>
 
     <fragment

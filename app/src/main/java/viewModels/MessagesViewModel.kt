@@ -20,8 +20,7 @@ class MessagesViewModel(
     val mutableMessageSent: MutableLiveData<Boolean> = MutableLiveData()
     val mutableGroups: MutableLiveData<List<GroupChat>> = MutableLiveData()
     val mutableGroupMessages: MutableLiveData<List<GroupMessage>> = MutableLiveData()
-    val mutableGroupParticipants: MutableLiveData<List<User>> = MutableLiveData()
-    val mutableGroupParticipantsId: MutableLiveData<List<UserInGroup>> = MutableLiveData()
+    val mutableGroupParticipants: MutableLiveData<List<UserInGroup>> = MutableLiveData()
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
     val mutableCurrentGroup: MutableLiveData<GroupChat> = MutableLiveData()
 
@@ -109,25 +108,12 @@ class MessagesViewModel(
 
 
     fun getGroupParticipants(groupChatId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = messagesRepository.getGroupParticipants(groupChatId)
             if(response.code() == Constants.ACCEPTED_CODE) {
-                mutableGroupParticipantsId.postValue(response.body())
-                mutableGroupParticipantsId.value?.let { usersId ->
-                    val users = mutableListOf<User>()
-                    usersId.forEach { userGroup->
-                        val user = loginRepository.getUserById(userGroup.UserId)
-                        if(user.code() == Constants.ACCEPTED_CODE) {
-                            user.body()?.let {
-                                users.add(it)
-                            }
-                        } else {
-                            baseViewModel.appState.postValue(AppState.ERROR)
-                        }
-                    }
-                    mutableGroupParticipants.postValue(users)
-                    baseViewModel.appState.postValue(AppState.SUCCESS)
-                }
+                mutableGroupParticipants.postValue(response.body())
+                baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

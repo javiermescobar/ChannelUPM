@@ -67,5 +67,6 @@
     <string name="group_added">Grupo creado!</string>
     <string name="group_info">Información de grupo</string>
     <string name="participants">Participantes</string>
-    <string name="edit_participants">Editar participantes</string>
+    <string name="edit_participants">Editar permisos</string>
+    <string name="edit_group_info">Editar información</string>
 </resources>
