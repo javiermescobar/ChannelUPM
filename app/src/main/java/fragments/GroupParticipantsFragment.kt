@@ -46,6 +46,12 @@ class GroupParticipantsFragment: BaseFragment() {
                 findNavController().popBackStack()
             }
 
+            addParticipantsButton.setOnClickListener {
+                val navBundle = Bundle()
+                navBundle.putSerializable(Constants.GROUP_ID, groupId)
+                findNavController().navigate(R.id.action_group_participants_fragment_to_add_participant_fragment, navBundle)
+            }
+
             participantsRecyclerView.apply {
                 layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
                 addItemDecoration(ItemDecorator(0))

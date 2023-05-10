@@ -68,5 +68,6 @@
     <string name="group_info">Información de grupo</string>
     <string name="participants">Participantes</string>
     <string name="edit_participants">Editar permisos</string>
-    <string name="edit_group_info">Editar información</string>
+    <string name="add_participant">Añadir participante</string>
+    <string name="particiant_added">Participante añadido</string>
 </resources>
