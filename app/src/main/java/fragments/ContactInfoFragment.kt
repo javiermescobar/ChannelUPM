@@ -94,6 +94,9 @@ class ContactInfoFragment: BaseFragment() {
                         .placeholder(R.drawable.user_default)
                         .into(contactImage)
                 }
+                if(it.UserId != Constants.currentUser.UserId) {
+                    toChatButton.visibility = View.VISIBLE
+                }
             }
         })
     }

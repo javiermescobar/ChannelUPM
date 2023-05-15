@@ -9,6 +9,10 @@ import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.AppState
 import utils.Constants
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MessagesViewModel(
     private val messagesRepository: MessagesRepository,
@@ -23,6 +27,8 @@ class MessagesViewModel(
     val mutableGroupParticipants: MutableLiveData<List<UserInGroup>> = MutableLiveData()
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
     val mutableCurrentGroup: MutableLiveData<GroupChat> = MutableLiveData()
+    val mutableEditedUser: MutableLiveData<Int> = MutableLiveData()
+
 
     fun getPrivateMessages(contactId: Int) {
         viewModelScope.launch {
@@ -39,7 +45,9 @@ class MessagesViewModel(
     fun sendPrivateMessage(text: String, contactId: Int) {
         mutableMessageSent.postValue(false)
         viewModelScope.launch {
-            val response = messagesRepository.sendPrivateMessage(text, contactId)
+            val formatter = DateTimeFormatter.ISO_DATE_TIME
+            val response = messagesRepository.sendPrivateMessage(text,
+                LocalDateTime.now().format(formatter).toString(), contactId)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableMessageSent.postValue(true)
@@ -106,6 +114,30 @@ class MessagesViewModel(
         }
     }
 
+    fun updateUserGroup(groupChatId: Int, contactId: Int, admin: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.updateUserGroup(groupChatId, contactId, admin)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                mutableEditedUser.postValue(response.body())
+                getGroupParticipants(groupChatId)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun updateGroupChat(groupChatId: Int, groupName: String, description: String, avatarImage: String) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.updateGroupChat(groupChatId, groupName, description, avatarImage)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
 
     fun getGroupParticipants(groupChatId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
@@ -147,7 +179,9 @@ class MessagesViewModel(
 
     fun sendGroupMessage(groupChatId: Int, text: String) {
         viewModelScope.launch {
-            val response = messagesRepository.sendGroupMessage(groupChatId, text)
+            val formatter = DateTimeFormatter.ISO_DATE_TIME
+            val response = messagesRepository.sendGroupMessage(groupChatId, text,
+                LocalDateTime.now().format(formatter).toString())
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableMessageSent.postValue(true)

@@ -49,7 +49,7 @@ class GroupsFragment: BaseFragment() {
 
     override fun subscribe() {
         messagesViewModel.mutableGroups.observe(this, Observer { groups ->
-            adapter = GroupsAdapter(groups){
+            adapter = GroupsAdapter(groups.sortedBy { group -> group.GroupName }){
                 val navBundle = Bundle()
                 navBundle.putSerializable(Constants.GROUP_ID, it.GroupChatId)
                 navBundle.putSerializable(Constants.GROUP_NAME, it.GroupName)

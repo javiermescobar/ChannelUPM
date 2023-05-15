@@ -16,10 +16,10 @@ class MessagesRepository {
             Constants.currentUser.UserId, contactId)
     }
 
-    suspend fun sendPrivateMessage(text: String, contactId: Int): Response<Int> {
+    suspend fun sendPrivateMessage(text: String, date: String, contactId: Int): Response<Int> {
         return RetrofitInstance.messagesApi.sendPrivateMessage(
             "https://qmhgbrdozzujanbbs2lyqxyole0qrbqz.lambda-url.eu-west-2.on.aws/",
-            text, Constants.currentUser.UserId, contactId)
+            text, date, Constants.currentUser.UserId, contactId)
     }
 
     suspend fun createGroupChat(groupName: String, description: String, avatar: String): Response<Int> {
@@ -31,8 +31,19 @@ class MessagesRepository {
     suspend fun addUserGroup(groupChatId: Int, contactId: Int, admin: Int): Response<Int> {
         return RetrofitInstance.messagesApi.addUserGroup(
             "https://4do6hqk44by2enkkanmipa4fpy0ahtgt.lambda-url.eu-west-2.on.aws/",
-            admin, groupChatId, contactId
-        )
+            admin, groupChatId, contactId)
+    }
+
+    suspend fun updateUserGroup(groupChatId: Int, contactId: Int, admin: Int): Response<Int> {
+        return RetrofitInstance.messagesApi.updateUserGroup(
+            "https://ndevktzh2g2eu77uxim6gflbly0cpdwl.lambda-url.eu-west-2.on.aws/",
+            admin, groupChatId, contactId)
+    }
+
+    suspend fun updateGroupChat(groupChatId: Int, groupName: String, description: String, avatarImage: String): Response<Int> {
+        return RetrofitInstance.messagesApi.updateGroupChat(
+            "https://abbv4m2ppcvcmop2fmdmgjvtsy0fkbhh.lambda-url.eu-west-2.on.aws/",
+            groupChatId, groupName, description, avatarImage)
     }
 
     suspend fun getGroupParticipants(groupChatId: Int): Response<List<UserInGroup>> {
@@ -45,8 +56,7 @@ class MessagesRepository {
     suspend fun isUserInGroup(groupChatId: Int, contactId: Int): Response<Int> {
         return RetrofitInstance.messagesApi.isUserInGroup(
             "https://dzqs4c4jg6dnmthjw34enqkbey0zcizo.lambda-url.eu-west-2.on.aws/",
-            groupChatId, contactId
-        )
+            groupChatId, contactId)
     }
 
     suspend fun getUserGroups(): Response<List<GroupChat>> {
@@ -58,8 +68,7 @@ class MessagesRepository {
     suspend fun getGroupById(groupChatId: Int): Response<GroupChat> {
         return RetrofitInstance.messagesApi.getGroupById(
             "https://u7linv3mybq2hasu7aviiug6ta0bsohg.lambda-url.eu-west-2.on.aws/",
-            groupChatId
-        )
+            groupChatId)
     }
 
     suspend fun getGroupMessages(groupMessageId: Int): Response<List<GroupMessage>> {
@@ -68,9 +77,9 @@ class MessagesRepository {
             groupMessageId)
     }
 
-    suspend fun sendGroupMessage(groupChatId: Int ,text: String): Response<Int> {
+    suspend fun sendGroupMessage(groupChatId: Int ,text: String, date: String): Response<Int> {
         return RetrofitInstance.messagesApi.sendGroupMessage(
             "https://qmhgbrdozzujanbbs2lyqxyole0qrbqz.lambda-url.eu-west-2.on.aws/",
-            groupChatId, text, Constants.currentUser.UserId)
+            groupChatId, text, date, Constants.currentUser.UserId)
     }
 }

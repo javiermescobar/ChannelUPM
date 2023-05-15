@@ -5,10 +5,7 @@ import models.GroupMessage
 import models.PrivateMessage
 import models.UserInGroup
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
-import retrofit2.http.Url
+import retrofit2.http.*
 
 interface MessagesApi {
 
@@ -23,6 +20,7 @@ interface MessagesApi {
     suspend fun sendPrivateMessage(
         @Url url: String,
         @Query("text") text: String,
+        @Query("date") date: String,
         @Query("senderId") senderId: Int,
         @Query("receiverId") receiverId: Int
     ): Response<Int>
@@ -37,6 +35,23 @@ interface MessagesApi {
 
     @POST
     suspend fun addUserGroup(
+        @Url url: String,
+        @Query("admin") admin: Int,
+        @Query("groupChatId") groupChatId: Int,
+        @Query("contactId") contactId: Int
+    ): Response<Int>
+
+    @PUT
+    suspend fun updateGroupChat(
+        @Url url: String,
+        @Query("groupChatId") groupChatId: Int,
+        @Query("groupName") groupName: String,
+        @Query("description") description: String,
+        @Query("avatarImage") avatarImage: String
+    ): Response<Int>
+
+    @PUT
+    suspend fun updateUserGroup(
         @Url url: String,
         @Query("admin") admin: Int,
         @Query("groupChatId") groupChatId: Int,
@@ -79,6 +94,7 @@ interface MessagesApi {
         @Url url: String,
         @Query("groupChatId") groupChatId: Int,
         @Query("text") text: String,
+        @Query("date") date: String,
         @Query("senderId") senderId: Int
     ): Response<Int>
 }

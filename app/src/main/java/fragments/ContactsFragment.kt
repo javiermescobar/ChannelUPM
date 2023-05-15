@@ -57,7 +57,7 @@ class ContactsFragment: BaseFragment() {
 
     override fun subscribe() {
         contactsViewModel.mutableContacts.observe(this, Observer {
-            contactsAdapter = ContactsAdapter(it){ user ->
+            contactsAdapter = ContactsAdapter(it.sortedBy { user -> user.Name }){ user ->
                 val navBundle = Bundle()
                 navBundle.putSerializable(Constants.CONTACT_INFO_NAME, user.Name)
                 navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, user.Mail)

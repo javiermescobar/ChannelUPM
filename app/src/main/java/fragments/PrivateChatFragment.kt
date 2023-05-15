@@ -1,6 +1,7 @@
 package fragments
 
 import adapters.PrivateMessageAdapter
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -90,8 +91,12 @@ class PrivateChatFragment: BaseFragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableMessages.observe(this, Observer {
+            if(this::adapter.isInitialized) {
+                adapter.notifyDataSetChanged()
+            }
             adapter = PrivateMessageAdapter(it)
             binding.messagesRecyclerView.adapter = adapter
         })

@@ -1,6 +1,7 @@
 package activities
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -24,6 +25,10 @@ class LoginActivity: BaseActivity() {
     }
 
     override fun configureUI() {
+        if(Constants.userCreated) {
+            Constants.userCreated = false
+            super.showInformationDialog(R.string.user_created, false)
+        }
         binding.LoginButton.setOnClickListener {
             super.hideKeyboard()
 

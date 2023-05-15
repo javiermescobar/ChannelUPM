@@ -22,6 +22,7 @@ class GroupParticipantsFragment: BaseFragment() {
     private lateinit var messagesViewModel: MessagesViewModel
 
     private var groupId = -1
+    private var isUserAdmin = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,12 +47,6 @@ class GroupParticipantsFragment: BaseFragment() {
                 findNavController().popBackStack()
             }
 
-            addParticipantsButton.setOnClickListener {
-                val navBundle = Bundle()
-                navBundle.putSerializable(Constants.GROUP_ID, groupId)
-                findNavController().navigate(R.id.action_group_participants_fragment_to_add_participant_fragment, navBundle)
-            }
-
             participantsRecyclerView.apply {
                 layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
                 addItemDecoration(ItemDecorator(0))
@@ -60,11 +55,44 @@ class GroupParticipantsFragment: BaseFragment() {
     }
 
     override fun subscribe() {
-        messagesViewModel.mutableGroupParticipants.observe(this, Observer {
-            binding.participantsRecyclerView.adapter = ParticipantsAdapter(it){
-                val navBundle = Bundle()
-                navBundle.putSerializable(Constants.CONTACT_ID, it.UserId)
-                findNavController().navigate(R.id.action_group_participants_fragment_to_contact_info_fragment, navBundle)
+        messagesViewModel.mutableGroupParticipants.observe(this, Observer { participants ->
+            binding.apply {
+                participantsRecyclerView.adapter = ParticipantsAdapter(participants){ contact ->
+                    val navBundle = Bundle()
+                    navBundle.putSerializable(Constants.CONTACT_ID, contact.UserId)
+                    findNavController().navigate(R.id.action_group_participants_fragment_to_contact_info_fragment, navBundle)
+                }
+
+                addParticipantsButton.setOnClickListener {
+                    if(participants.any { participant -> participant.UserId == Constants.currentUser.UserId &&
+                                    participant.Administrator == 1 }) {
+                        val navBundle = Bundle()
+                        navBundle.putSerializable(Constants.GROUP_ID, groupId)
+                        findNavController().navigate(R.id.action_group_participants_fragment_to_add_participant_fragment, navBundle)
+                    } else {
+                        showInformationDialog(R.string.need_to_be_admin_add_participants, true)
+                    }
+                }
+
+                editAdministratorsButton.setOnClickListener {
+                    if(participants.any { participant -> participant.UserId == Constants.currentUser.UserId &&
+                                    participant.Administrator == 1 }) {
+                        val navBundle = Bundle()
+                        navBundle.putSerializable(Constants.GROUP_ID, groupId)
+                        findNavController().navigate(R.id.action_group_participants_fragment_to_edit_group_permissions_fragment, navBundle)
+                    } else {
+                        showInformationDialog(R.string.need_to_be_admin_edit_participants, true)
+                    }
+                }
+
+                editInfoButton.setOnClickListener {
+                    if(participants.any { participant -> participant.UserId == Constants.currentUser.UserId &&
+                                    participant.Administrator == 1 }) {
+
+                    } else {
+                        showInformationDialog(R.string.need_to_be_admin_edit_info, true)
+                    }
+                }
             }
         })
     }

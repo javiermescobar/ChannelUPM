@@ -40,5 +40,6 @@ class Constants {
 
         lateinit var currentUser: User
         lateinit var currentNewsItem: NewsItem
+        var userCreated: Boolean = false
     }
 }

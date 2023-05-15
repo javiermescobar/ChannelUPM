@@ -18,6 +18,7 @@ interface NewsApi {
         @Query("userId") userId: Int,
         @Query("title") title: String,
         @Query("description") description: String,
+        @Query("date") date: String,
         @Query("categoryId") categoryId: Int
     ): Response<Int>
 
