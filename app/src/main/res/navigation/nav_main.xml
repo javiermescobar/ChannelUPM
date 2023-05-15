@@ -127,6 +127,10 @@
         android:id="@+id/add_group_fragment"
         android:name="fragments.AddGroupFragment"
         android:label="AddGroupFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
         <action
             android:id="@+id/action_add_group_fragment_to_groups_fragment"
             app:destination="@id/groups_fragment" />
@@ -180,6 +184,9 @@
         <action
             android:id="@+id/action_group_participants_fragment_to_edit_group_permissions_fragment"
             app:destination="@id/edit_group_permissions_fragment" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_add_group_fragment"
+            app:destination="@id/add_group_fragment" />
     </fragment>
 
     <fragment

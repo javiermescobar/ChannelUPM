@@ -110,7 +110,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/rounded_button"
-            android:text="@string/menu_continue"
+            android:text="@string/confirm"
             style="@style/default_text"
             android:layout_marginTop="@dimen/small_margin"/>
 

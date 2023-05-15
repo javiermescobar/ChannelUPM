@@ -88,7 +88,9 @@ class GroupParticipantsFragment: BaseFragment() {
                 editInfoButton.setOnClickListener {
                     if(participants.any { participant -> participant.UserId == Constants.currentUser.UserId &&
                                     participant.Administrator == 1 }) {
-
+                        val navBundle = Bundle()
+                        navBundle.putSerializable(Constants.GROUP_ID, groupId)
+                        findNavController().navigate(R.id.action_group_participants_fragment_to_add_group_fragment, navBundle)
                     } else {
                         showInformationDialog(R.string.need_to_be_admin_edit_info, true)
                     }
