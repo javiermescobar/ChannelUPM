@@ -23,8 +23,7 @@
                 app:layout_constraintBottom_toTopOf="@id/message_text_sender"
                 android:src="@drawable/user_default"
                 android:background="@color/transparent"
-                android:layout_marginStart="@dimen/smallest_margin"
-                android:layout_marginTop="@dimen/smallest_margin"/>
+                android:layout_marginStart="@dimen/smallest_margin"/>
 
             <TextView
                 android:id="@+id/username_message"
@@ -32,9 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/smallest_margin"
-                android:layout_marginTop="@dimen/smallest_margin"
+                android:layout_marginEnd="@dimen/smallest_margin"
                 app:layout_constraintBottom_toTopOf="@id/message_text_sender"
                 app:layout_constraintStart_toEndOf="@id/avatar_message"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Nombre de usuario"
                 android:textSize="@dimen/smallest_text"/>

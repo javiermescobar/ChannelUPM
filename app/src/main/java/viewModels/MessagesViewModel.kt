@@ -178,6 +178,7 @@ class MessagesViewModel(
     }
 
     fun sendGroupMessage(groupChatId: Int, text: String) {
+        mutableMessageSent.postValue(false)
         viewModelScope.launch {
             val formatter = DateTimeFormatter.ISO_DATE_TIME
             val response = messagesRepository.sendGroupMessage(groupChatId, text,
