@@ -5,15 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentContactInfoBinding
+import com.squareup.picasso.Picasso
+import repositories.LoginRepository
 import utils.Constants
+import viewModels.LoginViewModel
 
 class ContactInfoFragment: BaseFragment() {
 
     private lateinit var binding: FragmentContactInfoBinding
+    private lateinit var loginViewModel: LoginViewModel
 
+    private var contactId = -1
     private var placeholderName = ""
     private var placeholderMail = ""
     private var placeholderDescription = ""
@@ -27,6 +33,7 @@ class ContactInfoFragment: BaseFragment() {
         binding = FragmentContactInfoBinding.inflate(layoutInflater)
 
         arguments?.let {
+            contactId = it.getInt(Constants.CONTACT_ID, -1)
             placeholderName = it.getString(Constants.CONTACT_INFO_NAME, "")
             placeholderMail = it.getString(Constants.CONTACT_INFO_MAIL, "")
             placeholderDescription = it.getString(Constants.CONTACT_INFO_DESCRIPTION, "")
@@ -37,24 +44,61 @@ class ContactInfoFragment: BaseFragment() {
     }
 
     override fun initializeView() {
+
         binding.apply {
             backButton.setOnClickListener {
                 findNavController().popBackStack()
             }
-            contactName.text = placeholderName
-            contactMail.text = placeholderMail
-            if(placeholderDescription.isNotEmpty()) {
-                contactDescription.text = placeholderDescription
+            if(contactId == -1) {
+                contactName.text = placeholderName
+                contactMail.text = placeholderMail
+                if(placeholderDescription.isNotEmpty()) {
+                    contactDescription.text = placeholderDescription
+                } else {
+                    contactDescription.text = resources.getText(R.string.contact_info_no_description)
+                }
+                if(placeholderAvatar.isNotEmpty()) {
+                    Picasso.with(root.context)
+                        .load(placeholderAvatar)
+                        .resize(contactImage.layoutParams.width, contactImage.layoutParams.height)
+                        .placeholder(R.drawable.user_default)
+                        .into(contactImage)
+                }
             } else {
-                contactDescription.text = resources.getText(R.string.contact_info_no_description)
-            }
-            if(placeholderAvatar.isNotEmpty()) {
-                contactImage.setImageURI(Uri.parse(placeholderAvatar))
+                loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
+                loginViewModel.getUserById(contactId)
+                toChatButton.visibility = View.GONE
             }
             toChatButton.setOnClickListener {
                 goToPrivateChat()
             }
         }
+    }
+
+    override fun subscribe() {
+        loginViewModel.currentUser.observe(this, Observer {
+            binding.apply {
+                contactName.text = it.Name
+                placeholderName = it.Name
+                contactMail.text = it.Mail
+                contactDescription.text = if(it.Description.isNotEmpty()) {
+                    it.Description
+                } else {
+                    resources.getText(R.string.contact_info_no_description)
+                }
+                if(it.AvatarImage.isNotEmpty()) {
+                    placeholderAvatar = it.AvatarImage
+                    Picasso.with(root.context)
+                        .load(it.AvatarImage)
+                        .resize(contactImage.layoutParams.width, contactImage.layoutParams.height)
+                        .placeholder(R.drawable.user_default)
+                        .into(contactImage)
+                }
+                if(it.UserId != Constants.currentUser.UserId) {
+                    toChatButton.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     private fun goToPrivateChat() {

@@ -4,6 +4,8 @@
     <string name="confirm">CONFIRMAR</string>
     <string name="menu_continue">CONTINUAR</string>
 
+    <string name="enter_url">URL de imagen</string>
+
     <string name="error_message">Algo ha ido mal...</string>
     <string name="error_confirm">OK</string>
 
@@ -28,6 +30,7 @@
     <string name="register_error_password_short">La contraseña debe tener entre 8 y 20 caractéres</string>
     <string name="register_error_passwords_dont_match">Las contraseñas deben ser iguales</string>
     <string name="enter_all_fields">Debes rellenar todos los campos para continuar</string>
+    <string name="user_created">Usuario creado!</string>
 
     <!-- menus -->
     <string name="news_section">Noticias</string>
@@ -59,4 +62,21 @@
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
     <string name="text_required">No se pueden enviar mensjaes vacíos</string>
+    <string name="add_group_title">Añadir grupo</string>
+    <string name="add_group_group_title">Título del grupo</string>
+    <string name="add_group_group_description">Descripción del grupo</string>
+    <string name="group_added">Grupo creado!</string>
+    <string name="group_edited">Información de grupo editada!</string>
+    <string name="group_edit">Editar información</string>
+    <string name="group_info">Información de grupo</string>
+    <string name="participants">Participantes</string>
+    <string name="edit_participants">Editar permisos</string>
+    <string name="add_participant">Añadir participante</string>
+    <string name="particiant_added">Participante añadido</string>
+    <string name="edit_group_info">Editar información</string>
+    <string name="group_needs_one_administrator">El grupo debe tener al menos un administrador</string>
+    <string name="need_to_be_admin_add_participants">Debes ser administrador del grupo para añadir participantes</string>
+    <string name="need_to_be_admin_edit_participants">Debes ser administrador del grupo para editar los permisos</string>
+    <string name="need_to_be_admin_edit_info">Debes ser administrador del grupo para editar la información</string>
+    <string name="cant_edit_own_permissions">No puedes editar tus permisos</string>
 </resources>

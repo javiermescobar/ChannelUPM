@@ -8,6 +8,9 @@ import models.NewsItem
 import repositories.NewsRepository
 import utils.AppState
 import utils.Constants
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class NewsViewModel(
     private val newsRepository: NewsRepository,
@@ -32,7 +35,9 @@ class NewsViewModel(
     fun addNew(userId: Int, title: String, description: String, categoryId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = newsRepository.addNewsItem(userId, title, description, categoryId)
+            val formatter = DateTimeFormatter.ISO_DATE
+            val response = newsRepository.addNewsItem(userId, title,
+                LocalDateTime.now().format(formatter), description, categoryId)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {

@@ -1,6 +1,7 @@
 package activities
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -87,6 +88,7 @@ class RegisterActivity: BaseActivity() {
                 }
                 AppState.SUCCESS -> {
                     if(creatingUser) {
+                        Constants.userCreated = true
                         startActivity(Intent(this, LoginActivity::class.java))
                     }
                 }

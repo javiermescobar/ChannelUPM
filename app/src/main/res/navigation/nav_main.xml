@@ -114,7 +114,98 @@
     <fragment
         android:id="@+id/groups_fragment"
         android:name="fragments.GroupsFragment"
-        android:label="GroupsFragment"/>
+        android:label="GroupsFragment">
+        <action
+            android:id="@+id/action_groups_fragment_to_add_group_fragment"
+            app:destination="@id/add_group_fragment" />
+        <action
+            android:id="@+id/action_groups_fragment_to_group_chat_fragment"
+            app:destination="@id/group_chat_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_group_fragment"
+        android:name="fragments.AddGroupFragment"
+        android:label="AddGroupFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_add_group_fragment_to_groups_fragment"
+            app:destination="@id/groups_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/group_chat_fragment"
+        android:name="fragments.GroupChatFragment"
+        android:label="GroupChatFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="group_name"
+            app:argType="string"/>
+
+        <argument
+            android:name="group_avatar"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_group_chat_fragment_to_group_info_fragment"
+            app:destination="@id/group_info_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/group_info_fragment"
+        android:name="fragments.GroupInfoFragment"
+        android:label="GroupInfoFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_group_info_fragment_to_group_participants_fragment"
+            app:destination="@id/group_participants_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/group_participants_fragment"
+        android:name="fragments.GroupParticipantsFragment"
+        android:label="GroupParticipantsFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_contact_info_fragment"
+            app:destination="@id/contact_info_fragment" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_add_participant_fragment"
+            app:destination="@id/add_participant_fragment" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_edit_group_permissions_fragment"
+            app:destination="@id/edit_group_permissions_fragment" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_add_group_fragment"
+            app:destination="@id/add_group_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_participant_fragment"
+        android:name="fragments.AddParticipantFragment"
+        android:label="AddParticipantFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_group_permissions_fragment"
+        android:name="fragments.EditGroupPermissionsFragment"
+        android:label="EditGroupPermissionsFragment">
+        <argument
+            android:name="group_id"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/settings_fragment"

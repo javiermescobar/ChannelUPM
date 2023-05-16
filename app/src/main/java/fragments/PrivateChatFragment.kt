@@ -1,6 +1,8 @@
 package fragments
 
 import adapters.PrivateMessageAdapter
+import android.annotation.SuppressLint
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +10,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +30,7 @@ class PrivateChatFragment: BaseFragment() {
     private lateinit var messagesViewModel: MessagesViewModel
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var adapter: PrivateMessageAdapter
+    private lateinit var inputMethodManager: InputMethodManager
     private lateinit var contact: User
 
     private var contactId = -1
@@ -52,9 +56,13 @@ class PrivateChatFragment: BaseFragment() {
     override fun initializeView() {
         loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
         loginViewModel.getUserById(contactId)
-        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
-        val mainHandler = Handler(Looper.getMainLooper())
+        messagesViewModel = MessagesViewModel(MessagesRepository(),LoginRepository(), baseViewModel)
 
+        inputMethodManager = activity?.let {
+            it.getSystemService(Context.INPUT_METHOD_SERVICE)
+        } as InputMethodManager
+
+        val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post(object : Runnable {
             override fun run() {
                 messagesViewModel.getPrivateMessages(contactId)
@@ -76,6 +84,7 @@ class PrivateChatFragment: BaseFragment() {
                 if(!messageInput.text.isNullOrEmpty()) {
                     messagesViewModel.sendPrivateMessage(messageInput.text.toString(), contactId)
                     messageInput.setText("")
+                    inputMethodManager.hideSoftInputFromWindow(root.windowToken, 0)
                 } else {
                     showInformationDialog(R.string.text_required, true)
                 }
@@ -90,8 +99,12 @@ class PrivateChatFragment: BaseFragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableMessages.observe(this, Observer {
+            if(this::adapter.isInitialized) {
+                adapter.notifyDataSetChanged()
+            }
             adapter = PrivateMessageAdapter(it)
             binding.messagesRecyclerView.adapter = adapter
         })

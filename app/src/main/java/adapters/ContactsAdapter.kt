@@ -3,7 +3,7 @@ package adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.javier.channelupm.databinding.HolderContactBinding
+import com.javier.channelupm.databinding.HolderContactGroupBinding
 import holders.ContactsViewHolder
 import models.User
 
@@ -12,7 +12,7 @@ class ContactsAdapter(
     val onClick:(item: User) -> Unit
     ): RecyclerView.Adapter<ContactsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
-        return ContactsViewHolder(HolderContactBinding.inflate(LayoutInflater.from(parent.context),parent, false), onClick)
+        return ContactsViewHolder(HolderContactGroupBinding.inflate(LayoutInflater.from(parent.context),parent, false), onClick)
     }
 
     override fun onBindViewHolder(holder: ContactsViewHolder, position: Int) {
