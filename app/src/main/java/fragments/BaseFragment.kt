@@ -1,7 +1,10 @@
 package fragments
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.airbnb.lottie.LottieAnimationView
@@ -9,6 +12,7 @@ import com.javier.channelupm.R
 import dialogs.ErrorDialogFragment
 import dialogs.InformationDialogFragment
 import utils.AppState
+import utils.Constants
 import viewModels.BaseViewModel
 
 abstract class BaseFragment: Fragment() {
@@ -28,6 +32,15 @@ abstract class BaseFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         subscribe()
         appStateSubscribe()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(Constants.currentUserConfiguration.Theme == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     open fun initializeView() {}
@@ -51,5 +64,10 @@ abstract class BaseFragment: Fragment() {
     protected fun showInformationDialog(informationMessage: Int, isWarning: Boolean) {
         informationDialog = InformationDialogFragment(this.requireActivity(), informationMessage, isWarning)
         informationDialog.show(parentFragmentManager, resources.getString(R.string.information_dialog_tag))
+    }
+
+    fun Context.isDarkThemeOn(): Boolean {
+        return resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 }

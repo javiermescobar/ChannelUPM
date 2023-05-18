@@ -51,7 +51,6 @@
     <string name="newsItem_edited">Noticia editada!</string>
 
     <!-- Contacts fragment-->
-    <string name="contacts_fragment_title">Conctactos</string>
     <string name="search_contact">Buscar contacto</string>
     <string name="contact_info_title">Información de contacto</string>
     <string name="contact_info_to_chat">Conversación</string>
@@ -79,4 +78,10 @@
     <string name="need_to_be_admin_edit_participants">Debes ser administrador del grupo para editar los permisos</string>
     <string name="need_to_be_admin_edit_info">Debes ser administrador del grupo para editar la información</string>
     <string name="cant_edit_own_permissions">No puedes editar tus permisos</string>
+    
+    <!-- Settings -->
+    <string name="my_profile">Mi perfil</string>
+    <string name="my_interests">Categorías de interés</string>
+    <string name="app_theme">Tema de aplicación</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>

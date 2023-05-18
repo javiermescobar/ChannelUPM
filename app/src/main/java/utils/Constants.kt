@@ -2,6 +2,7 @@ package utils
 
 import models.NewsItem
 import models.User
+import models.UserConfiguration
 
 class Constants {
     companion object {
@@ -39,6 +40,7 @@ class Constants {
         }
 
         lateinit var currentUser: User
+        lateinit var currentUserConfiguration: UserConfiguration
         lateinit var currentNewsItem: NewsItem
         var userCreated: Boolean = false
     }

@@ -9,19 +9,23 @@ import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityLoginBinding
 import models.User
 import repositories.LoginRepository
+import repositories.RegisterRepository
 import utils.Constants
 import viewModels.LoginViewModel
+import viewModels.RegisterViewModel
 
 class LoginActivity: BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var registerViewModel: RegisterViewModel
 
     override fun initializeView() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loginViewModel = LoginViewModel(LoginRepository(), super.baseViewModel)
+        loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
+        registerViewModel = RegisterViewModel(RegisterRepository(), baseViewModel)
     }
 
     override fun configureUI() {
@@ -61,14 +65,19 @@ class LoginActivity: BaseActivity() {
         loginViewModel.currentUser.observe(this, Observer {
             if(it.UserId != -1) {
                 Constants.currentUser = it
-                Thread{
-                    Thread.sleep(100)
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }.start()
+                registerViewModel.getUserConfigurationById(Constants.currentUser.UserId)
             } else {
                 binding.errorTextPassword.visibility = View.VISIBLE
             }
+        })
+
+        registerViewModel.mutableCreatedConfiguration.observe(this, Observer {
+            Constants.currentUserConfiguration = it
+            Thread{
+                Thread.sleep(100)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }.start()
         })
     }
 }
