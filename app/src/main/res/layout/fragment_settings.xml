@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="@id/view_1"
-            app:layout_constraintBottom_toBottomOf="@id/view_5"
+            app:layout_constraintBottom_toBottomOf="@id/view_6"
             android:background="?attr/colorPrimaryVariant"/>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -112,6 +112,14 @@
             android:text="@string/app_theme"
             android:layout_marginTop="@dimen/smallest_margin"/>
 
+        <ImageView
+            android:layout_width="@dimen/light_dark_icon_side"
+            android:layout_height="@dimen/light_dark_icon_side"
+            app:layout_constraintEnd_toStartOf="@id/theme_switch"
+            app:layout_constraintTop_toBottomOf="@id/theme_text"
+            app:layout_constraintBottom_toTopOf="@id/view_4"
+            android:src="@drawable/ic_night"/>
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/theme_switch"
             android:layout_width="wrap_content"
@@ -120,6 +128,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/theme_text"/>
 
+        <ImageView
+            android:id="@+id/light_image"
+            android:layout_width="@dimen/light_dark_icon_side"
+            android:layout_height="@dimen/light_dark_icon_side"
+            app:layout_constraintStart_toEndOf="@id/theme_switch"
+            app:layout_constraintTop_toBottomOf="@id/theme_text"
+            app:layout_constraintBottom_toTopOf="@id/view_4"
+            android:src="@drawable/ic_light"/>
+
         <View
             android:id="@+id/view_4"
             android:layout_width="match_parent"
@@ -127,13 +144,41 @@
             android:background="@color/orange"
             app:layout_constraintTop_toBottomOf="@id/theme_switch"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/news_notifications_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_4"
+            style="@style/default_text"
+            android:textSize="@dimen/normal_text"
+            android:text="@string/news_notifications"
+            android:layout_marginTop="@dimen/smallest_margin"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/notifications_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/news_notifications_text"/>
+
+        <View
+            android:id="@+id/view_5"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/orange"
+            app:layout_constraintTop_toBottomOf="@id/notifications_switch"
+            android:layout_marginTop="@dimen/smallest_margin"/>
+
         <TextView
             android:id="@+id/logout_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_4"
+            app:layout_constraintTop_toBottomOf="@id/view_5"
             style="@style/default_text"
             android:textSize="@dimen/normal_text"
             android:text="@string/logout"
@@ -149,7 +194,7 @@
             android:src="@drawable/ic_logout"/>
 
         <View
-            android:id="@+id/view_5"
+            android:id="@+id/view_6"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/orange"

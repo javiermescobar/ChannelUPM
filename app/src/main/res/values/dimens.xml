@@ -54,4 +54,7 @@
     <dimen name="background_image_height">200dp</dimen>
     <dimen name="message_padding">5dp</dimen>
     <dimen name="group_message_avatar_size">40dp</dimen>
+
+    <!--settings-->
+    <dimen name="light_dark_icon_side">40dp</dimen>
 </resources>

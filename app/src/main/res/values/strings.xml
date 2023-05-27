@@ -85,5 +85,6 @@
     <string name="my_profile">Mi perfil</string>
     <string name="my_interests">Categorías de interés</string>
     <string name="app_theme">Tema de aplicación</string>
+    <string name="news_notifications">Notificaciones de noticias</string>
     <string name="logout">Cerrar sesión</string>
 </resources>

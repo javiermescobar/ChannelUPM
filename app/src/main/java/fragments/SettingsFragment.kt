@@ -18,8 +18,6 @@ class SettingsFragment: BaseFragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var registerViewModel: RegisterViewModel
 
-    private var updatingTheme = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
