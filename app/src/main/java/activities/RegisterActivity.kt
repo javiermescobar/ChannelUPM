@@ -26,6 +26,7 @@ class RegisterActivity: BaseActivity() {
         binding.backButton.setOnClickListener {
             super.hideKeyboard()
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         binding.mailTextBox.addTextChangedListener {
@@ -86,6 +87,7 @@ class RegisterActivity: BaseActivity() {
             if(it) {
                 Constants.userCreated = true
                 startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         })
     }

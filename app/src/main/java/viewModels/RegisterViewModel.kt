@@ -18,6 +18,7 @@ class RegisterViewModel(
     val mutableUserRegistered: MutableLiveData<Int> = MutableLiveData()
     val mutableRegisteredUser: MutableLiveData<User> = MutableLiveData()
     val mutableConfigurationCreated: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableConfigurationUpdated: MutableLiveData<Boolean> = MutableLiveData()
     val mutableCreatedConfiguration: MutableLiveData<UserConfiguration> = MutableLiveData()
 
     fun getMailRegistered(mail: String) {
@@ -79,10 +80,11 @@ class RegisterViewModel(
 
     fun updateUserConfiguration(theme: Int, notifications: Int, configurationId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
+        mutableConfigurationUpdated.postValue(false)
         viewModelScope.launch {
             val response = registerRepository.updateUserConfiguration(theme, notifications, configurationId)
             if(response.code() == Constants.ACCEPTED_CODE) {
-                baseViewModel.appState.postValue(AppState.SUCCESS)
+                getUserConfigurationById(Constants.currentUser.UserId)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

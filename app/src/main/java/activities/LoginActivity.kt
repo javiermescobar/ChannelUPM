@@ -58,6 +58,7 @@ class LoginActivity: BaseActivity() {
             super.hideKeyboard()
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -73,10 +74,12 @@ class LoginActivity: BaseActivity() {
 
         registerViewModel.mutableCreatedConfiguration.observe(this, Observer {
             Constants.currentUserConfiguration = it
+            Constants.performSave = true;
             Thread{
                 Thread.sleep(100)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }.start()
         })
     }

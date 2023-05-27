@@ -12,6 +12,8 @@
     <string name="error_dialog_tag">Error dialog</string>
     <string name="information_dialog_tag">Information dialog</string>
 
+    <string name="saved_user_id_key">UserIdKey</string>
+
     <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
     <string name="input_name">Introduce tu nombre</string>

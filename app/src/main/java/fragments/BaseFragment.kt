@@ -1,6 +1,7 @@
 package fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -35,12 +36,27 @@ abstract class BaseFragment: Fragment() {
     }
 
     override fun onResume() {
-        super.onResume()
         if(Constants.currentUserConfiguration.Theme == 1) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+        super.onResume()
+    }
+
+    override fun onStop() {
+        val sharedPref = activity?.getSharedPreferences("label", 0)
+        sharedPref?.let {
+            with (sharedPref.edit()) {
+                if(Constants.performSave) {
+                    putInt(getString(R.string.saved_user_id_key), Constants.currentUser.UserId)
+                } else {
+                    remove(getString(R.string.saved_user_id_key))
+                }
+                apply()
+            }
+        }
+        super.onStop()
     }
 
     open fun initializeView() {}

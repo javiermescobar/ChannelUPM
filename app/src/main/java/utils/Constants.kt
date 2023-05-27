@@ -43,5 +43,6 @@ class Constants {
         lateinit var currentUserConfiguration: UserConfiguration
         lateinit var currentNewsItem: NewsItem
         var userCreated: Boolean = false
+        var performSave: Boolean = true
     }
 }
