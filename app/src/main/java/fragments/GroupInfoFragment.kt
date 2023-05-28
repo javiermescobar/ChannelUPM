@@ -61,7 +61,12 @@ class GroupInfoFragment: BaseFragment() {
                     .into(groupImage)
 
                 groupNameText.text = groupChat.GroupName
-                groupDescritionText.text = groupChat.Description
+                groupDescritionText.keyListener = null
+                groupDescritionText.setText(if(groupChat.Description.isEmpty()) {
+                    resources.getText(R.string.contact_info_no_description)
+                } else {
+                    groupChat.Description
+                })
             }
         })
     }

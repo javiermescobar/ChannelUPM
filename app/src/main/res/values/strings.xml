@@ -63,6 +63,7 @@
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
     <string name="text_required">No se pueden enviar mensjaes vacíos</string>
+    <string name="cant_send_to_contact">No se pueden enviar mensajes a este contacto</string>
     <string name="add_group_title">Añadir grupo</string>
     <string name="add_group_group_title">Título del grupo</string>
     <string name="add_group_group_description">Descripción del grupo</string>

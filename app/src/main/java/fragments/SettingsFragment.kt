@@ -31,6 +31,15 @@ class SettingsFragment: BaseFragment() {
         registerViewModel = RegisterViewModel(RegisterRepository(), baseViewModel)
 
         binding.apply {
+
+            profileArrow.setOnClickListener {
+                //@TODO implement edit profile fragment
+            }
+
+            interestsArrow.setOnClickListener {
+                //@TODO implement interests fragment
+            }
+
             themeSwitch.isChecked = Constants.currentUserConfiguration.Theme == 1
 
             themeSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -41,6 +50,20 @@ class SettingsFragment: BaseFragment() {
                 } else {
                     registerViewModel.updateUserConfiguration(0,
                         Constants.currentUserConfiguration.Notifications,
+                        Constants.currentUserConfiguration.ConfigId)
+                }
+            }
+
+            notificationsSwitch.isChecked = Constants.currentUserConfiguration.Notifications == 1
+
+            notificationsSwitch.setOnCheckedChangeListener{ _, isChecked ->
+                if(isChecked) {
+                    registerViewModel.updateUserConfiguration(
+                        Constants.currentUserConfiguration.Theme, 1,
+                        Constants.currentUserConfiguration.ConfigId)
+                } else {
+                    registerViewModel.updateUserConfiguration(
+                        Constants.currentUserConfiguration.Theme, 0,
                         Constants.currentUserConfiguration.ConfigId)
                 }
             }

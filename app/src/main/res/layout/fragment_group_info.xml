@@ -40,8 +40,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/group_image"
-            android:layout_width="@dimen/fragment_logo_width"
-            android:layout_height="@dimen/fragment_logo_width"
+            android:layout_width="@dimen/contact_info_image_size"
+            android:layout_height="@dimen/contact_info_image_size"
             app:layout_constraintTop_toBottomOf="@id/title_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:layout_marginEnd="@dimen/smallest_margin"
             android:layout_marginTop="@dimen/small_margin"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <EditText
             android:id="@+id/group_descrition_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

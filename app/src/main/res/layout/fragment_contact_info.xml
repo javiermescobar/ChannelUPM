@@ -45,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text"
-            android:layout_marginTop="@dimen/default_margin"/>
+            android:layout_marginTop="@dimen/smallest_margin"/>
 
         <TextView
             android:id="@+id/contact_name"
@@ -81,11 +81,11 @@
             android:layout_marginEnd="@dimen/smallest_margin"
             android:layout_marginTop="@dimen/smallest_margin"/>
 
-        <TextView
+        <EditText
             android:id="@+id/contact_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="@dimen/max_info_height"
+            android:maxLines="5"
             app:layout_constraintTop_toBottomOf="@id/contact_mail"
             android:background="@drawable/rounded_input_box"
             style="@style/default_text"
@@ -108,7 +108,7 @@
             android:textSize="@dimen/smallest_text"
             style="@style/default_text"
             android:text="@string/contact_info_to_chat"
-            android:layout_marginBottom="@dimen/default_margin"/>
+            android:layout_marginBottom="@dimen/smallest_margin"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

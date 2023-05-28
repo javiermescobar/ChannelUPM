@@ -6,7 +6,7 @@
     <dimen name="big_text">20pt</dimen>
     <dimen name="huge_text">25pt</dimen>
 
-    <dimen name="max_info_height">200dp</dimen>
+    <dimen name="max_info_height">150dp</dimen>
 
     <!--Login & register-->
     <dimen name="logo_login_height">170dp</dimen>
@@ -44,7 +44,7 @@
     <!-- Contacts fragment-->
     <dimen name="contact_holder_height">100dp</dimen>
     <dimen name="contact_image_size">75dp</dimen>
-    <dimen name="contact_info_image_size">150dp</dimen>
+    <dimen name="contact_info_image_size">125dp</dimen>
 
     <!-- messages -->
     <dimen name="message_max_width">200dp</dimen>
