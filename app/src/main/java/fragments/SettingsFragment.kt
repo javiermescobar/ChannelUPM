@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentSettingsBinding
 import repositories.RegisterRepository
 import utils.Constants
@@ -32,12 +34,18 @@ class SettingsFragment: BaseFragment() {
 
         binding.apply {
 
+            profileText.setOnClickListener {
+                findNavController().navigate(R.id.action_settings_fragment_to_user_profile_fragment)
+            }
             profileArrow.setOnClickListener {
-                //@TODO implement edit profile fragment
+                findNavController().navigate(R.id.action_settings_fragment_to_user_profile_fragment)
             }
 
+            interestsText.setOnClickListener {
+                findNavController().navigate(R.id.action_settings_fragment_to_user_interests_fragment)
+            }
             interestsArrow.setOnClickListener {
-                //@TODO implement interests fragment
+                findNavController().navigate(R.id.action_settings_fragment_to_user_interests_fragment)
             }
 
             themeSwitch.isChecked = Constants.currentUserConfiguration.Theme == 1

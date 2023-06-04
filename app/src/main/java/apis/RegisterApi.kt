@@ -41,4 +41,13 @@ interface RegisterApi {
         @Query("notifications") notifications: Int,
         @Query("configurationId") configurationId: Int
     ): Response<Int>
+
+    @PUT
+    suspend fun updateUserInformation(
+        @Url url: String,
+        @Query("name") name: String,
+        @Query("description") description: String,
+        @Query("avatarImage") avatarImage: String,
+        @Query("userId") userId: Int
+    ): Response<Int>
 }

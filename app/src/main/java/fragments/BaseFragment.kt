@@ -81,9 +81,4 @@ abstract class BaseFragment: Fragment() {
         informationDialog = InformationDialogFragment(this.requireActivity(), informationMessage, isWarning)
         informationDialog.show(parentFragmentManager, resources.getString(R.string.information_dialog_tag))
     }
-
-    fun Context.isDarkThemeOn(): Boolean {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-    }
 }

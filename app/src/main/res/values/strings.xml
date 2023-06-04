@@ -56,6 +56,7 @@
     <string name="search_contact">Buscar contacto</string>
     <string name="contact_info_title">Información de contacto</string>
     <string name="contact_info_to_chat">Conversación</string>
+    <string name="contact_info_no_mail">Sin correo</string>
     <string name="contact_info_no_description">Sin descripción</string>
     <string name="add_contact_title">Añadir contacto</string>
     <string name="contact_added">Contacto añadido</string>
@@ -88,4 +89,10 @@
     <string name="app_theme">Tema de aplicación</string>
     <string name="news_notifications">Notificaciones de noticias</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="user_updated">Información de usuario actualizada!</string>
+    <string name="description_is_empty">Tu descripción está vacía, rellénala para que los demás puedan conocerte mejor!</string>
+    <string name="cant_edit_mail">No puedes editar tu dirección de correo</string>
+    <string name="name_cant_be_empty">El nombre de usuario no puede ser vacío</string>
+    <string name="select_categories">Selecciona las categorías de tu interés</string>
+    <string name="interests_updated">Intereses actualizados!</string>
 </resources>

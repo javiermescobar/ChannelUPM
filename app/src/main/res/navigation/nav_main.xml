@@ -210,5 +210,22 @@
     <fragment
         android:id="@+id/settings_fragment"
         android:name="fragments.SettingsFragment"
-        android:label="SettingsFragment"/>
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settings_fragment_to_user_profile_fragment"
+            app:destination="@id/user_profile_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_user_interests_fragment"
+            app:destination="@id/user_interests_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/user_profile_fragment"
+        android:name="fragments.UserProfileFragment"
+        android:label="UserProfileFragment"/>
+
+    <fragment
+        android:id="@+id/user_interests_fragment"
+        android:name="fragments.UserInterestsFragment"
+        android:label="UserInterestsFragment"/>
 </navigation>

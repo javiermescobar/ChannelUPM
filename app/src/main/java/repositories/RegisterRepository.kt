@@ -4,6 +4,7 @@ import apis.RetrofitInstance
 import models.User
 import models.UserConfiguration
 import retrofit2.Response
+import utils.Constants
 
 class RegisterRepository {
 
@@ -35,5 +36,11 @@ class RegisterRepository {
         return RetrofitInstance.registerApi.updateUserConfiguration(
             "https://vns4o5ykkjs35rp2ltidxdsvhy0dwvhu.lambda-url.eu-west-2.on.aws/",
             theme, notifications, configurationId)
+    }
+
+    suspend fun updateUserInformation(name: String, description: String, avatarImage: String): Response<Int> {
+        return RetrofitInstance.registerApi.updateUserInformation(
+            "https://6xk7sye3am575ibw4zmdn745aq0cjfsi.lambda-url.eu-west-2.on.aws/",
+            name, description, avatarImage, Constants.currentUser.UserId)
     }
 }

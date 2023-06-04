@@ -32,7 +32,7 @@ class AddGroupFragment: BaseFragment() {
         binding = FragmentAddGroupBinding.inflate(layoutInflater)
 
         arguments?.let {
-            groupId = it.getInt(Constants.GROUP_ID)
+            groupId = it.getInt(Constants.GROUP_ID, -1)
         }
 
         return binding.root
@@ -46,6 +46,10 @@ class AddGroupFragment: BaseFragment() {
         }
 
         binding.apply {
+
+            backButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
 
             urlInput.doAfterTextChanged {
                 if(!it.isNullOrEmpty()) {

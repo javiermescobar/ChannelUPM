@@ -80,7 +80,11 @@ class ContactInfoFragment: BaseFragment() {
             binding.apply {
                 contactName.text = it.Name
                 placeholderName = it.Name
-                contactMail.text = it.Mail
+                contactMail.text = if(it.Mail.isNotEmpty()) {
+                    it.Mail
+                } else {
+                    resources.getText(R.string.contact_info_no_mail)
+                }
                 contactDescription.keyListener = null
                 contactDescription.setText(if(it.Description.isNotEmpty()) {
                     it.Description
