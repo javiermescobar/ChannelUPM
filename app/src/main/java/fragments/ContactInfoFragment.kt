@@ -53,9 +53,9 @@ class ContactInfoFragment: BaseFragment() {
                 contactName.text = placeholderName
                 contactMail.text = placeholderMail
                 if(placeholderDescription.isNotEmpty()) {
-                    contactDescription.text = placeholderDescription
+                    contactDescription.setText(placeholderDescription)
                 } else {
-                    contactDescription.text = resources.getText(R.string.contact_info_no_description)
+                    contactDescription.setText(resources.getText(R.string.contact_info_no_description))
                 }
                 if(placeholderAvatar.isNotEmpty()) {
                     Picasso.with(root.context)
@@ -80,12 +80,17 @@ class ContactInfoFragment: BaseFragment() {
             binding.apply {
                 contactName.text = it.Name
                 placeholderName = it.Name
-                contactMail.text = it.Mail
-                contactDescription.text = if(it.Description.isNotEmpty()) {
+                contactMail.text = if(it.Mail.isNotEmpty()) {
+                    it.Mail
+                } else {
+                    resources.getText(R.string.contact_info_no_mail)
+                }
+                contactDescription.keyListener = null
+                contactDescription.setText(if(it.Description.isNotEmpty()) {
                     it.Description
                 } else {
                     resources.getText(R.string.contact_info_no_description)
-                }
+                })
                 if(it.AvatarImage.isNotEmpty()) {
                     placeholderAvatar = it.AvatarImage
                     Picasso.with(root.context)

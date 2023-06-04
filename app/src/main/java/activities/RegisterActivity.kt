@@ -1,14 +1,12 @@
 package activities
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.ActivityRegisterBinding
 import repositories.RegisterRepository
-import utils.AppState
 import utils.Constants
 import viewModels.RegisterViewModel
 
@@ -16,8 +14,6 @@ class RegisterActivity: BaseActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
-
-    private var creatingUser = false
 
     override fun initializeView() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -30,6 +26,7 @@ class RegisterActivity: BaseActivity() {
         binding.backButton.setOnClickListener {
             super.hideKeyboard()
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         binding.mailTextBox.addTextChangedListener {
@@ -61,7 +58,6 @@ class RegisterActivity: BaseActivity() {
                 } else {
                     if(passwordGoodEnough(password)) {
                         if(password == binding.confirmPasswordTextBox.text.toString()) {
-                            creatingUser = true
                             registerViewModel.registerUser(
                                 name = binding.nameTextBox.text.toString(),
                                 mail = binding.mailTextBox.text.toString(),
@@ -81,18 +77,17 @@ class RegisterActivity: BaseActivity() {
             }
         })
 
-        baseViewModel.appState.observe(this, Observer {
-            when (it) {
-                AppState.ERROR -> {
-                    creatingUser = false
-                }
-                AppState.SUCCESS -> {
-                    if(creatingUser) {
-                        Constants.userCreated = true
-                        startActivity(Intent(this, LoginActivity::class.java))
-                    }
-                }
-                else -> {}
+        registerViewModel.mutableRegisteredUser.observe(this, Observer {
+            registerViewModel.createUserConfiguration(
+                if(isDarkThemeOn()) { 0 } else { 1 },
+                it.UserId)
+        })
+
+        registerViewModel.mutableConfigurationCreated.observe(this, Observer {
+            if(it) {
+                Constants.userCreated = true
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
         })
     }

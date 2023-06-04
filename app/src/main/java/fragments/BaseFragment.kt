@@ -1,7 +1,11 @@
 package fragments
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.airbnb.lottie.LottieAnimationView
@@ -9,6 +13,7 @@ import com.javier.channelupm.R
 import dialogs.ErrorDialogFragment
 import dialogs.InformationDialogFragment
 import utils.AppState
+import utils.Constants
 import viewModels.BaseViewModel
 
 abstract class BaseFragment: Fragment() {
@@ -28,6 +33,30 @@ abstract class BaseFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         subscribe()
         appStateSubscribe()
+    }
+
+    override fun onResume() {
+        if(Constants.currentUserConfiguration.Theme == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        super.onResume()
+    }
+
+    override fun onStop() {
+        val sharedPref = activity?.getSharedPreferences("label", 0)
+        sharedPref?.let {
+            with (sharedPref.edit()) {
+                if(Constants.performSave) {
+                    putInt(getString(R.string.saved_user_id_key), Constants.currentUser.UserId)
+                } else {
+                    remove(getString(R.string.saved_user_id_key))
+                }
+                apply()
+            }
+        }
+        super.onStop()
     }
 
     open fun initializeView() {}

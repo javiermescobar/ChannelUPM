@@ -19,7 +19,8 @@ interface NewsApi {
         @Query("title") title: String,
         @Query("description") description: String,
         @Query("date") date: String,
-        @Query("categoryId") categoryId: Int
+        @Query("categoryId") categoryId: Int,
+        @Query("categoryName") categoryName: String
     ): Response<Int>
 
     @PUT
@@ -29,5 +30,24 @@ interface NewsApi {
         @Query("title") title: String,
         @Query("description") description: String,
         @Query("categoryId") categoryId: Int
+    ): Response<Int>
+
+    @GET
+    suspend fun getUserInterests(
+        @Url url: String,
+        @Query("userId") userId: Int
+    ): Response<List<Int>>
+
+    @DELETE
+    suspend fun removeUserInterests(
+        @Url url: String,
+        @Query("userId") userId: Int
+    ): Response<Int>
+
+    @POST
+    suspend fun addUserInterests(
+        @Url url: String,
+        @Query("categoriesId") categoriesId: List<Int>,
+        @Query("userId") userId: Int
     ): Response<Int>
 }

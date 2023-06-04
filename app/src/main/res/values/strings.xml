@@ -12,6 +12,8 @@
     <string name="error_dialog_tag">Error dialog</string>
     <string name="information_dialog_tag">Information dialog</string>
 
+    <string name="saved_user_id_key">UserIdKey</string>
+
     <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
     <string name="input_name">Introduce tu nombre</string>
@@ -51,10 +53,10 @@
     <string name="newsItem_edited">Noticia editada!</string>
 
     <!-- Contacts fragment-->
-    <string name="contacts_fragment_title">Conctactos</string>
     <string name="search_contact">Buscar contacto</string>
     <string name="contact_info_title">Información de contacto</string>
     <string name="contact_info_to_chat">Conversación</string>
+    <string name="contact_info_no_mail">Sin correo</string>
     <string name="contact_info_no_description">Sin descripción</string>
     <string name="add_contact_title">Añadir contacto</string>
     <string name="contact_added">Contacto añadido</string>
@@ -62,6 +64,7 @@
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
     <string name="text_required">No se pueden enviar mensjaes vacíos</string>
+    <string name="cant_send_to_contact">No se pueden enviar mensajes a este contacto</string>
     <string name="add_group_title">Añadir grupo</string>
     <string name="add_group_group_title">Título del grupo</string>
     <string name="add_group_group_description">Descripción del grupo</string>
@@ -79,4 +82,17 @@
     <string name="need_to_be_admin_edit_participants">Debes ser administrador del grupo para editar los permisos</string>
     <string name="need_to_be_admin_edit_info">Debes ser administrador del grupo para editar la información</string>
     <string name="cant_edit_own_permissions">No puedes editar tus permisos</string>
+    
+    <!-- Settings -->
+    <string name="my_profile">Mi perfil</string>
+    <string name="my_interests">Categorías de interés</string>
+    <string name="app_theme">Tema de aplicación</string>
+    <string name="news_notifications">Notificaciones de noticias</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="user_updated">Información de usuario actualizada!</string>
+    <string name="description_is_empty">Tu descripción está vacía, rellénala para que los demás puedan conocerte mejor!</string>
+    <string name="cant_edit_mail">No puedes editar tu dirección de correo</string>
+    <string name="name_cant_be_empty">El nombre de usuario no puede ser vacío</string>
+    <string name="select_categories">Selecciona las categorías de tu interés</string>
+    <string name="interests_updated">Intereses actualizados!</string>
 </resources>

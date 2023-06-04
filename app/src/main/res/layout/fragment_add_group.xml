@@ -41,13 +41,13 @@
             android:id="@+id/group_image"
             android:layout_width="@dimen/fragment_logo_width"
             android:layout_height="@dimen/fragment_logo_width"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_text"
-            app:layout_constraintBottom_toTopOf="@id/title_input"
-            android:src="@drawable/user_default"
-            android:scaleType="fitXY"
+            android:layout_marginStart="@dimen/big_margin"
             android:background="@color/transparent"
-            android:layout_marginStart="@dimen/big_margin" />
+            android:scaleType="fitXY"
+            android:src="@drawable/user_default"
+            app:layout_constraintBottom_toTopOf="@id/title_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_text"/>
 
         <EditText
             android:id="@+id/url_input"

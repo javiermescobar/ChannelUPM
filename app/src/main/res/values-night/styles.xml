@@ -28,4 +28,8 @@
     <style name="error_dialog">
         <item name="android:background">?attr/colorOnPrimary</item>
     </style>
+
+    <style name="default_switch" parent="Theme.ChannelUPM">
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
 </resources>

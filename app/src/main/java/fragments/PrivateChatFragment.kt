@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentPrivateChatBinding
+import com.squareup.picasso.Picasso
 import models.User
 import repositories.LoginRepository
 import repositories.MessagesRepository
@@ -32,6 +33,8 @@ class PrivateChatFragment: BaseFragment() {
     private lateinit var adapter: PrivateMessageAdapter
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var contact: User
+    private lateinit var mainHandler: Handler
+    private lateinit var runnable: Runnable
 
     private var contactId = -1
 
@@ -43,10 +46,12 @@ class PrivateChatFragment: BaseFragment() {
         binding = FragmentPrivateChatBinding.inflate(layoutInflater)
         arguments?.let {
             contactId = it.getInt(Constants.CONTACT_ID)
-            if(it.getString(Constants.CONTACT_INFO_AVATAR).isNullOrBlank()) {
-                binding.contactImage.setImageDrawable(resources.getDrawable(R.drawable.user_default))
-            } else {
-                binding.contactImage.setImageURI(Uri.parse(it.getString(Constants.CONTACT_INFO_AVATAR)))
+            if(!it.getString(Constants.CONTACT_INFO_AVATAR).isNullOrBlank()) {
+                Picasso.with(context)
+                    .load(it.getString(Constants.CONTACT_INFO_AVATAR))
+                    .placeholder(R.drawable.user_default)
+                    .resize(binding.contactImage.layoutParams.width, binding.contactImage.layoutParams.height)
+                    .into(binding.contactImage)
             }
             binding.userNameText.text = it.getString(Constants.CONTACT_INFO_NAME)
         }
@@ -62,13 +67,14 @@ class PrivateChatFragment: BaseFragment() {
             it.getSystemService(Context.INPUT_METHOD_SERVICE)
         } as InputMethodManager
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
+        mainHandler = Handler(Looper.getMainLooper())
+        runnable = object : Runnable {
             override fun run() {
                 messagesViewModel.getPrivateMessages(contactId)
                 mainHandler.postDelayed(this, 1000)
             }
-        })
+        }
+        mainHandler.post(runnable)
 
         binding.apply {
             backButton.setOnClickListener {
@@ -82,7 +88,11 @@ class PrivateChatFragment: BaseFragment() {
 
             sendButton.setOnClickListener {
                 if(!messageInput.text.isNullOrEmpty()) {
-                    messagesViewModel.sendPrivateMessage(messageInput.text.toString(), contactId)
+                    if(contactId == 100) {
+                        showInformationDialog(R.string.cant_send_to_contact, true);
+                    } else {
+                        messagesViewModel.sendPrivateMessage(messageInput.text.toString(), contactId)
+                    }
                     messageInput.setText("")
                     inputMethodManager.hideSoftInputFromWindow(root.windowToken, 0)
                 } else {
@@ -130,5 +140,10 @@ class PrivateChatFragment: BaseFragment() {
             navBundle.putSerializable(Constants.CONTACT_ID, contactId)
             findNavController().navigate(R.id.action_private_chat_fragment_to_contact_info_fragment, navBundle)
         }
+    }
+
+    override fun onDestroy() {
+        mainHandler.removeCallbacks(runnable)
+        super.onDestroy()
     }
 }

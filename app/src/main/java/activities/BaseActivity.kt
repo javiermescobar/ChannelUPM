@@ -1,6 +1,8 @@
 package activities
 
 import android.app.Activity
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -75,5 +77,10 @@ abstract class BaseActivity: AppCompatActivity(){
     protected fun showInformationDialog(informationMessage: Int, isWarning: Boolean) {
         informationDialog = InformationDialogFragment(this, informationMessage, isWarning)
         informationDialog.show(supportFragmentManager, resources.getString(R.string.information_dialog_tag))
+    }
+
+    fun Context.isDarkThemeOn(): Boolean {
+        return resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 }

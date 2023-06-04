@@ -80,11 +80,10 @@ class AddParticipantFragment: BaseFragment() {
     }
 
     private fun showAddibleContacts() {
-        var mutableAddibleContacts = mutableListOf<User>()
-        mutableAddibleContacts = contacts.toMutableList()
+        val mutableAddibleContacts = contacts.toMutableList()
 
         contacts.forEach { contact ->
-            if(contactInGroup(contact.UserId)) {
+            if(contactInGroup(contact.UserId) || contact.UserId == 100) {
                 mutableAddibleContacts.remove(contact)
             }
         }

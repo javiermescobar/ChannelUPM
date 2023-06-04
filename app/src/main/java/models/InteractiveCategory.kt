@@ -6,6 +6,14 @@ class InteractiveCategory(
     var selected: Boolean
 ) {
     companion object {
+        fun getEmptyCategory(): InteractiveCategory {
+            return InteractiveCategory(
+                -1,
+                "",
+                false
+            )
+        }
+
         fun mapCategoryToInteractiveCategory(category: Category): InteractiveCategory {
             return InteractiveCategory(
                 category.CategoryId,

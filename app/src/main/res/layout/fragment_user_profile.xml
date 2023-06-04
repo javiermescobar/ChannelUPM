@@ -32,44 +32,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/contact_info_title"
+            android:text="@string/my_profile"
             android:textSize="@dimen/normal_text"
             app:layout_constraintTop_toBottomOf="@+id/back_button"
             android:layout_marginTop="@dimen/small_margin"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/contact_image"
-            android:layout_width="@dimen/contact_info_image_size"
-            android:layout_height="@dimen/contact_info_image_size"
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/fragment_logo_width"
+            android:layout_height="@dimen/fragment_logo_width"
+            android:layout_marginStart="@dimen/big_margin"
+            android:background="@color/transparent"
+            android:scaleType="fitXY"
             android:src="@drawable/user_default"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintBottom_toTopOf="@+id/profile_name"
             android:layout_marginTop="@dimen/smallest_margin"/>
 
-        <TextView
-            android:id="@+id/contact_name"
+        <EditText
+            android:id="@+id/url_input"
+            android:layout_width="wrap_content"
+            android:maxWidth="@dimen/contact_info_image_size"
+            android:layout_height="@dimen/add_news_title_input_height"
+            android:layout_marginStart="@dimen/big_margin"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:background="@drawable/rounded_input_box"
+            android:hint="@string/enter_url"
+            android:inputType="text"
+            android:padding="@dimen/smallest_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintBottom_toTopOf="@+id/profile_name"/>
+
+        <EditText
+            android:id="@+id/profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/contact_image"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
             android:background="@drawable/rounded_input_box"
             style="@style/default_text"
             android:padding="@dimen/smallest_margin"
             android:textSize="@dimen/small_text"
             android:maxLines="1"
-            android:text="Nombre de contacto"
+            android:maxLength="30"
+            android:text="Nombre de usuario"
             android:gravity="center"
             android:layout_marginStart="@dimen/smallest_margin"
             android:layout_marginEnd="@dimen/smallest_margin"
             android:layout_marginTop="@dimen/small_margin"/>
 
         <TextView
-            android:id="@+id/contact_mail"
+            android:id="@+id/profile_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contact_name"
+            app:layout_constraintTop_toBottomOf="@id/profile_name"
             android:background="@drawable/rounded_input_box"
             style="@style/default_text"
             android:padding="@dimen/smallest_margin"
@@ -82,11 +102,11 @@
             android:layout_marginTop="@dimen/smallest_margin"/>
 
         <EditText
-            android:id="@+id/contact_description"
+            android:id="@+id/profile_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="5"
-            app:layout_constraintTop_toBottomOf="@id/contact_mail"
+            app:layout_constraintTop_toBottomOf="@id/profile_mail"
             android:background="@drawable/rounded_input_box"
             style="@style/default_text"
             android:padding="@dimen/smallest_margin"
@@ -98,7 +118,7 @@
             android:layout_marginTop="@dimen/smallest_margin" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/to_chat_button"
+            android:id="@+id/confirm_button"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +127,7 @@
             android:background="@drawable/rounded_button"
             android:textSize="@dimen/smallest_text"
             style="@style/default_text"
-            android:text="@string/contact_info_to_chat"
+            android:text="@string/confirm"
             android:layout_marginBottom="@dimen/smallest_margin"/>
 
         <com.airbnb.lottie.LottieAnimationView

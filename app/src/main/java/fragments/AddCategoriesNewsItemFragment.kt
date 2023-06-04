@@ -1,6 +1,7 @@
 package fragments
 
 import adapters.CategoryAdapter
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,8 +26,8 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
     private lateinit var categoriesAdapter: CategoryAdapter
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var categoriesViewModel: CategoriesViewModel
+    private lateinit var selectedCategory: InteractiveCategory
 
-    private var selectedCategory: InteractiveCategory? = null
     private var newsItemTitle = ""
     private var newsItemDescription = ""
     private var isEditing = false
@@ -59,19 +60,21 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
         categoriesViewModel = CategoriesViewModel(CategoriesRepository(), baseViewModel)
         categoriesViewModel.getCategories()
 
+        selectedCategory = InteractiveCategory.getEmptyCategory()
+
         binding.backButton.setOnClickListener{
             findNavController().popBackStack()
         }
 
         binding.buttonConfirm.setOnClickListener {
-            if(selectedCategory == null) {
+            if(selectedCategory.categoryId == -1) {
                 showInformationDialog(R.string.need_select_category, true)
             } else {
                 creatingNew = true
                 if(isEditing) {
-                    newsViewModel.editNew(Constants.currentNewsItem.NewsItemId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
+                    newsViewModel.editNew(Constants.currentNewsItem.NewsItemId, newsItemTitle, newsItemDescription, selectedCategory.categoryId)
                 } else {
-                    newsViewModel.addNew(Constants.currentUser.UserId, newsItemTitle, newsItemDescription, selectedCategory!!.categoryId)
+                    newsViewModel.addNew(Constants.currentUser.UserId, newsItemTitle, newsItemDescription, selectedCategory)
                 }
             }
         }
@@ -107,7 +110,7 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
 
             categoriesAdapter = CategoryAdapter(mutableCategories) { interactiveCategory ->
                 if(interactiveCategory.selected) {
-                    selectedCategory = null
+                    selectedCategory = InteractiveCategory.getEmptyCategory()
                     mutableCategories.forEach { it.selected = false }
                 } else {
                     mutableCategories.filter { category -> category.selected }
@@ -126,6 +129,7 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
         })
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateAdapter() {
         if(this::categoriesAdapter.isInitialized) {
             categoriesAdapter.notifyDataSetChanged()
