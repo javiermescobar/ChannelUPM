@@ -58,6 +58,10 @@ class GroupsFragment: BaseFragment() {
                 findNavController().navigate(R.id.action_groups_fragment_to_group_chat_fragment, navBundle)
             }
             binding.groupsRecyclerView.adapter = adapter
+
+            if(groups.isEmpty()) {
+                binding.noGroupsText.visibility = View.VISIBLE
+            }
         })
     }
 }
