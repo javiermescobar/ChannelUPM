@@ -64,6 +64,10 @@ class NewsFragment : BaseFragment() {
                 findNavController().navigate(R.id.action_news_fragment_to_add_news_fragment, navBundle)
             }
 
+            if(it.isEmpty()) {
+                binding.noNewsText.visibility = View.VISIBLE
+            }
+
             binding.newsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL,false)
             binding.newsRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
             binding.newsRecyclerView.adapter = newsItemAdapter

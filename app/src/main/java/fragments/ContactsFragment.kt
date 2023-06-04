@@ -67,6 +67,10 @@ class ContactsFragment: BaseFragment() {
                 findNavController().navigate(R.id.action_contacts_fragment_to_contact_info_fragment, navBundle)
             }
             binding.contactsRecyclerView.adapter = contactsAdapter
+
+            if(it.size == 1) {
+                binding.noContactsText.visibility = View.VISIBLE
+            }
         })
     }
 }

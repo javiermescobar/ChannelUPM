@@ -14,6 +14,11 @@
 
     <string name="saved_user_id_key">UserIdKey</string>
 
+    <!-- user guide -->
+    <string name="no_news">Nada por aqui? Accede a la sección de ajustes y actualiza tus intereses para visualizar noticias!</string>
+    <string name="no_contacts">El bot de ChannelUPM se siente solo:( Añade contactos pulsando el botón de arriba a la derecha!</string>
+    <string name="no_groups">Nada por aqui? Crea un grupo pulsando el botón de arriba a la derecha! Pero recuerda, necesitarás al menos un contacto para crear un grupo!</string>
+
     <!-- login & register -->
     <string name="welcome">Bienvenido a ChannelUPM!</string>
     <string name="input_name">Introduce tu nombre</string>
