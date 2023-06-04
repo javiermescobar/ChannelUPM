@@ -31,4 +31,8 @@
         <item name="android:width">200dp</item>
         <item name="android:height">300dp</item>
     </style>
+
+    <style name="default_switch" parent="Theme.ChannelUPM">
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
 </resources>

@@ -126,7 +126,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/theme_text"/>
+            app:layout_constraintTop_toBottomOf="@id/theme_text"
+            android:theme="@style/default_switch"/>
 
         <ImageView
             android:id="@+id/light_image"
@@ -162,7 +163,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/news_notifications_text"/>
+            app:layout_constraintTop_toBottomOf="@id/news_notifications_text"
+            android:theme="@style/default_switch"/>
 
         <View
             android:id="@+id/view_5"
