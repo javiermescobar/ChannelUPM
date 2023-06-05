@@ -20,6 +20,7 @@
 
     <style name="default_text">
         <item name="android:textColor">?attr/colorPrimaryInverse</item>
+        <item name="fontFamily">@font/steinem_font</item>
     </style>
 
     <style name="category_text">
