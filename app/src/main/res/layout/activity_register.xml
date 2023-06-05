@@ -27,7 +27,7 @@
             android:src="@drawable/logo"
             android:layout_marginTop="@dimen/login_register_button_top_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             android:maxLines="1"
             android:layout_marginTop="@dimen/default_margin"/>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/name_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
@@ -59,7 +59,7 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/mail_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
@@ -78,10 +78,11 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/error_text_mail"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="wrap_content"
+            style="@style/default_text"
             android:text="@string/register_error_mail_registered"
             android:textColor="@color/red"
             android:textSize="@dimen/smallest_text"
@@ -93,7 +94,7 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
@@ -112,10 +113,11 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/error_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/default_text"
             android:text="@string/register_error_password_weak"
             android:textColor="@color/red"
             android:textSize="@dimen/smallest_text"
@@ -127,7 +129,7 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/confirm_password_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
@@ -146,10 +148,11 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/error_match_password"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="wrap_content"
+            style="@style/default_text"
             android:text="@string/register_error_passwords_dont_match"
             android:textColor="@color/red"
             android:textSize="@dimen/smallest_text"

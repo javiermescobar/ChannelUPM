@@ -18,24 +18,25 @@
             android:src="@drawable/logo"
             android:layout_marginTop="@dimen/default_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/logo_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/confirm_login"
-            android:textSize="@dimen/big_text"
-            android:gravity="center"
             style="@style/default_text"
+            android:textSize="@dimen/big_text"
+            android:text="@string/confirm_login"
+            android:gravity="center"
             android:layout_marginTop="@dimen/default_margin"/>
 
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/mail_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
+            style="@style/default_text"
             android:background="@drawable/rounded_input_box"
             android:hint="@string/input_mail"
             android:inputType="textEmailAddress"
@@ -43,7 +44,6 @@
             android:maxLength="30"
             android:maxLines="1"
             android:padding="10dp"
-            style="@style/default_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo_image"
@@ -51,10 +51,11 @@
             android:layout_marginLeft="@dimen/login_text_side_margin"
             android:layout_marginRight="@dimen/login_text_side_margin"/>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password_textBox"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
+            style="@style/default_text"
             android:background="@drawable/rounded_input_box"
             android:hint="@string/input_password"
             android:inputType="textPassword"
@@ -62,7 +63,6 @@
             android:maxLength="30"
             android:maxLines="1"
             android:padding="10dp"
-            style="@style/default_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mail_textBox"
@@ -95,16 +95,16 @@
             style="@style/default_text"
             android:layout_marginTop="@dimen/default_margin"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/first_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/default_text"
             android:layout_marginLeft="@dimen/login_text_top_margin"
             android:layout_marginBottom="@dimen/default_margin"
             android:maxLines="1"
             android:text="@string/firstTime"
             android:textSize="14pt"
-            style="@style/default_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 

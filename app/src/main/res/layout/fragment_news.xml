@@ -52,7 +52,9 @@
             android:textSize="@dimen/normal_text"
             android:text="@string/no_news"
             android:gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/smallest_margin"
+            android:layout_marginEnd="@dimen/smallest_margin"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

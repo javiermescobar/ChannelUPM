@@ -73,7 +73,9 @@
             android:text="@string/no_groups"
             android:gravity="center"
             android:layout_marginBottom="@dimen/huge_margin"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/smallest_margin"
+            android:layout_marginEnd="@dimen/smallest_margin"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

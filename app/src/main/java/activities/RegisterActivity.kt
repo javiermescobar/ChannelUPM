@@ -108,10 +108,10 @@ class RegisterActivity: BaseActivity() {
     }
 
     private fun anyBlankField(): Boolean {
-        return (binding.nameTextBox.text.isEmpty() ||
-                    binding.mailTextBox.text.isEmpty() ||
-                    binding.passwordTextBox.text.isEmpty() ||
-                    binding.confirmPasswordTextBox.text.isEmpty())
+        return (binding.nameTextBox.text.isNullOrEmpty() ||
+                    binding.mailTextBox.text.isNullOrEmpty()||
+                    binding.passwordTextBox.text.isNullOrEmpty() ||
+                    binding.confirmPasswordTextBox.text.isNullOrEmpty())
     }
 
     private fun passwordGoodEnough(password: String): Boolean {
