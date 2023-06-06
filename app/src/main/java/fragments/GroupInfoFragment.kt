@@ -54,11 +54,13 @@ class GroupInfoFragment: BaseFragment() {
     override fun subscribe() {
         messagesViewModel.mutableCurrentGroup.observe(this, Observer { groupChat ->
             binding.apply {
-                Picasso.with(root.context)
-                    .load(groupChat.AvatarImage)
-                    .resize(groupImage.layoutParams.width, groupImage.layoutParams.height)
-                    .placeholder(R.drawable.user_default)
-                    .into(groupImage)
+                if(groupChat.AvatarImage.isNotEmpty()) {
+                    Picasso.with(root.context)
+                        .load(groupChat.AvatarImage)
+                        .resize(groupImage.layoutParams.width, groupImage.layoutParams.height)
+                        .placeholder(R.drawable.user_default)
+                        .into(groupImage)
+                }
 
                 groupNameText.text = groupChat.GroupName
                 groupDescritionText.keyListener = null
