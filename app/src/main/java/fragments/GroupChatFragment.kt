@@ -70,11 +70,14 @@ class GroupChatFragment: BaseFragment() {
 
         binding.apply {
             groupNameText.text = groupName
-            Picasso.with(root.context)
-                .load(groupAvatar)
-                .resize(groupImage.layoutParams.width, groupImage.layoutParams.height)
-                .placeholder(R.drawable.user_default)
-                .into(groupImage)
+
+            if(groupAvatar.isNotEmpty()) {
+                Picasso.with(root.context)
+                    .load(groupAvatar)
+                    .resize(groupImage.layoutParams.width, groupImage.layoutParams.height)
+                    .placeholder(R.drawable.user_default)
+                    .into(groupImage)
+            }
 
             backButton.setOnClickListener {
                 findNavController().popBackStack()
