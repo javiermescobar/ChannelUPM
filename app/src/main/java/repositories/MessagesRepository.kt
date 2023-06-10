@@ -83,4 +83,16 @@ class MessagesRepository {
             groupChatId, text, date, Constants.currentUser.UserId,
             Constants.currentUser.AvatarImage, Constants.currentUser.Name)
     }
+
+    suspend fun removeUserGroup(groupChatId: Int): Response<Int> {
+        return RetrofitInstance.messagesApi.removeUserGroup(
+            "https://spjjukyujsjn3ds6rkdtmwhdpe0qexkx.lambda-url.eu-west-2.on.aws/",
+        Constants.currentUser.UserId, groupChatId)
+    }
+
+    suspend fun removeGroup(groupChatId: Int): Response<Int> {
+        return RetrofitInstance.messagesApi.removeGroup(
+            "https://eljtf6tfg3jieazdi4tfftknhy0ttepi.lambda-url.eu-west-2.on.aws/",
+            groupChatId)
+    }
 }

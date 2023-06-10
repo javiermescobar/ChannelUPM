@@ -99,4 +99,17 @@ interface MessagesApi {
         @Query("avatarImage") avatarImage: String,
         @Query("senderName") senderName: String
     ): Response<Int>
+
+    @DELETE
+    suspend fun removeUserGroup(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("groupChatId") groupChatId: Int
+    ): Response<Int>
+
+    @DELETE
+    suspend fun removeGroup(
+        @Url url: String,
+        @Query("groupChatId") groupChatId: Int
+    ): Response<Int>
 }
