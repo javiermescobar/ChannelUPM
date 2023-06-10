@@ -104,7 +104,8 @@
             android:textSize="@dimen/smallest_text"
             style="@style/default_text"
             android:text="@string/exit_group"
-            android:layout_marginBottom="@dimen/default_margin"/>
+            android:layout_marginBottom="@dimen/default_margin"
+            android:enabled="false"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

@@ -31,6 +31,8 @@ class GroupChatFragment: BaseFragment() {
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var adapter: GroupMessageAdapter
     private lateinit var participants: List<UserInGroup>
+    private lateinit var mainHandler: Handler
+    private lateinit var runnable: Runnable
 
 
     private var groupId = -1
@@ -60,13 +62,14 @@ class GroupChatFragment: BaseFragment() {
             it.getSystemService(Context.INPUT_METHOD_SERVICE)
         } as InputMethodManager
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
+        mainHandler = Handler(Looper.getMainLooper())
+        runnable = object : Runnable {
             override fun run() {
                 messagesViewModel.getGroupMessages(groupId)
                 mainHandler.postDelayed(this, 1000)
             }
-        })
+        }
+        mainHandler.post(runnable)
 
         binding.apply {
             groupNameText.text = groupName
@@ -136,5 +139,10 @@ class GroupChatFragment: BaseFragment() {
                 messagesViewModel.getGroupMessages(groupId)
             }
         })
+    }
+
+    override fun onDestroy() {
+        mainHandler.removeCallbacks(runnable)
+        super.onDestroy()
     }
 }

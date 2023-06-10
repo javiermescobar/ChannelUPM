@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentGroupInfoBinding
 import com.squareup.picasso.Picasso
+import models.UserInGroup
 import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
@@ -18,6 +19,7 @@ class GroupInfoFragment: BaseFragment() {
 
     private lateinit var binding: FragmentGroupInfoBinding
     private lateinit var messagesViewModel: MessagesViewModel
+    private lateinit var participants: List<UserInGroup>
 
     private var groupId = -1
 
@@ -38,15 +40,25 @@ class GroupInfoFragment: BaseFragment() {
     override fun initializeView() {
         messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
         messagesViewModel.getGroupById(groupId)
+        messagesViewModel.getGroupParticipants(groupId)
 
         binding.apply {
             backButton.setOnClickListener {
                 findNavController().popBackStack()
             }
+
             groupParticipantsButton.setOnClickListener {
                 val navBundle = Bundle()
                 navBundle.putSerializable(Constants.GROUP_ID, groupId)
                 findNavController().navigate(R.id.action_group_info_fragment_to_group_participants_fragment, navBundle)
+            }
+
+            exitGroupButton.setOnClickListener {
+                if(participants.isEmpty()) {
+                    showInformationDialog(R.string.cant_exit_not_enough_admin, true)
+                } else {
+                    messagesViewModel.removeUserGroup(groupId)
+                }
             }
         }
     }
@@ -69,6 +81,19 @@ class GroupInfoFragment: BaseFragment() {
                 } else {
                     groupChat.Description
                 })
+            }
+        })
+
+        messagesViewModel.mutableGroupParticipants.observe(this, Observer {
+            participants = it.filter { participant -> participant.Administrator == 1
+                    && participant.UserId != Constants.currentUser.UserId}
+            binding.exitGroupButton.isEnabled = true
+        })
+
+        messagesViewModel.mutableUserInGroupRemoved.observe(this, Observer {
+            if(it) {
+                findNavController().navigate(R.id.action_group_info_fragment_to_groups_fragment)
+                showInformationDialog(R.string.exited_from_group, false)
             }
         })
     }
