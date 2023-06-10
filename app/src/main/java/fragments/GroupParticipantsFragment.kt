@@ -22,7 +22,6 @@ class GroupParticipantsFragment: BaseFragment() {
     private lateinit var messagesViewModel: MessagesViewModel
 
     private var groupId = -1
-    private var isUserAdmin = false
 
     override fun onCreateView(
         inflater: LayoutInflater,

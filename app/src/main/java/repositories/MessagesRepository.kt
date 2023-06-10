@@ -80,6 +80,7 @@ class MessagesRepository {
     suspend fun sendGroupMessage(groupChatId: Int ,text: String, date: String): Response<Int> {
         return RetrofitInstance.messagesApi.sendGroupMessage(
             "https://magt755g2oagtnhosohl7jt6ua0kfjif.lambda-url.eu-west-2.on.aws/",
-            groupChatId, text, date, Constants.currentUser.UserId)
+            groupChatId, text, date, Constants.currentUser.UserId,
+            Constants.currentUser.AvatarImage, Constants.currentUser.Name)
     }
 }

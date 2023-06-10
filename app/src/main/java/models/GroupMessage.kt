@@ -5,15 +5,7 @@ data class GroupMessage(
     val Text: String,
     val SendDate: String,
     val GroupChatId: Int,
-    val SenderId: Int
+    val SenderId: Int,
+    val AvatarImage: String,
+    val SenderName: String
 )
-
-/*
-GropuMessageId int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  Text varchar(1000) NOT NULL,
-  SendDate varchar(30) NOT NULL,
-  GroupChatId int NOT NULL,
-  SenderId int NOT NULL,
-  FOREIGN KEY (GroupChatId) REFERENCES GroupChat(GroupChatId),
-  FOREIGN KEY (SenderId) REFERENCES User(UserId)
- */

@@ -95,6 +95,8 @@ interface MessagesApi {
         @Query("groupChatId") groupChatId: Int,
         @Query("text") text: String,
         @Query("date") date: String,
-        @Query("senderId") senderId: Int
+        @Query("senderId") senderId: Int,
+        @Query("avatarImage") avatarImage: String,
+        @Query("senderName") senderName: String
     ): Response<Int>
 }

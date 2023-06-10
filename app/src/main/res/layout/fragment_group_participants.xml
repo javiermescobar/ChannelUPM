@@ -58,28 +58,40 @@
             style="@style/default_text"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@id/delete_group_button"
             android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
             android:background="@drawable/rounded_button"
             android:text="@string/edit_participants"
-            android:textSize="@dimen/smallest_text"
-            android:layout_marginStart="@dimen/default_margin"/>
+            android:textSize="@dimen/smallest_text" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_info_button"
             style="@style/default_text"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_above="@id/delete_group_button"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:background="@drawable/rounded_button"
             android:text="@string/edit_group_info"
-            android:textSize="@dimen/smallest_text"
-            android:layout_marginEnd="@dimen/default_margin"/>
+            android:textSize="@dimen/smallest_text" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/delete_group_button"
+            style="@style/default_text"
+            android:layout_width="@dimen/login_register_button_width"
+            android:layout_height="@dimen/login_register_button_height"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@drawable/rounded_button"
+            android:text="@string/group_delete"
+            android:textSize="@dimen/smallest_text" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"
