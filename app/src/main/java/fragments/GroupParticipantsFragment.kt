@@ -22,7 +22,6 @@ class GroupParticipantsFragment: BaseFragment() {
     private lateinit var messagesViewModel: MessagesViewModel
 
     private var groupId = -1
-    private var isUserAdmin = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,6 +94,22 @@ class GroupParticipantsFragment: BaseFragment() {
                         showInformationDialog(R.string.need_to_be_admin_edit_info, true)
                     }
                 }
+
+                deleteGroupButton.setOnClickListener {
+                    if(participants.any { participant -> participant.UserId == Constants.currentUser.UserId &&
+                                participant.Administrator == 1 }) {
+                        messagesViewModel.removeGroup(groupId)
+                    } else {
+                        showInformationDialog(R.string.need_to_be_admin_to_delete_group, true)
+                    }
+                }
+            }
+        })
+
+        messagesViewModel.mutableGroupRemoved.observe(this, Observer {
+            if(it) {
+                findNavController().navigate(R.id.action_group_participants_fragment_to_groups_fragment)
+                showInformationDialog(R.string.group_removed, false)
             }
         })
     }

@@ -23,15 +23,14 @@ class GroupMessageHolder(
                 dateTextReceiver.text = DateUtils.obtainDateMessageString(item.SendDate)
             } else {
                 messageLayoutReceiver.visibility = View.GONE
-                val sender = participants.filter { participant -> participant.UserId == item.SenderId }[0]
-                if(sender.AvatarImage.isNotEmpty()) {
+                if(item.AvatarImage.isNotEmpty()) {
                     Picasso.with(root.context)
-                        .load(sender.AvatarImage)
+                        .load(item.AvatarImage)
                         .placeholder(R.drawable.user_default)
                         .resize(avatarMessage.layoutParams.width, avatarMessage.layoutParams.height)
                         .into(avatarMessage)
                 }
-                usernameMessage.text = sender.Name
+                usernameMessage.text = item.SenderName
                 messageTextSender.text = item.Text
                 messageDateSender.text = DateUtils.obtainDateMessageString(item.SendDate)
             }

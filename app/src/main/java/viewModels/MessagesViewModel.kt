@@ -28,6 +28,8 @@ class MessagesViewModel(
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
     val mutableCurrentGroup: MutableLiveData<GroupChat> = MutableLiveData()
     val mutableEditedUser: MutableLiveData<Int> = MutableLiveData()
+    val mutableUserInGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
 
 
     fun getPrivateMessages(contactId: Int) {
@@ -186,6 +188,34 @@ class MessagesViewModel(
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableMessageSent.postValue(true)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun removeUserGroup(groupChatId: Int) {
+        mutableUserInGroupRemoved.postValue(false)
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.removeUserGroup(groupChatId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableUserInGroupRemoved.postValue(true)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun removeGroup(groupChatId: Int) {
+        mutableGroupRemoved.postValue(false)
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.removeGroup(groupChatId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableGroupRemoved.postValue(true)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

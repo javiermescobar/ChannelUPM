@@ -166,6 +166,9 @@
         <action
             android:id="@+id/action_group_info_fragment_to_group_participants_fragment"
             app:destination="@id/group_participants_fragment" />
+        <action
+            android:id="@+id/action_group_info_fragment_to_groups_fragment"
+            app:destination="@id/groups_fragment" />
     </fragment>
 
     <fragment
@@ -187,6 +190,9 @@
         <action
             android:id="@+id/action_group_participants_fragment_to_add_group_fragment"
             app:destination="@id/add_group_fragment" />
+        <action
+            android:id="@+id/action_group_participants_fragment_to_groups_fragment"
+            app:destination="@id/groups_fragment" />
     </fragment>
 
     <fragment

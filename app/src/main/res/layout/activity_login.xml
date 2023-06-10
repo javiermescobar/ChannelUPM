@@ -41,7 +41,7 @@
             android:hint="@string/input_mail"
             android:inputType="textEmailAddress"
             android:textColorHint="?attr/colorPrimaryInverse"
-            android:maxLength="30"
+            android:maxLength="50"
             android:maxLines="1"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
