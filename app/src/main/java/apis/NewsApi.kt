@@ -23,6 +23,13 @@ interface NewsApi {
         @Query("categoryName") categoryName: String
     ): Response<Int>
 
+    @POST
+    suspend fun sendNewsNotifications(
+        @Url url: String,
+        @Query("categoryId") categoryId: Int,
+        @Query("categoryName") categoryName: String
+    ): Response<Int>
+
     @PUT
     suspend fun editNewsItem(
         @Url url: String,

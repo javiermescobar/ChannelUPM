@@ -88,12 +88,8 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
                 }
                 AppState.SUCCESS -> {
                     if(creatingNew) {
-                        if(isEditing) {
-                            showInformationDialog(R.string.newsItem_edited, false)
-                        } else {
-                            showInformationDialog(R.string.newsItem_created, false)
-                        }
-                        findNavController().navigate(R.id.action_add_categories_news_fragment_to_news_fragment)
+                        creatingNew = false
+                        newsViewModel.sendNewsNotifications(selectedCategory.categoryId, selectedCategory.categoryTitle)
                     }
                 }
                 else -> {}
@@ -126,6 +122,17 @@ class AddCategoriesNewsItemFragment: BaseFragment(){
             binding.categoriesRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
             binding.categoriesRecyclerView.addItemDecoration(ItemDecorator(ITEM_SPACING))
             binding.categoriesRecyclerView.adapter = categoriesAdapter
+        })
+
+        newsViewModel.mutableNotificationsSend.observe(this, Observer {
+            if(it) {
+                if(isEditing) {
+                    showInformationDialog(R.string.newsItem_edited, false)
+                } else {
+                    showInformationDialog(R.string.newsItem_created, false)
+                }
+                findNavController().navigate(R.id.action_add_categories_news_fragment_to_news_fragment)
+            }
         })
     }
 

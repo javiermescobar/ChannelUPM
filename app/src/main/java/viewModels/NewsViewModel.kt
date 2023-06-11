@@ -18,10 +18,11 @@ class NewsViewModel(
     private val baseViewModel: BaseViewModel
 ): ViewModel() {
 
-    var mutableNews: MutableLiveData<List<NewsItem>> = MutableLiveData()
-    var mutableInterestsRemoved: MutableLiveData<Boolean> = MutableLiveData()
-    var mutableUserInterests: MutableLiveData<List<Int>> = MutableLiveData()
-    var mutableUserInterestsUpdated: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableNews: MutableLiveData<List<NewsItem>> = MutableLiveData()
+    val mutableInterestsRemoved: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableUserInterests: MutableLiveData<List<Int>> = MutableLiveData()
+    val mutableUserInterestsUpdated: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableNotificationsSend: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getNews(userId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
@@ -44,6 +45,20 @@ class NewsViewModel(
                 LocalDateTime.now().format(formatter), description, category)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun sendNewsNotifications(categoryId: Int, categoryName: String) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        mutableNotificationsSend.postValue(false)
+        viewModelScope.launch {
+            val response = newsRepository.sendNewsNotifications(categoryId, categoryName)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableNotificationsSend.postValue(true)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }

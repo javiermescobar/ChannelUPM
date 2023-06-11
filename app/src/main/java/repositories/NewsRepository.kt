@@ -25,6 +25,12 @@ class NewsRepository {
             categoryName = category.categoryTitle)
     }
 
+    suspend fun sendNewsNotifications(categoryId: Int, categoryName: String): Response<Int> {
+        return RetrofitInstance.newsApi.sendNewsNotifications(
+            "https://4mwyb5npzspgxy2hamkskrbjze0xdgdl.lambda-url.eu-west-2.on.aws/",
+            categoryId, categoryName)
+    }
+
     suspend fun editNewsItem(newId: Int, title: String, description: String, categoryId: Int): Response<Int> {
         return RetrofitInstance.newsApi.editNewsItem("https://kla55kqkpfixeylzoxiuwje6bu0wcjsm.lambda-url.eu-west-2.on.aws/",
         newId = newId,
