@@ -38,15 +38,15 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search_input"
+            style="@style/default_text"
             android:layout_width="@dimen/login_text_width"
             android:layout_height="@dimen/login_text_height"
             android:layout_below="@id/title_text"
             android:layout_centerHorizontal="true"
             android:background="@drawable/rounded_input_box"
-            android:hint="@string/search_contact"
-            style="@style/default_text"
-            android:padding="@dimen/smallest_margin"
-            android:drawableEnd="@drawable/ic_search"/>
+            android:drawableEnd="@drawable/ic_search"
+            android:hint="@string/search_group"
+            android:padding="@dimen/smallest_margin" />
 
         <View
             android:id="@+id/search_input_separator"

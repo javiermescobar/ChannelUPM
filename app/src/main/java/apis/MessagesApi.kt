@@ -65,6 +65,13 @@ interface MessagesApi {
     ): Response<List<GroupChat>>
 
     @GET
+    suspend fun searchGroup(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("searchString") searchString: String
+    ): Response<List<GroupChat>>
+
+    @GET
     suspend fun getGroupById(
         @Url url: String,
         @Query("groupChatId") groupChatId: Int

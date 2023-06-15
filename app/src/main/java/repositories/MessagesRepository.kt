@@ -65,6 +65,13 @@ class MessagesRepository {
         Constants.currentUser.UserId)
     }
 
+    suspend fun searchGroup(searchString: String): Response<List<GroupChat>> {
+        return RetrofitInstance.messagesApi.searchGroup(
+            "https://7wolmvyep54m5px4duzlap5shi0exgpz.lambda-url.eu-west-2.on.aws/",
+            Constants.currentUser.UserId, searchString
+        )
+    }
+
     suspend fun getGroupById(groupChatId: Int): Response<GroupChat> {
         return RetrofitInstance.messagesApi.getGroupById(
             "https://u7linv3mybq2hasu7aviiug6ta0bsohg.lambda-url.eu-west-2.on.aws/",

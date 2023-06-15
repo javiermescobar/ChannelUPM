@@ -23,6 +23,7 @@ class MessagesViewModel(
     val mutableMessages: MutableLiveData<List<PrivateMessage>> = MutableLiveData()
     val mutableMessageSent: MutableLiveData<Boolean> = MutableLiveData()
     val mutableGroups: MutableLiveData<List<GroupChat>> = MutableLiveData()
+    val mutableSearchedGroups: MutableLiveData<List<GroupChat>> = MutableLiveData()
     val mutableGroupMessages: MutableLiveData<List<GroupMessage>> = MutableLiveData()
     val mutableGroupParticipants: MutableLiveData<List<UserInGroup>> = MutableLiveData()
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
@@ -85,6 +86,19 @@ class MessagesViewModel(
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
                 mutableGroups.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun searchGroups(searchString: String) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.searchGroup(searchString)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableSearchedGroups.postValue(response.body())
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }
