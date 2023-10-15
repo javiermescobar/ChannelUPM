@@ -42,13 +42,10 @@ android {
 
 dependencies {
 
-    //Android core & test
+    //Android core
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Android navegation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
@@ -73,4 +70,13 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.4.0'
+
+    //JDBC
+    implementation files('lib/mysql-connector-java-5.1.49.jar')
+    implementation 'jboss:jboss-common-jdbc-wrapper:3.2.3'
+
+    //Test
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
