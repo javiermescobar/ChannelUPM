@@ -19,16 +19,7 @@ class NewsApiTest {
         try {
 
             query = connection.prepareStatement("""
-                INSERT INTO Category(CategoryId, CategoryName) 
-                    VALUES
-                    (1, "Primero"),
-                    (2, "Segundo"),
-                    (3, "Tercero");
-            """.trimIndent())
-            query.executeUpdate()
-
-            query = connection.prepareStatement("""
-                INSERT INTO NEWS(NewsItemId, Title, Description, SendDate, UserId, CategoryId)
+                INSERT INTO News(NewsItemId, Title, Description, SendDate, UserId, CategoryId)
                 VALUES
                 (1, "News 1", "Description 1", "14/05/2023T20:20:00.000", 1, 1),
                 (2, "News 2", "Description 2", "14/05/2023T20:20:00.000", 1, 2),
@@ -53,7 +44,7 @@ class NewsApiTest {
         try {
 
             query = connection.prepareStatement("""
-                INSERT INTO NEWS VALUES 
+                INSERT INTO News VALUES 
                 (4, "News 4", "Description 4", "14/05/2023T20:20:00.000", 1, 2)
             """.trimIndent())
             query.executeUpdate()
@@ -91,7 +82,7 @@ class NewsApiTest {
             query.executeUpdate()
 
             query = connection.prepareStatement("""
-                INSERT INTO NEWS VALUES 
+                INSERT INTO News VALUES 
                 (5, "News 5", "Description 5", "16/05/2023T20:20:00.000", 1, 2)
             """.trimIndent())
             query.executeUpdate()
@@ -130,7 +121,7 @@ class NewsApiTest {
             query.executeUpdate()
 
             query = connection.prepareStatement("""
-                SELECT * FROM NEWS 
+                SELECT * FROM News
                 WHERE Title LIKE "%editada%"
             """.trimIndent())
             resultSet = query.executeQuery()
@@ -164,11 +155,11 @@ class NewsApiTest {
         try {
 
             query = connection.prepareStatement("""
-                DELETE FROM UserInterests WHERE UserId = 1
+                DELETE FROM UserInterested WHERE UserId = 1
             """.trimIndent())
             query.executeUpdate()
 
-            query = connection.prepareStatement("SELECT * FROM UserInterests WHERE UserId = 1")
+            query = connection.prepareStatement("SELECT * FROM UserInterested WHERE UserId = 1")
             resultSet = query.executeQuery()
             assertEquals(false, resultSet.next())
 
@@ -184,7 +175,7 @@ class NewsApiTest {
         try {
 
             query = connection.prepareStatement("""
-                INSERT INTO UserInterests (UserId, CategoryId)
+                INSERT INTO UserInterested (UserId, CategoryId)
                 VALUES
                 (1, 1),
                 (1, 2),
@@ -192,7 +183,7 @@ class NewsApiTest {
             """.trimIndent())
             query.executeUpdate()
 
-            query = connection.prepareStatement("SELECT * FROM UserInterests WHERE UserId = 1")
+            query = connection.prepareStatement("SELECT * FROM UserInterested WHERE UserId = 1")
             resultSet = query.executeQuery()
             resultSet.last()
             assertEquals(3, resultSet.row)
