@@ -83,7 +83,7 @@ class AddParticipantFragment: BaseFragment() {
         val mutableAddibleContacts = contacts.toMutableList()
 
         contacts.forEach { contact ->
-            if(contactInGroup(contact.UserId) || contact.UserId == 100) {
+            if(contactInGroup(contact.UserId) || contact.UserId == Constants.BOT_ID) {
                 mutableAddibleContacts.remove(contact)
             }
         }

@@ -88,7 +88,7 @@ class PrivateChatFragment: BaseFragment() {
 
             sendButton.setOnClickListener {
                 if(!messageInput.text.isNullOrEmpty()) {
-                    if(contactId == 100) {
+                    if(contactId == Constants.BOT_ID) {
                         showInformationDialog(R.string.cant_send_to_contact, true);
                     } else {
                         messagesViewModel.sendPrivateMessage(messageInput.text.toString(), contactId)
