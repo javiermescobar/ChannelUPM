@@ -40,9 +40,8 @@ class NewsViewModel(
     fun addNew(userId: Int, title: String, description: String, category: InteractiveCategory) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val formatter = DateTimeFormatter.ISO_DATE
             val response = newsRepository.addNewsItem(userId, title,
-                LocalDateTime.now().format(formatter), description, category)
+                LocalDateTime.now().toLocalDate().toString(), description, category)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
