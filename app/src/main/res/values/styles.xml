@@ -16,6 +16,7 @@
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/white</item>
         <item name="colorPrimaryInverse">@color/dark_grey</item>
+        <item name="colorOnSecondaryContainer">@color/light_blue</item>
     </style>
 
     <style name="default_text">

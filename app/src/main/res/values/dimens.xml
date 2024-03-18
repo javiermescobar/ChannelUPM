@@ -47,7 +47,8 @@
     <dimen name="contact_info_image_size">125dp</dimen>
 
     <!-- messages -->
-    <dimen name="message_max_width">200dp</dimen>
+    <dimen name="message_max_width">300dp</dimen>
+    <dimen name="message_min_width">75dp</dimen>
     <dimen name="message_user_banner_height">100dp</dimen>
     <dimen name="message_input_height">50dp</dimen>
     <dimen name="background_image_width">250dp</dimen>

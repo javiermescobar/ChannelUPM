@@ -12,7 +12,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/smallest_margin"
-            android:background="@drawable/message_background">
+            android:background="@drawable/message_background_receiver">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/avatar_message"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="@dimen/smallest_margin"
-            android:background="@drawable/message_background">
+            android:background="@drawable/message_background_receiver">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/message_text_receiver"
