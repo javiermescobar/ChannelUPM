@@ -34,4 +34,10 @@ class ContactsRepository {
             "https://nnpdacnxdhxilyhcijhmpzruwe0cvusm.lambda-url.eu-west-2.on.aws/",
             userId, contactId)
     }
+
+    suspend fun removeContact(userId: Int, contactId: Int): Response<Int> {
+        return RetrofitInstance.contactsApi.removeContact(
+            "https://yp5lruuhewkcs6it2m5gqftzae0tdntg.lambda-url.eu-west-2.on.aws/",
+            userId, contactId)
+    }
 }

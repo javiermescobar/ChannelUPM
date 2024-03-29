@@ -2,10 +2,7 @@ package apis
 
 import models.User
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
-import retrofit2.http.Url
+import retrofit2.http.*
 
 interface ContactsApi {
 
@@ -31,6 +28,12 @@ interface ContactsApi {
 
     @POST
     suspend fun saveUser(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("contactId") contactId: Int): Response<Int>
+
+    @DELETE
+    suspend fun removeContact(
         @Url url: String,
         @Query("userId") userId: Int,
         @Query("contactId") contactId: Int): Response<Int>

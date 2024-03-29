@@ -1,6 +1,5 @@
 package fragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +9,25 @@ import androidx.navigation.fragment.findNavController
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentContactInfoBinding
 import com.squareup.picasso.Picasso
+import repositories.ContactsRepository
 import repositories.LoginRepository
+import utils.AppState
 import utils.Constants
+import viewModels.ContactsViewModel
 import viewModels.LoginViewModel
 
 class ContactInfoFragment: BaseFragment() {
 
     private lateinit var binding: FragmentContactInfoBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var contactsViewModel: ContactsViewModel
 
     private var contactId = -1
     private var placeholderName = ""
     private var placeholderMail = ""
     private var placeholderDescription = ""
     private var placeholderAvatar = ""
+    private var removingContact = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +35,7 @@ class ContactInfoFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentContactInfoBinding.inflate(layoutInflater)
+        contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)
 
         arguments?.let {
             contactId = it.getInt(Constants.CONTACT_ID, -1)
@@ -68,9 +73,16 @@ class ContactInfoFragment: BaseFragment() {
                 loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
                 loginViewModel.getUserById(contactId)
                 toChatButton.visibility = View.GONE
+                removeContactButton.visibility = View.GONE
             }
+
             toChatButton.setOnClickListener {
                 goToPrivateChat()
+            }
+
+            removeContactButton.setOnClickListener {
+                removingContact = true
+                contactsViewModel.removeContact(Constants.currentUser.UserId, contactId)
             }
         }
     }
@@ -101,7 +113,16 @@ class ContactInfoFragment: BaseFragment() {
                 }
                 if(it.UserId != Constants.currentUser.UserId) {
                     toChatButton.visibility = View.VISIBLE
+                    removeContactButton.visibility = View.VISIBLE
                 }
+            }
+        })
+
+        baseViewModel.appState.observe(this, Observer {
+            if(it == AppState.SUCCESS && removingContact) {
+                removingContact = false
+                showInformationDialog(R.string.contact_removed, false)
+                findNavController().popBackStack()
             }
         })
     }

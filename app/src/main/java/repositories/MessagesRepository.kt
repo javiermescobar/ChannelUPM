@@ -102,4 +102,16 @@ class MessagesRepository {
             "https://enlafdklwfj3f5jxf6svua4mfq0jsaet.lambda-url.eu-west-2.on.aws/",
             groupChatId)
     }
+
+    suspend fun getLastPrivateMessage(userId: Int, contactId: Int): Response<String> {
+        return RetrofitInstance.messagesApi.getLastPrivateMessage(
+            "https://6xljrehjwvav4rdvyijfrji37e0vsuki.lambda-url.eu-west-2.on.aws/",
+            userId, contactId)
+    }
+
+    suspend fun getLastGroupMessage(groupChatId: Int): Response<String> {
+        return RetrofitInstance.messagesApi.getLastGroupMessage(
+            "https://34ug6jdygvuwixs6m2himg7w3m0sjwir.lambda-url.eu-west-2.on.aws/",
+            groupChatId)
+    }
 }

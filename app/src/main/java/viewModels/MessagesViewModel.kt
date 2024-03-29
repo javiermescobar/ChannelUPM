@@ -235,4 +235,28 @@ class MessagesViewModel(
             }
         }
     }
+
+    fun getLastPrivateMessage(userId: Int, contactId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.getLastPrivateMessage(userId, contactId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun getLastGroupMessage(groupChatId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = messagesRepository.getLastGroupMessage(groupChatId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
 }

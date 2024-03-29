@@ -119,4 +119,17 @@ interface MessagesApi {
         @Url url: String,
         @Query("groupChatId") groupChatId: Int
     ): Response<Int>
+
+    @GET
+    suspend fun getLastPrivateMessage(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("contactId") contactId: Int
+    ): Response<String>
+
+    @GET
+    suspend fun getLastGroupMessage(
+        @Url url: String,
+        @Query("groupChatId") groupChatId: Int
+    ): Response<String>
 }
