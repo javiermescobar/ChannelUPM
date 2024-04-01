@@ -13,17 +13,16 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.HashMap
 
 class MessagesViewModel(
     private val messagesRepository: MessagesRepository,
-    private val loginRepository: LoginRepository,
     private val baseViewModel: BaseViewModel
 ): ViewModel() {
 
     val mutableMessages: MutableLiveData<List<PrivateMessage>> = MutableLiveData()
     val mutableMessageSent: MutableLiveData<Boolean> = MutableLiveData()
     val mutableGroups: MutableLiveData<List<GroupChat>> = MutableLiveData()
-    val mutableSearchedGroups: MutableLiveData<List<GroupChat>> = MutableLiveData()
     val mutableGroupMessages: MutableLiveData<List<GroupMessage>> = MutableLiveData()
     val mutableGroupParticipants: MutableLiveData<List<UserInGroup>> = MutableLiveData()
     val mutableUserInGroup: MutableLiveData<Boolean> = MutableLiveData()
@@ -31,7 +30,11 @@ class MessagesViewModel(
     val mutableEditedUser: MutableLiveData<Int> = MutableLiveData()
     val mutableUserInGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
     val mutableGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
+    val mutableMessagesContact: MutableLiveData<HashMap<User, String>> = MutableLiveData()
+    val mutableMessageGroup: MutableLiveData<HashMap<GroupChat, String>> = MutableLiveData()
 
+    private val messageContactHashMap = HashMap<User, String>()
+    private val messageGroupHashMap = HashMap<GroupChat, String>()
 
     fun getPrivateMessages(contactId: Int) {
         viewModelScope.launch {
@@ -79,7 +82,7 @@ class MessagesViewModel(
         }
     }
 
-    fun getUserGropus() {
+    fun getUserGroups() {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = messagesRepository.getUserGroups()
@@ -98,7 +101,7 @@ class MessagesViewModel(
             val response = messagesRepository.searchGroup(searchString)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
-                mutableSearchedGroups.postValue(response.body())
+                mutableGroups.postValue(response.body())
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
             }
@@ -236,11 +239,15 @@ class MessagesViewModel(
         }
     }
 
-    fun getLastPrivateMessage(userId: Int, contactId: Int) {
+    fun getLastPrivateMessage(userId: Int, user: User) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = messagesRepository.getLastPrivateMessage(userId, contactId)
+            val response = messagesRepository.getLastPrivateMessage(userId, user.UserId)
             if(response.code() == Constants.ACCEPTED_CODE) {
+                response.body()?.let {
+                    messageContactHashMap.put(user, it)
+                }
+                mutableMessagesContact.postValue(messageContactHashMap)
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)
@@ -248,11 +255,15 @@ class MessagesViewModel(
         }
     }
 
-    fun getLastGroupMessage(groupChatId: Int) {
+    fun getLastGroupMessage(group: GroupChat) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
-            val response = messagesRepository.getLastGroupMessage(groupChatId)
+            val response = messagesRepository.getLastGroupMessage(group.GroupChatId)
             if(response.code() == Constants.ACCEPTED_CODE) {
+                response.body()?.let {
+                    messageGroupHashMap.put(group, it)
+                }
+                mutableMessageGroup.postValue(messageGroupHashMap)
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {
                 baseViewModel.appState.postValue(AppState.ERROR)

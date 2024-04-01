@@ -61,7 +61,7 @@ class PrivateChatFragment: BaseFragment() {
     override fun initializeView() {
         loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
         loginViewModel.getUserById(contactId)
-        messagesViewModel = MessagesViewModel(MessagesRepository(),LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
 
         inputMethodManager = activity?.let {
             it.getSystemService(Context.INPUT_METHOD_SERVICE)

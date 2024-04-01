@@ -45,7 +45,7 @@ class AddParticipantFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
         messagesViewModel.getGroupParticipants(groupId)
 
         contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)

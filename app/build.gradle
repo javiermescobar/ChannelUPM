@@ -12,6 +12,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,9 +39,16 @@ android {
     dataBinding {
         enabled = true
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
+
+    //SUPPORT
+    implementation 'com.android.support:multidex:1.0.1'
 
     //Android core
     implementation 'androidx.core:core-ktx:1.8.0'

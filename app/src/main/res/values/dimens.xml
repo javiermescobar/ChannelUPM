@@ -42,7 +42,7 @@
     <dimen name="add_news_description_input_height">350dp</dimen>
 
     <!-- Contacts fragment-->
-    <dimen name="contact_holder_height">100dp</dimen>
+    <dimen name="contact_holder_height">120dp</dimen>
     <dimen name="contact_image_size">75dp</dimen>
     <dimen name="contact_info_image_size">125dp</dimen>
 

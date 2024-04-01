@@ -39,7 +39,7 @@ class AddGroupFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
         if(groupId != -1) {
             binding.titleText.text = resources.getText(R.string.group_edit)
             messagesViewModel.getGroupById(groupId)

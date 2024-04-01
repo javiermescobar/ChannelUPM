@@ -38,7 +38,7 @@ class GroupInfoFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
         messagesViewModel.getGroupById(groupId)
         messagesViewModel.getGroupParticipants(groupId)
 

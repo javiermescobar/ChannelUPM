@@ -54,7 +54,7 @@ class GroupChatFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
         messagesViewModel.getGroupMessages(groupId)
         messagesViewModel.getGroupParticipants(groupId)
 

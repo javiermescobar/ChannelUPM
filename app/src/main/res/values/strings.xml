@@ -96,6 +96,7 @@
     <string name="exited_from_group">Has salido del grupo</string>
     <string name="group_removed">El grupo ha sido eliminado</string>
     <string name="search_group">Buscar grupo</string>
+    <string name="no_messages_registered">Sin registro de mensajes</string>
     
     <!-- Settings -->
     <string name="my_profile">Mi perfil</string>
