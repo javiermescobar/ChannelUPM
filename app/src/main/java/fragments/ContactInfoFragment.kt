@@ -35,7 +35,6 @@ class ContactInfoFragment: BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentContactInfoBinding.inflate(layoutInflater)
-        contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)
 
         arguments?.let {
             contactId = it.getInt(Constants.CONTACT_ID, -1)
@@ -49,6 +48,7 @@ class ContactInfoFragment: BaseFragment() {
     }
 
     override fun initializeView() {
+        contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)
 
         binding.apply {
             backButton.setOnClickListener {
