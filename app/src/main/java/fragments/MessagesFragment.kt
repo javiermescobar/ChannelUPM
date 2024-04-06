@@ -1,6 +1,6 @@
 package fragments
 
-import adapters.ContactMessageAdapter
+import adapters.PrivateMessageContactAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentMessagesBinding
-import models.MessageContact
+import models.PrivateMessageContact
 import repositories.ContactsRepository
-import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
 import utils.ItemDecorator
@@ -64,12 +63,12 @@ class MessagesFragment: BaseFragment() {
 
         messagesViewModel.mutableMessagesContact.observe(this, Observer { messagesContactMap ->
             if(messagesContactMap.size == contacts) {
-                val messagesContact = mutableListOf<MessageContact>()
-                messagesContactMap.forEach { (user, lastMessage) ->
-                    messagesContact.add(MessageContact(user.UserId, user.AvatarImage, user.Name, lastMessage))
+                val messagesContact = mutableListOf<PrivateMessageContact>()
+                messagesContactMap.forEach { (user, messageInfo) ->
+                    messagesContact.add(PrivateMessageContact(user.UserId, messageInfo.SenderId, user.AvatarImage, user.Name, messageInfo.Text))
                 }
 
-                binding.contactsRecyclerView.adapter = ContactMessageAdapter(
+                binding.contactsRecyclerView.adapter = PrivateMessageContactAdapter(
                     messagesContact.toList().sortedBy { user -> user.Name }) { user ->
                     val navBundle = Bundle()
                     navBundle.putSerializable(Constants.CONTACT_ID, user.UserId)

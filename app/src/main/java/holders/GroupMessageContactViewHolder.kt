@@ -1,16 +1,19 @@
 package holders
 
+import android.text.TextUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.HolderContactMessageBinding
 import com.squareup.picasso.Picasso
-import models.MessageContact
+import models.GroupMessageContact
+import models.PrivateMessageContact
+import utils.Constants
 
-class ContactMessageViewHolder(
+class GroupMessageContactViewHolder(
     val binding: HolderContactMessageBinding,
-    val onClick: (item: MessageContact) -> Unit
+    val onClick: (item: GroupMessageContact) -> Unit
 ): RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: MessageContact) {
+    fun bind(item: GroupMessageContact) {
         binding.root.setOnClickListener {
             onClick.invoke(item)
         }
@@ -22,11 +25,17 @@ class ContactMessageViewHolder(
                 .resize(binding.contactImage.layoutParams.width, binding.contactImage.layoutParams.height)
                 .into(binding.contactImage)
         }
+        binding.usernameText.text = item.GroupName
 
-        binding.usernameText.text = item.Name
 
         if(item.LastMessage.isNotEmpty()) {
-            binding.contactLastMessage.text = item.LastMessage
+            if(item.UserName == Constants.currentUser.Name) {
+                val lastText = "Tú: ${item.LastMessage}"
+                binding.contactLastMessage.text = lastText
+            } else {
+                val lastMessage = "${item.UserName}: ${item.LastMessage}"
+                binding.contactLastMessage.text = lastMessage
+            }
         }
     }
 }

@@ -30,11 +30,11 @@ class MessagesViewModel(
     val mutableEditedUser: MutableLiveData<Int> = MutableLiveData()
     val mutableUserInGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
     val mutableGroupRemoved: MutableLiveData<Boolean> = MutableLiveData()
-    val mutableMessagesContact: MutableLiveData<HashMap<User, String>> = MutableLiveData()
-    val mutableMessageGroup: MutableLiveData<HashMap<GroupChat, String>> = MutableLiveData()
+    val mutableMessagesContact: MutableLiveData<HashMap<User, LastPrivateMessage>> = MutableLiveData()
+    val mutableMessageGroup: MutableLiveData<HashMap<GroupChat, LastGroupMessage>> = MutableLiveData()
 
-    private val messageContactHashMap = HashMap<User, String>()
-    private val messageGroupHashMap = HashMap<GroupChat, String>()
+    private val messageContactHashMap = HashMap<User, LastPrivateMessage>()
+    private val messageGroupHashMap = HashMap<GroupChat, LastGroupMessage>()
 
     fun getPrivateMessages(contactId: Int) {
         viewModelScope.launch {

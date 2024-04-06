@@ -1,6 +1,7 @@
 package fragments
 
-import adapters.ContactMessageAdapter
+import adapters.GroupMessageContactAdapter
+import adapters.PrivateMessageContactAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentGroupsBinding
-import models.GroupChat
-import models.MessageContact
-import repositories.LoginRepository
+import models.GroupMessageContact
+import models.PrivateMessageContact
 import repositories.MessagesRepository
 import utils.Constants
 import utils.ItemDecorator
@@ -73,16 +73,16 @@ class GroupsFragment: BaseFragment() {
 
         messagesViewModel.mutableMessageGroup.observe(this, Observer { messageGroupHashMap ->
             if(messageGroupHashMap.size == groups) {
-                val mutableMessageGroups = mutableListOf<MessageContact>()
-                messageGroupHashMap.forEach { (group, message) ->
-                    mutableMessageGroups.add(MessageContact(group.GroupChatId, group.AvatarImage, group.GroupName, message))
+                val mutableMessageGroups = mutableListOf<GroupMessageContact>()
+                messageGroupHashMap.forEach { (group, messageInfo) ->
+                    mutableMessageGroups.add(GroupMessageContact(group.GroupChatId, group.AvatarImage, group.GroupName, messageInfo.Name, messageInfo.Text))
                 }
 
-                binding.groupsRecyclerView.adapter = ContactMessageAdapter(
-                    mutableMessageGroups.toList().sortedBy { group -> group.Name }) {
+                binding.groupsRecyclerView.adapter = GroupMessageContactAdapter(
+                    mutableMessageGroups.toList().sortedBy { group -> group.GroupName }) {
                     val navBundle = Bundle()
                     navBundle.putSerializable(Constants.GROUP_ID, it.UserId)
-                    navBundle.putSerializable(Constants.GROUP_NAME, it.Name)
+                    navBundle.putSerializable(Constants.GROUP_NAME, it.GroupName)
                     navBundle.putSerializable(Constants.GROUP_AVATAR, it.AvatarImage)
 
                     findNavController().navigate(R.id.action_groups_fragment_to_group_chat_fragment, navBundle)

@@ -3,6 +3,8 @@ package repositories
 import apis.RetrofitInstance
 import models.GroupChat
 import models.GroupMessage
+import models.LastGroupMessage
+import models.LastPrivateMessage
 import models.PrivateMessage
 import models.UserInGroup
 import retrofit2.Response
@@ -103,13 +105,13 @@ class MessagesRepository {
             groupChatId)
     }
 
-    suspend fun getLastPrivateMessage(userId: Int, contactId: Int): Response<String> {
+    suspend fun getLastPrivateMessage(userId: Int, contactId: Int): Response<LastPrivateMessage> {
         return RetrofitInstance.messagesApi.getLastPrivateMessage(
             "https://6xljrehjwvav4rdvyijfrji37e0vsuki.lambda-url.eu-west-2.on.aws/",
             userId, contactId)
     }
 
-    suspend fun getLastGroupMessage(groupChatId: Int): Response<String> {
+    suspend fun getLastGroupMessage(groupChatId: Int): Response<LastGroupMessage> {
         return RetrofitInstance.messagesApi.getLastGroupMessage(
             "https://34ug6jdygvuwixs6m2himg7w3m0sjwir.lambda-url.eu-west-2.on.aws/",
             groupChatId)
