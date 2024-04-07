@@ -14,8 +14,9 @@ class NewsItemViewHolder(
 
     fun bind(item: NewsItem) {
         binding.titleText.text = item.Title
+        binding.categoryText.text = item.CategoryName
         binding.descriptionText.text = item.Description
-        binding.dateText.text = item.SendDate.toString()
+        binding.dateText.text = item.SendDate
         binding.editNewsButton.apply {
             visibility = if(item.UserId == Constants.currentUser.UserId) {
                 View.VISIBLE
