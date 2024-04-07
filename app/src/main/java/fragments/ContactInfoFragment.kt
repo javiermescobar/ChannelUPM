@@ -27,6 +27,7 @@ class ContactInfoFragment: BaseFragment() {
     private var placeholderMail = ""
     private var placeholderDescription = ""
     private var placeholderAvatar = ""
+    private var addingContact = false
     private var removingContact = false
 
     override fun onCreateView(
@@ -80,6 +81,11 @@ class ContactInfoFragment: BaseFragment() {
                 goToPrivateChat()
             }
 
+            addContactButton.setOnClickListener {
+                addingContact = true
+                contactsViewModel.saveUser(Constants.currentUser.UserId, contactId)
+            }
+
             removeContactButton.setOnClickListener {
                 removingContact = true
                 contactsViewModel.removeContact(Constants.currentUser.UserId, contactId)
@@ -89,6 +95,8 @@ class ContactInfoFragment: BaseFragment() {
 
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
+            contactsViewModel.isContactFromUser(contactId)
+
             binding.apply {
                 contactName.text = it.Name
                 placeholderName = it.Name
@@ -111,17 +119,29 @@ class ContactInfoFragment: BaseFragment() {
                         .placeholder(R.drawable.user_default)
                         .into(contactImage)
                 }
-                if(it.UserId != Constants.currentUser.UserId) {
+            }
+        })
+
+        contactsViewModel.mutableContactFromUser.observe(this, Observer {
+            if(it == 1) {
+                binding.apply {
                     toChatButton.visibility = View.VISIBLE
                     removeContactButton.visibility = View.VISIBLE
                 }
+            } else {
+                binding.addContactButton.visibility = View.VISIBLE
             }
         })
 
         baseViewModel.appState.observe(this, Observer {
-            if(it == AppState.SUCCESS && removingContact) {
-                removingContact = false
-                showInformationDialog(R.string.contact_removed, false)
+            if(it == AppState.SUCCESS && (addingContact || removingContact)) {
+                if(addingContact) {
+                    addingContact = false
+                    showInformationDialog(R.string.contact_added, false)
+                } else if (removingContact) {
+                    removingContact = false
+                    showInformationDialog(R.string.contact_removed, false)
+                }
                 findNavController().popBackStack()
             }
         })

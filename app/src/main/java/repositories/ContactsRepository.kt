@@ -3,6 +3,7 @@ package repositories
 import apis.RetrofitInstance
 import models.User
 import retrofit2.Response
+import utils.Constants
 
 class ContactsRepository {
 
@@ -27,6 +28,12 @@ class ContactsRepository {
         return RetrofitInstance.contactsApi.searchContacts(
             "https://gacysizver5ozj4t5xdmofpwoa0jhfgc.lambda-url.eu-west-2.on.aws/",
             userId, searchString)
+    }
+
+    suspend fun isContactFromUser(contactId: Int): Response<Int> {
+        return RetrofitInstance.contactsApi.isContactFromUser(
+            "https://pntnom6msj3nolk6rbzhd7eluu0cxpli.lambda-url.eu-west-2.on.aws/",
+            Constants.currentUser.UserId, contactId)
     }
 
     suspend fun saveUser(userId: Int, contactId: Int): Response<Int> {
