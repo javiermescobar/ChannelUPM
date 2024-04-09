@@ -17,10 +17,9 @@ import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentGroupChatBinding
 import com.squareup.picasso.Picasso
 import models.GroupMessage
-import models.UserInGroup
-import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
+import utils.DateUtils
 import utils.ItemDecorator
 import viewModels.MessagesViewModel
 
@@ -30,7 +29,6 @@ class GroupChatFragment: BaseFragment() {
     private lateinit var messagesViewModel: MessagesViewModel
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var adapter: GroupMessageAdapter
-    private lateinit var participants: List<UserInGroup>
     private lateinit var mainHandler: Handler
     private lateinit var runnable: Runnable
 
@@ -120,18 +118,12 @@ class GroupChatFragment: BaseFragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableGroupMessages.observe(this, Observer {
-            if(this::participants.isInitialized && participants.isNotEmpty()) {
-                if(this::adapter.isInitialized) {
-                    adapter.notifyDataSetChanged()
-                }
-                adapter = GroupMessageAdapter(it, participants)
-                binding.messagesRecyclerView.adapter = adapter
-                binding.messagesRecyclerView.scrollToPosition(it.size - 1)
+            if(this::adapter.isInitialized) {
+                adapter.notifyDataSetChanged()
             }
-        })
-
-        messagesViewModel.mutableGroupParticipants.observe(this, Observer {
-            participants = it
+            adapter = GroupMessageAdapter(processMessages(it))
+            binding.messagesRecyclerView.adapter = adapter
+            binding.messagesRecyclerView.scrollToPosition(it.size - 1)
         })
 
         messagesViewModel.mutableMessageSent.observe(this, Observer {
@@ -144,5 +136,23 @@ class GroupChatFragment: BaseFragment() {
     override fun onDestroy() {
         mainHandler.removeCallbacks(runnable)
         super.onDestroy()
+    }
+
+    private fun processMessages(items: List<GroupMessage>): List<GroupMessage> {
+        if(items.isEmpty()) return emptyList()
+
+        var mutableList = mutableListOf<GroupMessage>()
+        var lastPrivateMessage = GroupMessage(-1, "", DateUtils.getDateString(items[0].SendDate), -1, -1, "", "")
+        mutableList.add(lastPrivateMessage)
+
+        items.forEach {
+            if(mutableList.size > 1 && lastPrivateMessage.GroupChatId != -1 && !DateUtils.haveSameDates(lastPrivateMessage.SendDate, it.SendDate)) {
+                mutableList.add(GroupMessage(-1, "", DateUtils.getDateString(it.SendDate), -1, -1, "", ""))
+            }
+            mutableList.add(it)
+            lastPrivateMessage = it
+        }
+
+        return mutableList.toList()
     }
 }

@@ -6,16 +6,4 @@ data class PrivateMessage(
     val SendDate: String,
     val SenderId: Int,
     val ReceiverId: Int
-) {
-    companion object {
-        fun newMessage(date: String): PrivateMessage {
-            return PrivateMessage(
-                1,
-                date,
-                date,
-                1,
-                1
-            )
-        }
-    }
-}
+)

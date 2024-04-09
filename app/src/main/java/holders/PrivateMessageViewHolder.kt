@@ -15,14 +15,23 @@ class PrivateMessageViewHolder(
 
     fun bind(item: PrivateMessage) {
         binding.apply {
-            if(item.SenderId != Constants.currentUser.UserId) {
-                messageLayoutReceiver.visibility = View.GONE
-                messageTextSender.text = item.Text
-                dateTextSender.text = DateUtils.obtainDateMessageString(item.SendDate)
+
+            if(item.MessageId != -1) {
+                if(item.SenderId != Constants.currentUser.UserId) {
+                    messageLayoutReceiver.visibility = View.GONE
+                    messageTextSender.text = item.Text
+                    dateTextSender.text = DateUtils.obtainDateMessageString(item.SendDate)
+                } else {
+                    messageLayoutSender.visibility = View.GONE
+                    messageTextReceiver.text = item.Text
+                    dateTextReceiver.text = DateUtils.obtainDateMessageString(item.SendDate)
+                }
             } else {
+                messageLayoutReceiver.visibility = View.GONE
                 messageLayoutSender.visibility = View.GONE
-                messageTextReceiver.text = item.Text
-                dateTextReceiver.text = DateUtils.obtainDateMessageString(item.SendDate)
+                dateMessageLayout.visibility = View.VISIBLE
+
+                dateText.text = item.SendDate
             }
         }
     }

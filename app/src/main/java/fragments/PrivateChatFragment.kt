@@ -17,13 +17,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentPrivateChatBinding
 import com.squareup.picasso.Picasso
+import models.PrivateMessage
 import models.User
 import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
+import utils.DateUtils.Companion.getDateString
+import utils.DateUtils.Companion.haveSameDates
 import utils.ItemDecorator
 import viewModels.LoginViewModel
 import viewModels.MessagesViewModel
+import java.time.OffsetDateTime
+import java.util.Objects
 
 class PrivateChatFragment: BaseFragment() {
 
@@ -115,7 +120,7 @@ class PrivateChatFragment: BaseFragment() {
             if(this::adapter.isInitialized) {
                 adapter.notifyDataSetChanged()
             }
-            adapter = PrivateMessageAdapter(it)
+            adapter = PrivateMessageAdapter(processMessages(it))
             binding.messagesRecyclerView.adapter = adapter
         })
 
@@ -145,5 +150,23 @@ class PrivateChatFragment: BaseFragment() {
     override fun onDestroy() {
         mainHandler.removeCallbacks(runnable)
         super.onDestroy()
+    }
+
+    private fun processMessages(items: List<PrivateMessage>): List<PrivateMessage> {
+        if(items.isEmpty()) return emptyList()
+
+        var mutableList = mutableListOf<PrivateMessage>()
+        var lastPrivateMessage = PrivateMessage(-1, "", getDateString(items[0].SendDate), -1, -1)
+        mutableList.add(lastPrivateMessage)
+
+        items.forEach {
+            if(mutableList.size > 1 && lastPrivateMessage.MessageId != -1 && !haveSameDates(lastPrivateMessage.SendDate, it.SendDate)) {
+                mutableList.add(PrivateMessage(-1, "", getDateString(it.SendDate), -1, -1))
+            }
+            mutableList.add(it)
+            lastPrivateMessage = it
+        }
+
+        return mutableList.toList()
     }
 }
