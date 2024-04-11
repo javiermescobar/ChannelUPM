@@ -28,7 +28,7 @@ class GroupChatFragment: BaseFragment() {
     private lateinit var binding: FragmentGroupChatBinding
     private lateinit var messagesViewModel: MessagesViewModel
     private lateinit var inputMethodManager: InputMethodManager
-    private lateinit var adapter: GroupMessageAdapter
+    private lateinit var messageAdapter: GroupMessageAdapter
     private lateinit var mainHandler: Handler
     private lateinit var runnable: Runnable
 
@@ -36,6 +36,8 @@ class GroupChatFragment: BaseFragment() {
     private var groupId = -1
     private var groupName = ""
     private var groupAvatar = ""
+    private var currentMessages = listOf<GroupMessage>()
+    private var doneFirstScroll = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -94,6 +96,8 @@ class GroupChatFragment: BaseFragment() {
             messagesRecyclerView.apply {
                 addItemDecoration(ItemDecorator(10))
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                messageAdapter = GroupMessageAdapter(emptyList())
+                adapter = messageAdapter
             }
 
             sendButton.setOnClickListener {
@@ -118,12 +122,18 @@ class GroupChatFragment: BaseFragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableGroupMessages.observe(this, Observer {
-            if(this::adapter.isInitialized) {
-                adapter.notifyDataSetChanged()
+            if(it.size != currentMessages.size) {
+                messageAdapter.updateItems(processMessages(it))
+                messageAdapter.notifyDataSetChanged()
+                currentMessages = it
             }
-            adapter = GroupMessageAdapter(processMessages(it))
-            binding.messagesRecyclerView.adapter = adapter
-            binding.messagesRecyclerView.scrollToPosition(it.size - 1)
+
+            binding.messagesRecyclerView.adapter?.let {adapter ->
+                if(adapter.itemCount != 0 && !doneFirstScroll) {
+                    doneFirstScroll = true
+                    binding.messagesRecyclerView.layoutManager?.scrollToPosition(adapter.itemCount - 1)
+                }
+            }
         })
 
         messagesViewModel.mutableMessageSent.observe(this, Observer {

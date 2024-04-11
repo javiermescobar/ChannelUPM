@@ -8,11 +8,13 @@ import holders.PrivateMessageViewHolder
 import models.PrivateMessage
 
 class PrivateMessageAdapter(
-    private val items: List<PrivateMessage>
+    private var items: List<PrivateMessage>
 ): RecyclerView.Adapter<PrivateMessageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PrivateMessageViewHolder {
-        return PrivateMessageViewHolder(HolderPrivateMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        var holder = PrivateMessageViewHolder(HolderPrivateMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        holder.setIsRecyclable(false)
+        return holder
     }
 
     override fun onBindViewHolder(holder: PrivateMessageViewHolder, position: Int) {
@@ -20,4 +22,8 @@ class PrivateMessageAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun updateMessages(items: List<PrivateMessage>) {
+        this.items = items
+    }
 }

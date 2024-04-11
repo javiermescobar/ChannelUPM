@@ -8,10 +8,12 @@ import holders.GroupMessageHolder
 import models.GroupMessage
 
 class GroupMessageAdapter(
-    private val items: List<GroupMessage>
+    private var items: List<GroupMessage>
 ): RecyclerView.Adapter<GroupMessageHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupMessageHolder {
-        return GroupMessageHolder(HolderGroupMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        var holder = GroupMessageHolder(HolderGroupMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        holder.setIsRecyclable(false)
+        return holder
     }
 
     override fun onBindViewHolder(holder: GroupMessageHolder, position: Int) {
@@ -19,4 +21,8 @@ class GroupMessageAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun updateItems(items: List<GroupMessage>) {
+        this.items = items
+    }
 }

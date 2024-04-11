@@ -11,7 +11,7 @@
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="@dimen/smallest_margin"
+            android:layout_margin="@dimen/default_margin"
             android:background="@drawable/message_date_text_background"
             android:visibility="gone">
 

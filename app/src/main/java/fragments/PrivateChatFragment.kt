@@ -35,13 +35,15 @@ class PrivateChatFragment: BaseFragment() {
     private lateinit var binding: FragmentPrivateChatBinding
     private lateinit var messagesViewModel: MessagesViewModel
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var adapter: PrivateMessageAdapter
+    private lateinit var messageAdapter: PrivateMessageAdapter
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var contact: User
     private lateinit var mainHandler: Handler
     private lateinit var runnable: Runnable
 
     private var contactId = -1
+    private var currentMessages = emptyList<PrivateMessage>()
+    private var doneFirstScroll = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,6 +91,8 @@ class PrivateChatFragment: BaseFragment() {
             messagesRecyclerView.apply {
                 addItemDecoration(ItemDecorator(10))
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                messageAdapter = PrivateMessageAdapter(currentMessages)
+                adapter = messageAdapter
             }
 
             sendButton.setOnClickListener {
@@ -117,11 +121,18 @@ class PrivateChatFragment: BaseFragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableMessages.observe(this, Observer {
-            if(this::adapter.isInitialized) {
-                adapter.notifyDataSetChanged()
+            if(it.size != currentMessages.size) {
+                currentMessages = it
+                messageAdapter.updateMessages(processMessages(currentMessages))
+                messageAdapter.notifyDataSetChanged()
             }
-            adapter = PrivateMessageAdapter(processMessages(it))
-            binding.messagesRecyclerView.adapter = adapter
+
+            binding.messagesRecyclerView.adapter?.let {adapter ->
+                if(adapter.itemCount != 0 && !doneFirstScroll) {
+                    doneFirstScroll = true
+                    binding.messagesRecyclerView.layoutManager?.scrollToPosition(adapter.itemCount - 1)
+                }
+            }
         })
 
         messagesViewModel.mutableMessageSent.observe(this, Observer {
