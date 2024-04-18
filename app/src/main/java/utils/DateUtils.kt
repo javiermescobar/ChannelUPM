@@ -1,18 +1,20 @@
 package utils
 
-import android.content.res.Resources
-import com.javier.channelupm.R
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.Period
-import java.util.Locale
 import java.util.Objects
 
 class DateUtils {
     companion object {
         fun obtainDateMessageString(date: String): String {
             var date = OffsetDateTime.parse(date + "Z")
-            return date.hour.toString() + ":" + date.minute.toString()
+            var minuteString = if (date.minute < 10) {
+                "0" + date.minute
+            } else {
+                date.minute
+            }
+            return date.hour.toString() + ":" + minuteString
         }
 
         fun haveSameDates(previousDate: String, actualDate: String): Boolean {
