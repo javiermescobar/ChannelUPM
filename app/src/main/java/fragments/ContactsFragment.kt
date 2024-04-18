@@ -24,6 +24,8 @@ class ContactsFragment: BaseFragment() {
     private lateinit var contactsViewModel: ContactsViewModel
     private lateinit var contactsAdapter: ContactsAdapter
 
+    private var contacts = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +42,7 @@ class ContactsFragment: BaseFragment() {
         binding.contactsRecyclerView.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         binding.contactsRecyclerView.addItemDecoration(ItemDecorator(0))
 
+        binding.searchInput.isEnabled = false
         binding.searchInput.addTextChangedListener {
             it?.let {
                 if(it.isNotEmpty()) {
@@ -57,6 +60,8 @@ class ContactsFragment: BaseFragment() {
 
     override fun subscribe() {
         contactsViewModel.mutableContacts.observe(this, Observer {
+            contacts = it.size
+            binding.searchInput.isEnabled = contacts > 1
             contactsAdapter = ContactsAdapter(it.sortedBy { user -> user.Name }){ user ->
                 val navBundle = Bundle()
                 navBundle.putSerializable(Constants.CONTACT_INFO_NAME, user.Name)

@@ -44,6 +44,7 @@ class MessagesFragment: BaseFragment() {
         binding.contactsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.contactsRecyclerView.addItemDecoration(ItemDecorator(0))
 
+        binding.searchInput.isEnabled = false
         binding.searchInput.addTextChangedListener {
             it?.let {
                 if(it.isNotEmpty()) {
@@ -58,6 +59,7 @@ class MessagesFragment: BaseFragment() {
     override fun subscribe() {
         contactsViewModel.mutableContacts.observe(this, Observer { users ->
             contacts = users.size
+            binding.searchInput.isEnabled = contacts > 1
             users.forEach { messagesViewModel.getLastPrivateMessage(Constants.currentUser.UserId, it)}
         })
 

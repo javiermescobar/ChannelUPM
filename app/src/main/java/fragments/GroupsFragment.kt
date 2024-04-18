@@ -41,7 +41,8 @@ class GroupsFragment: BaseFragment() {
 
         binding.apply {
 
-            binding.searchInput.addTextChangedListener {
+            searchInput.isEnabled = false
+            searchInput.addTextChangedListener {
                 it?.let {
                     if(it.isNotEmpty()) {
                         messagesViewModel.searchGroups(it.toString())
@@ -65,6 +66,7 @@ class GroupsFragment: BaseFragment() {
     override fun subscribe() {
         messagesViewModel.mutableGroups.observe(this, Observer { groups ->
             this.groups = groups.size
+            binding.searchInput.isEnabled = this.groups > 0
             if(this.groups == 0) {
                 binding.noGroupsText.visibility = View.VISIBLE
             }
