@@ -17,7 +17,7 @@ class NewsRepository {
 
     suspend fun addNewsItem(userId: Int, title: String, date: String, description: String, category: InteractiveCategory): Response<Int> {
         return RetrofitInstance.newsApi.addNewsItem("https://vu7a7islms7li2vvsu672b3aaa0jrnaf.lambda-url.eu-west-2.on.aws/",
-            userId, title, date, description, category.categoryId, category.categoryTitle)
+            userId, title, description, date, category.categoryId, category.categoryTitle)
     }
 
     suspend fun sendNewsNotifications(categoryId: Int, categoryName: String): Response<Int> {

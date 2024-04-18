@@ -2,6 +2,8 @@ package apis
 
 import models.GroupChat
 import models.GroupMessage
+import models.LastGroupMessage
+import models.LastPrivateMessage
 import models.PrivateMessage
 import models.UserInGroup
 import retrofit2.Response
@@ -119,4 +121,17 @@ interface MessagesApi {
         @Url url: String,
         @Query("groupChatId") groupChatId: Int
     ): Response<Int>
+
+    @GET
+    suspend fun getLastPrivateMessage(
+        @Url url: String,
+        @Query("userId") userId: Int,
+        @Query("contactId") contactId: Int
+    ): Response<LastPrivateMessage>
+
+    @GET
+    suspend fun getLastGroupMessage(
+        @Url url: String,
+        @Query("groupChatId") groupChatId: Int
+    ): Response<LastGroupMessage>
 }

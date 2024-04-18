@@ -1,6 +1,7 @@
 package fragments
 
-import adapters.GroupsAdapter
+import adapters.GroupMessageContactAdapter
+import adapters.PrivateMessageContactAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentGroupsBinding
-import models.GroupChat
-import repositories.LoginRepository
+import models.GroupMessageContact
+import models.PrivateMessageContact
 import repositories.MessagesRepository
 import utils.Constants
 import utils.ItemDecorator
@@ -21,9 +22,9 @@ import viewModels.MessagesViewModel
 class GroupsFragment: BaseFragment() {
 
     private lateinit var binding: FragmentGroupsBinding
-    private lateinit var adapter: GroupsAdapter
     private lateinit var messagesViewModel: MessagesViewModel
-    private lateinit var currentGroups: List<GroupChat>
+
+    private var groups = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +36,8 @@ class GroupsFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
-        messagesViewModel.getUserGropus()
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
+        messagesViewModel.getUserGroups()
 
         binding.apply {
 
@@ -45,7 +46,7 @@ class GroupsFragment: BaseFragment() {
                     if(it.isNotEmpty()) {
                         messagesViewModel.searchGroups(it.toString())
                     } else {
-                        messagesViewModel.getUserGropus()
+                        messagesViewModel.getUserGroups()
                     }
                 }
             }
@@ -63,29 +64,30 @@ class GroupsFragment: BaseFragment() {
 
     override fun subscribe() {
         messagesViewModel.mutableGroups.observe(this, Observer { groups ->
-            currentGroups = groups
-            setAdapter(currentGroups)
+            this.groups = groups.size
+            if(this.groups == 0) {
+                binding.noGroupsText.visibility = View.VISIBLE
+            }
+            groups.forEach { group -> messagesViewModel.getLastGroupMessage(group) }
         })
 
-        messagesViewModel.mutableSearchedGroups.observe(this, Observer { searchedGroups ->
-            currentGroups = searchedGroups
-            setAdapter(currentGroups)
+        messagesViewModel.mutableMessageGroup.observe(this, Observer { messageGroupHashMap ->
+            if(messageGroupHashMap.size == groups) {
+                val mutableMessageGroups = mutableListOf<GroupMessageContact>()
+                messageGroupHashMap.forEach { (group, messageInfo) ->
+                    mutableMessageGroups.add(GroupMessageContact(group.GroupChatId, group.AvatarImage, group.GroupName, messageInfo.Name, messageInfo.Text))
+                }
+
+                binding.groupsRecyclerView.adapter = GroupMessageContactAdapter(
+                    mutableMessageGroups.toList().sortedBy { group -> group.GroupName }) {
+                    val navBundle = Bundle()
+                    navBundle.putSerializable(Constants.GROUP_ID, it.UserId)
+                    navBundle.putSerializable(Constants.GROUP_NAME, it.GroupName)
+                    navBundle.putSerializable(Constants.GROUP_AVATAR, it.AvatarImage)
+
+                    findNavController().navigate(R.id.action_groups_fragment_to_group_chat_fragment, navBundle)
+                }
+            }
         })
-    }
-
-    private fun setAdapter(groups: List<GroupChat>) {
-        adapter = GroupsAdapter(groups.sortedBy { group -> group.GroupName }){
-            val navBundle = Bundle()
-            navBundle.putSerializable(Constants.GROUP_ID, it.GroupChatId)
-            navBundle.putSerializable(Constants.GROUP_NAME, it.GroupName)
-            navBundle.putSerializable(Constants.GROUP_AVATAR, it.AvatarImage)
-
-            findNavController().navigate(R.id.action_groups_fragment_to_group_chat_fragment, navBundle)
-        }
-        binding.groupsRecyclerView.adapter = adapter
-
-        if(groups.isEmpty()) {
-            binding.noGroupsText.visibility = View.VISIBLE
-        }
     }
 }

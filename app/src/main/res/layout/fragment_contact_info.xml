@@ -98,7 +98,21 @@
             android:layout_marginTop="@dimen/smallest_margin" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/to_chat_button"
+            android:id="@+id/remove_contact_button"
+            android:layout_width="@dimen/login_register_button_width"
+            android:layout_height="@dimen/login_register_button_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/to_chat_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/rounded_button"
+            android:textSize="@dimen/smallest_text"
+            style="@style/default_text"
+            android:text="@string/remove_cotact"
+            android:layout_marginBottom="@dimen/smallest_margin"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_contact_button"
             android:layout_width="@dimen/login_register_button_width"
             android:layout_height="@dimen/login_register_button_height"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,8 +121,23 @@
             android:background="@drawable/rounded_button"
             android:textSize="@dimen/smallest_text"
             style="@style/default_text"
+            android:text="@string/add_contact_title"
+            android:layout_marginBottom="@dimen/smallest_margin"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/to_chat_button"
+            android:layout_width="@dimen/login_register_button_width"
+            android:layout_height="@dimen/login_register_button_height"
+            app:layout_constraintStart_toEndOf="@id/remove_contact_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/rounded_button"
+            android:textSize="@dimen/smallest_text"
+            style="@style/default_text"
             android:text="@string/contact_info_to_chat"
-            android:layout_marginBottom="@dimen/smallest_margin"/>
+            android:layout_marginBottom="@dimen/smallest_margin"
+            android:visibility="gone"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading"

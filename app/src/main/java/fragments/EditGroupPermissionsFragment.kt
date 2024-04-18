@@ -38,7 +38,7 @@ class EditGroupPermissionsFragment: BaseFragment() {
     }
 
     override fun initializeView() {
-        messagesViewModel = MessagesViewModel(MessagesRepository(), LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
         messagesViewModel.getGroupParticipants(groupId)
 
         binding.apply {

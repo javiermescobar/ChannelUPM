@@ -16,6 +16,7 @@ class ContactsViewModel(
 
     val mutableContacts: MutableLiveData<List<User>> = MutableLiveData()
     val mutableUsers: MutableLiveData<List<User>> = MutableLiveData()
+    val mutableContactFromUser: MutableLiveData<Int> = MutableLiveData()
 
     fun getUsers() {
         baseViewModel.appState.postValue(AppState.LOADING)
@@ -69,10 +70,35 @@ class ContactsViewModel(
         }
     }
 
+    fun isContactFromUser(contactId: Int)  {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = contactsRepository.isContactFromUser(contactId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+                mutableContactFromUser.postValue(response.body())
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
     fun saveUser(userId: Int, contactId: Int) {
         baseViewModel.appState.postValue(AppState.LOADING)
         viewModelScope.launch {
             val response = contactsRepository.saveUser(userId, contactId)
+            if(response.code() == Constants.ACCEPTED_CODE) {
+                baseViewModel.appState.postValue(AppState.SUCCESS)
+            } else {
+                baseViewModel.appState.postValue(AppState.ERROR)
+            }
+        }
+    }
+
+    fun removeContact(userId: Int, contactId: Int) {
+        baseViewModel.appState.postValue(AppState.LOADING)
+        viewModelScope.launch {
+            val response = contactsRepository.removeContact(userId, contactId)
             if(response.code() == Constants.ACCEPTED_CODE) {
                 baseViewModel.appState.postValue(AppState.SUCCESS)
             } else {

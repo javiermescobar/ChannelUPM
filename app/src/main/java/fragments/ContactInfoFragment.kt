@@ -1,6 +1,5 @@
 package fragments
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +9,26 @@ import androidx.navigation.fragment.findNavController
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentContactInfoBinding
 import com.squareup.picasso.Picasso
+import repositories.ContactsRepository
 import repositories.LoginRepository
+import utils.AppState
 import utils.Constants
+import viewModels.ContactsViewModel
 import viewModels.LoginViewModel
 
 class ContactInfoFragment: BaseFragment() {
 
     private lateinit var binding: FragmentContactInfoBinding
     private lateinit var loginViewModel: LoginViewModel
+    private lateinit var contactsViewModel: ContactsViewModel
 
     private var contactId = -1
     private var placeholderName = ""
     private var placeholderMail = ""
     private var placeholderDescription = ""
     private var placeholderAvatar = ""
+    private var addingContact = false
+    private var removingContact = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +49,7 @@ class ContactInfoFragment: BaseFragment() {
     }
 
     override fun initializeView() {
+        contactsViewModel = ContactsViewModel(ContactsRepository(), baseViewModel)
 
         binding.apply {
             backButton.setOnClickListener {
@@ -68,15 +74,29 @@ class ContactInfoFragment: BaseFragment() {
                 loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
                 loginViewModel.getUserById(contactId)
                 toChatButton.visibility = View.GONE
+                removeContactButton.visibility = View.GONE
             }
+
             toChatButton.setOnClickListener {
                 goToPrivateChat()
+            }
+
+            addContactButton.setOnClickListener {
+                addingContact = true
+                contactsViewModel.saveUser(Constants.currentUser.UserId, contactId)
+            }
+
+            removeContactButton.setOnClickListener {
+                removingContact = true
+                contactsViewModel.removeContact(Constants.currentUser.UserId, contactId)
             }
         }
     }
 
     override fun subscribe() {
         loginViewModel.currentUser.observe(this, Observer {
+            contactsViewModel.isContactFromUser(contactId)
+
             binding.apply {
                 contactName.text = it.Name
                 placeholderName = it.Name
@@ -99,9 +119,30 @@ class ContactInfoFragment: BaseFragment() {
                         .placeholder(R.drawable.user_default)
                         .into(contactImage)
                 }
-                if(it.UserId != Constants.currentUser.UserId) {
+            }
+        })
+
+        contactsViewModel.mutableContactFromUser.observe(this, Observer {
+            if(it == 1) {
+                binding.apply {
                     toChatButton.visibility = View.VISIBLE
+                    removeContactButton.visibility = View.VISIBLE
                 }
+            } else {
+                binding.addContactButton.visibility = View.VISIBLE
+            }
+        })
+
+        baseViewModel.appState.observe(this, Observer {
+            if(it == AppState.SUCCESS && (addingContact || removingContact)) {
+                if(addingContact) {
+                    addingContact = false
+                    showInformationDialog(R.string.contact_added, false)
+                } else if (removingContact) {
+                    removingContact = false
+                    showInformationDialog(R.string.contact_removed, false)
+                }
+                findNavController().popBackStack()
             }
         })
     }

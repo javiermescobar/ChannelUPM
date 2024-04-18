@@ -6,5 +6,6 @@ data class NewsItem(
     val Description: String,
     val SendDate: String,
     val UserId: Int,
-    val CategoryId: Int
+    val CategoryId: Int,
+    val CategoryName: String
 )

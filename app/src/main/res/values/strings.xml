@@ -61,10 +61,12 @@
     <string name="search_contact">Buscar contacto</string>
     <string name="contact_info_title">Información de contacto</string>
     <string name="contact_info_to_chat">Conversación</string>
+    <string name="remove_cotact">Eliminar contacto</string>
     <string name="contact_info_no_mail">Sin correo</string>
     <string name="contact_info_no_description">Sin descripción</string>
     <string name="add_contact_title">Añadir contacto</string>
     <string name="contact_added">Contacto añadido</string>
+    <string name="contact_removed">Contacto eliminado</string>
 
     <!-- Messages -->
     <string name="write_here_text">Escriba aqui</string>
@@ -94,6 +96,7 @@
     <string name="exited_from_group">Has salido del grupo</string>
     <string name="group_removed">El grupo ha sido eliminado</string>
     <string name="search_group">Buscar grupo</string>
+    <string name="no_messages_registered">Sin registro de mensajes</string>
     
     <!-- Settings -->
     <string name="my_profile">Mi perfil</string>

@@ -25,8 +25,6 @@ class AddContactFragment: BaseFragment() {
     private lateinit var availableContacts: MutableList<User>
     private lateinit var currentContacts: List<User>
 
-    private var addingUser = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,8 +70,13 @@ class AddContactFragment: BaseFragment() {
                 contactsAdapter = ContactsAdapter(availableContacts.toList().filter {
                     contact -> contact.UserId != Constants.currentUser.UserId
                 }) { contact ->
-                    addingUser = true
-                    contactsViewModel.saveUser(Constants.currentUser.UserId, contact.UserId)
+                    val navBundle = Bundle()
+                    navBundle.putSerializable(Constants.CONTACT_INFO_NAME, contact.Name)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, contact.Mail)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, contact.Description)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, contact.AvatarImage)
+                    navBundle.putSerializable(Constants.CONTACT_ID, contact.UserId)
+                    findNavController().navigate(R.id.action_add_contact_fragment_to_contact_info_fragment, navBundle)
                 }
                 binding.contactsRecyclerView.adapter = contactsAdapter
             }
@@ -91,17 +94,15 @@ class AddContactFragment: BaseFragment() {
                 contactsAdapter = ContactsAdapter(availableContacts.toList().filter {
                         contact -> contact.UserId != Constants.currentUser.UserId
                 }) { contact ->
-                    addingUser = true
-                    contactsViewModel.saveUser(Constants.currentUser.UserId, contact.UserId)
+                    val navBundle = Bundle()
+                    navBundle.putSerializable(Constants.CONTACT_INFO_NAME, contact.Name)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_MAIL, contact.Mail)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_DESCRIPTION, contact.Description)
+                    navBundle.putSerializable(Constants.CONTACT_INFO_AVATAR, contact.AvatarImage)
+                    navBundle.putSerializable(Constants.CONTACT_ID, contact.UserId)
+                    findNavController().navigate(R.id.action_add_contact_fragment_to_contact_info_fragment, navBundle)
                 }
                 binding.contactsRecyclerView.adapter = contactsAdapter
-            }
-        })
-
-        baseViewModel.appState.observe(this, Observer {
-            if(it == AppState.SUCCESS && addingUser) {
-                showInformationDialog(R.string.contact_added,false)
-                findNavController().popBackStack()
             }
         })
     }

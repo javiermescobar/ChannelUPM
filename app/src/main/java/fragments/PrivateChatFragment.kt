@@ -17,26 +17,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.javier.channelupm.R
 import com.javier.channelupm.databinding.FragmentPrivateChatBinding
 import com.squareup.picasso.Picasso
+import models.PrivateMessage
 import models.User
 import repositories.LoginRepository
 import repositories.MessagesRepository
 import utils.Constants
+import utils.DateUtils.Companion.getDateString
+import utils.DateUtils.Companion.haveSameDates
 import utils.ItemDecorator
 import viewModels.LoginViewModel
 import viewModels.MessagesViewModel
+import java.time.OffsetDateTime
+import java.util.Objects
 
 class PrivateChatFragment: BaseFragment() {
 
     private lateinit var binding: FragmentPrivateChatBinding
     private lateinit var messagesViewModel: MessagesViewModel
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var adapter: PrivateMessageAdapter
+    private lateinit var messageAdapter: PrivateMessageAdapter
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var contact: User
     private lateinit var mainHandler: Handler
     private lateinit var runnable: Runnable
 
     private var contactId = -1
+    private var currentMessages = emptyList<PrivateMessage>()
+    private var doneFirstScroll = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +68,7 @@ class PrivateChatFragment: BaseFragment() {
     override fun initializeView() {
         loginViewModel = LoginViewModel(LoginRepository(), baseViewModel)
         loginViewModel.getUserById(contactId)
-        messagesViewModel = MessagesViewModel(MessagesRepository(),LoginRepository(), baseViewModel)
+        messagesViewModel = MessagesViewModel(MessagesRepository(), baseViewModel)
 
         inputMethodManager = activity?.let {
             it.getSystemService(Context.INPUT_METHOD_SERVICE)
@@ -84,6 +91,8 @@ class PrivateChatFragment: BaseFragment() {
             messagesRecyclerView.apply {
                 addItemDecoration(ItemDecorator(10))
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                messageAdapter = PrivateMessageAdapter(currentMessages)
+                adapter = messageAdapter
             }
 
             sendButton.setOnClickListener {
@@ -112,11 +121,18 @@ class PrivateChatFragment: BaseFragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun subscribe() {
         messagesViewModel.mutableMessages.observe(this, Observer {
-            if(this::adapter.isInitialized) {
-                adapter.notifyDataSetChanged()
+            if(it.size != currentMessages.size) {
+                currentMessages = it
+                messageAdapter.updateMessages(processMessages(currentMessages))
+                messageAdapter.notifyDataSetChanged()
             }
-            adapter = PrivateMessageAdapter(it)
-            binding.messagesRecyclerView.adapter = adapter
+
+            binding.messagesRecyclerView.adapter?.let {adapter ->
+                if(adapter.itemCount != 0 && !doneFirstScroll) {
+                    doneFirstScroll = true
+                    binding.messagesRecyclerView.layoutManager?.scrollToPosition(adapter.itemCount - 1)
+                }
+            }
         })
 
         messagesViewModel.mutableMessageSent.observe(this, Observer {
@@ -145,5 +161,23 @@ class PrivateChatFragment: BaseFragment() {
     override fun onDestroy() {
         mainHandler.removeCallbacks(runnable)
         super.onDestroy()
+    }
+
+    private fun processMessages(items: List<PrivateMessage>): List<PrivateMessage> {
+        if(items.isEmpty()) return emptyList()
+
+        var mutableList = mutableListOf<PrivateMessage>()
+        var lastPrivateMessage = PrivateMessage(-1, "", getDateString(items[0].SendDate), -1, -1)
+        mutableList.add(lastPrivateMessage)
+
+        items.forEach {
+            if(mutableList.size > 1 && lastPrivateMessage.MessageId != -1 && !haveSameDates(lastPrivateMessage.SendDate, it.SendDate)) {
+                mutableList.add(PrivateMessage(-1, "", getDateString(it.SendDate), -1, -1))
+            }
+            mutableList.add(it)
+            lastPrivateMessage = it
+        }
+
+        return mutableList.toList()
     }
 }
